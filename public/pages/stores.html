@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống nhà hàng - Spicy & Juicy</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- THÊM THƯ VIỆN LEAFLET VÀO ĐÂY -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- CSS của bạn -->
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <link rel="stylesheet" href="../../src/css/stores.css">
+</head>
+<body>
+    <div id="main">
+        <header id="header"></header>
+        <main id="content" class="page-content">
+            <div class="stores-page-wrapper">
+                <!-- CỘT BÊN TRÁI: DANH SÁCH CỬA HÀNG -->
+                <section class="store-list-container">
+                    <div class="store-list__header">
+                        <h1 class="store-list__title">Hệ Thống Nhà Hàng</h1>
+                        <input type="text" id="searchInput" class="store-list__search" placeholder="Nhập tên nhà hàng, quận...">
+                    </div>
+                    <div id="store-list-items" class="store-list__items">
+                        <!-- JavaScript sẽ tự động điền danh sách cửa hàng vào đây -->
+                    </div>
+                </section>
+                <!-- CỘT BÊN PHẢI: BẢN ĐỒ -->
+                <aside class="map-container">
+                    <div id="map"></div>
+                </aside>
+            </div>
+        </main>
+        <footer id="footer"></footer>
+    </div>
+    
+    <script src="../../src/js/loader.js"></script>
+    <script src="../../src/js/stores-logic.js"></script>
+</body>
+</html>
