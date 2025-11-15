@@ -1,4 +1,4 @@
-.stores-page-wrapper { display: flex; height: calc(100vh - 80px); /* 80px là chiều cao header (ước tính) */ }
+.stores-page-wrapper { display: flex; height: calc(100vh - 80px); }
 .store-list-container { flex: 4; /* Chiếm 4 phần */ display: flex; flex-direction: column; background-color: #fff; }
 .map-container { flex: 6; /* Chiếm 6 phần */ background-color: #eee; }
 #map { width: 100%; height: 100%; }

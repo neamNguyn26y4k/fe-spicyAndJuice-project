@@ -10,7 +10,7 @@
 
 /* Cột bên trái - form */
 .booking-form-container {
-    flex: 2; /* Chiếm 2/3 không gian */
+    flex: 2;
     min-width: 400px;
 }
 
@@ -29,7 +29,7 @@
 
 /* Cột bên phải - thông tin thêm */
 .booking-info {
-    flex: 1; /* Chiếm 1/3 không gian */
+    flex: 1;
     min-width: 300px;
 }
 
@@ -71,8 +71,7 @@
     position: absolute;
     left: 0;
 }
-
-/* ----- Tinh chỉnh lại BEM cho form ----- */
+/* BEM */
 .booking-form { font-family: 'Montserrat', sans-serif; }
 .booking-form__sub-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #333; margin-top: 30px; margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 20px; }
 .booking-form__group { margin-bottom: 20px; }
