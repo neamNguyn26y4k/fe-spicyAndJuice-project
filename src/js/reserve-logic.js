@@ -17,10 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- CHẠY CÁC HÀM KHỞI TẠO ---
-    populateBranchOptions(); // Gọi hàm điền danh sách cửa hàng vào dropdown
+    populateBranchOptions(); //điền danh sách cửa hàng vào dropdown
 
-    // --- LOGIC TỰ ĐỘNG CHỌN CHI NHÁNH (TỪ TRANG stores.html) ---
+    // --- TỰ ĐỘNG CHỌN CHI NHÁNH ---
     const selectedStore = localStorage.getItem('selectedStore');
     if (selectedStore && branchSelect) {
         branchSelect.value = selectedStore;
