@@ -159,10 +159,6 @@ modalContainer.forEach((modal) => {
   });
 });
 
-// =========================================
-// LOGIC CHO HERO SLIDER (BANNER CHẠY NGANG)
-// =========================================
-
 function initHeroSlider() {
   const wrapper = document.getElementById("hero-wrapper");
   const slides = document.querySelectorAll(".hero-slider__slide");

@@ -6,9 +6,18 @@
     <title>Thực đơn - Spicy & Juicy</title>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="../../src/assets/images/logo.png" />
-    <link rel="stylesheet" href="../../src/css/style.css" />
-    <link rel="stylesheet" href="../../src/css/menu.css" />
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/menu.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="boxicons.min.css" />
   </head>
 
   <body>
@@ -104,7 +113,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu bò Tây Bắc</h3>
                 <p class="product-card__price">Giá: 200.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(1)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -117,7 +128,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu cá đuối</h3>
                 <p class="product-card__price">Giá: 180.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(2)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -130,7 +143,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu cá hồi</h3>
                 <p class="product-card__price">Giá: 180.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(3)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -143,7 +158,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu cá hú</h3>
                 <p class="product-card__price">Giá: 699.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(4)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -156,7 +173,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu cá kèo rau đắng</h3>
                 <p class="product-card__price">Giá: 280.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(5)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -169,7 +188,9 @@
               <div class="product-card__content">
                 <h3 class="product-card__name">Lẩu cháo chim bồ câu</h3>
                 <p class="product-card__price">Giá: 540.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
+                <button class="product-card__button" onclick="detailProduct(6)">
+                  ĐẶT MÓN
+                </button>
               </div>
             </div>
 
@@ -356,20 +377,36 @@
             </div>
           </div>
         </section>
-
-        <script
-          type="module"
-          src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-        ></script>
-        <script
-          nomodule
-          src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-        ></script>
+        <div class="modal product-detail">
+          <button class="modal-close close-popup">
+            <i class="bx bx-x"></i>
+          </button>
+          <div
+            class="modal-container mdl-cnt"
+            id="product-detail-content"
+          ></div>
+        </div>
       </div>
 
       <div id="footer"></div>
-    </div>
 
+      <script>
+        src = "/src/js/menu.js";
+      </script>
+      <script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      ></script>
+      <script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      ></script>
+    </div>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <script src="/src/js/menu.js"></script>
+    <script src="/src/js/menu.js"></script>
     <script src="/src/js/loader.js"></script>
   </body>
 </html>
