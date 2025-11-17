@@ -1,3 +1,5 @@
+const AUTH_STATE_KEY = 'saj-user-logged-in';
+
 async function loadHeader() {
     const headerElement = document.getElementById('header');
     if (headerElement) {
@@ -8,6 +10,7 @@ async function loadHeader() {
                 headerElement.innerHTML = html;
 
                 highlightCurrentPage();
+                updateHeaderAuthState();
             } else {
                 console.error('Failed to load header');
             }
@@ -100,9 +103,8 @@ function loadPopup() {
     const btnLogin = document.querySelector('.btn-login');
     const btnSignup = document.querySelector('.btn-signup');
 
-    // Kiểm tra xem các elements có tồn tại không
-    if (!btnLogin || !btnSignup || !modal) {
-        console.error('Required elements not found');
+    if (!modal) {
+        console.error('Modal element not found');
         return;
     }
 
@@ -120,16 +122,20 @@ function loadPopup() {
     }
 
     // Hiển thị modal khi click button Login từ header
-    btnLogin.addEventListener('click', () => {
-        modal.classList.remove("right-panel-active");
-        modal.style.display = 'flex';
-    });
+    if (btnLogin) {
+        btnLogin.addEventListener('click', () => {
+            modal.classList.remove("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
 
     // Hiển thị modal khi click button Sign Up từ header
-    btnSignup.addEventListener('click', () => {
-        modal.classList.add("right-panel-active");
-        modal.style.display = 'flex';
-    });
+    if (btnSignup) {
+        btnSignup.addEventListener('click', () => {
+            modal.classList.add("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
 
     // Đóng modal khi click vào nút close
     if (closeBtn) {
@@ -144,6 +150,57 @@ function loadPopup() {
             modal.style.display = 'none';
         }
     });
+
+    bindMockLoginSuccess(modal);
+    updateHeaderAuthState();
+}
+
+function bindMockLoginSuccess(modal) {
+    const signInForm = document.querySelector('#modal .sign-in-modal form');
+    if (!signInForm) {
+        return;
+    }
+
+    signInForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        setUserLoggedIn(true);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+function setUserLoggedIn(isLoggedIn) {
+    localStorage.setItem(AUTH_STATE_KEY, isLoggedIn ? 'true' : 'false');
+    updateHeaderAuthState();
+}
+
+function isUserLoggedIn() {
+    return localStorage.getItem(AUTH_STATE_KEY) === 'true';
+}
+
+function updateHeaderAuthState() {
+    const authButtons = document.querySelector('.auth-buttons');
+    const userPanel = document.querySelector('.user-panel');
+    const body = document.body;
+
+    if (!authButtons || !userPanel) {
+        return;
+    }
+
+    if (isUserLoggedIn()) {
+        authButtons.classList.add('is-hidden');
+        userPanel.classList.add('is-visible');
+        if (body) {
+            body.classList.add('logged-in');
+        }
+    } else {
+        authButtons.classList.remove('is-hidden');
+        userPanel.classList.remove('is-visible');
+        if (body) {
+            body.classList.remove('logged-in');
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
