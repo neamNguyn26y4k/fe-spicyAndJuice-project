@@ -137,6 +137,7 @@ body.no-scroll {
   display: none;
   align-items: center;
   gap: 0.75rem;
+  position: relative;
 }
 
 .user-panel.is-visible {
@@ -209,6 +210,51 @@ body.no-scroll {
 .user-location {
   font-size: 0.85rem;
   color: #9ca3af;
+}
+
+.user-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+  padding: 0.4rem;
+  min-width: 190px;
+  z-index: 10;
+}
+
+.user-menu.is-open {
+  display: flex;
+}
+
+.user-menu-item {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.user-menu-item:hover {
+  background: rgba(17, 24, 39, 0.05);
+}
+
+.user-menu-item.is-danger {
+  color: #dc2626;
+}
+
+.user-menu-item.is-danger:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
 }
 
 .btn {

@@ -10,6 +10,7 @@ async function loadHeader() {
                 headerElement.innerHTML = html;
 
                 highlightCurrentPage();
+                initUserMenu();
                 updateHeaderAuthState();
             } else {
                 console.error('Failed to load header');
@@ -183,6 +184,8 @@ function updateHeaderAuthState() {
     const authButtons = document.querySelector('.auth-buttons');
     const userPanel = document.querySelector('.user-panel');
     const body = document.body;
+    const userMenu = document.querySelector('.user-menu');
+    const moreButton = document.querySelector('.more-button');
 
     if (!authButtons || !userPanel) {
         return;
@@ -200,6 +203,49 @@ function updateHeaderAuthState() {
         if (body) {
             body.classList.remove('logged-in');
         }
+        if (userMenu) {
+            userMenu.classList.remove('is-open');
+        }
+        if (moreButton) {
+            moreButton.setAttribute('aria-expanded', 'false');
+        }
+    }
+}
+
+function initUserMenu() {
+    const moreButton = document.querySelector('.more-button');
+    const userMenu = document.querySelector('.user-menu');
+    if (!moreButton || !userMenu) {
+        return;
+    }
+
+    const toggleMenu = (force) => {
+        const willOpen = force !== undefined ? force : !userMenu.classList.contains('is-open');
+        userMenu.classList.toggle('is-open', willOpen);
+        moreButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    };
+
+    const closeMenu = () => toggleMenu(false);
+
+    moreButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    userMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', () => {
+        closeMenu();
+    });
+
+    const logoutButton = userMenu.querySelector('[data-action="logout"]');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            setUserLoggedIn(false);
+            closeMenu();
+        });
     }
 }
 

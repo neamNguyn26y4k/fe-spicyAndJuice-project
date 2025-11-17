@@ -30,9 +30,15 @@
                         <span class="user-location">Tp. Hồ Chí Minh</span>
                     </div>
                 </div>
-                <button class="icon-button more-button" aria-label="Thêm tùy chọn">
+                <button class="icon-button more-button" aria-label="Thêm tùy chọn" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+                <div class="user-menu" role="menu">
+                    <button class="user-menu-item" data-action="account" role="menuitem">Tài khoản</button>
+                    <button class="user-menu-item" data-action="orders" role="menuitem">Đơn hàng</button>
+                    <button class="user-menu-item" data-action="payments" role="menuitem">Thanh toán</button>
+                    <button class="user-menu-item is-danger" data-action="logout" role="menuitem">Đăng xuất</button>
+                </div>
             </div>
         </div>
     </div>
