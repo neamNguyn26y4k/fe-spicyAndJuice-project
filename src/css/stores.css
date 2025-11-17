@@ -1,0 +1,22 @@
+.stores-page-wrapper { display: flex; height: calc(100vh - 80px); }
+.store-list-container { flex: 4; /* Chiếm 4 phần */ display: flex; flex-direction: column; background-color: #fff; }
+.map-container { flex: 6; /* Chiếm 6 phần */ background-color: #eee; }
+#map { width: 100%; height: 100%; }
+
+.store-list__header { padding: 20px; border-bottom: 1px solid #eee; }
+.store-list__title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; }
+.store-list__search { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 6px; }
+
+.store-list__items { overflow-y: auto; flex-grow: 1; }
+
+.store-card { padding: 20px; border-bottom: 1px solid #eee; cursor: pointer; transition: background-color 0.3s; }
+.store-card:hover { background-color: #f9f9f9; }
+.store-card--active { background-color: #fffbeb; }
+
+.store-card__name { font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
+.store-card__address, .store-card__hours { color: #555; margin-bottom: 5px; font-size: 0.9rem; }
+.store-card__actions { display: flex; gap: 10px; margin-top: 15px; }
+.store-card__button { padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: all 0.3s; font-size: 0.9rem; }
+.store-card__button--phone { border: 1px solid #ccc; color: #333; }
+.store-card__button--book { background-color: #E6B34B; color: #fff; border: 1px solid #E6B34B; }
+.store-card__button--book:hover { background-color: #d4a23a; }

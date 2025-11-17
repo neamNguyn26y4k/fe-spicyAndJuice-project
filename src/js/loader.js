@@ -1,3 +1,5 @@
+const AUTH_STATE_KEY = 'saj-user-logged-in';
+
 async function loadHeader() {
     const headerElement = document.getElementById('header');
     if (headerElement) {
@@ -8,6 +10,8 @@ async function loadHeader() {
                 headerElement.innerHTML = html;
 
                 highlightCurrentPage();
+                initUserMenu();
+                updateHeaderAuthState();
             } else {
                 console.error('Failed to load header');
             }
@@ -34,6 +38,30 @@ async function loadFooter() {
     }
 }
 
+async function loadModal() {
+    // Kiểm tra xem modal đã tồn tại chưa (có thể đã có trong index.html)
+    let modalElement = document.getElementById('modal');
+
+    // Nếu chưa có modal, tạo container và load modal
+    if (!modalElement) {
+        const modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-container';
+        document.body.appendChild(modalContainer);
+
+        try {
+            const response = await fetch('/src/partials/modal.html');
+            if (response.ok) {
+                const html = await response.text();
+                modalContainer.innerHTML = html;
+            } else {
+                console.error('Failed to load modal');
+            }
+        } catch (error) {
+            console.error('Error loading modal:', error);
+        }
+    }
+}
+
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navItems = document.querySelectorAll('.nav-item');
@@ -47,7 +75,6 @@ function highlightCurrentPage() {
 
             const normalizedCurrent = currentPath.replace(/\/$/, '');
             const normalizedItem = itemPath.replace(/\/$/, '');
-
 
             if (normalizedCurrent === normalizedItem || normalizedCurrent.endsWith(normalizedItem)) {
                 item.classList.add('active');
@@ -67,8 +94,164 @@ function highlightCurrentPage() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadHeader();
-    loadFooter();
-});
+function loadPopup() {
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const modal = document.getElementById('modal');
+    const closeBtn = document.querySelector('.close-btn');
 
+    // Lấy các button từ header
+    const btnLogin = document.querySelector('.btn-login');
+    const btnSignup = document.querySelector('.btn-signup');
+
+    if (!modal) {
+        console.error('Modal element not found');
+        return;
+    }
+
+    // Xử lý chuyển đổi giữa Sign Up và Sign In trong modal
+    if (signUpButton) {
+        signUpButton.addEventListener('click', () => {
+            modal.classList.add("right-panel-active");
+        });
+    }
+
+    if (signInButton) {
+        signInButton.addEventListener('click', () => {
+            modal.classList.remove("right-panel-active");
+        });
+    }
+
+    // Hiển thị modal khi click button Login từ header
+    if (btnLogin) {
+        btnLogin.addEventListener('click', () => {
+            modal.classList.remove("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
+
+    // Hiển thị modal khi click button Sign Up từ header
+    if (btnSignup) {
+        btnSignup.addEventListener('click', () => {
+            modal.classList.add("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
+
+    // Đóng modal khi click vào nút close
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    // Đóng modal khi click bên ngoài modal
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    bindMockLoginSuccess(modal);
+    updateHeaderAuthState();
+}
+
+function bindMockLoginSuccess(modal) {
+    const signInForm = document.querySelector('#modal .sign-in-modal form');
+    if (!signInForm) {
+        return;
+    }
+
+    signInForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        setUserLoggedIn(true);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+function setUserLoggedIn(isLoggedIn) {
+    localStorage.setItem(AUTH_STATE_KEY, isLoggedIn ? 'true' : 'false');
+    updateHeaderAuthState();
+}
+
+function isUserLoggedIn() {
+    return localStorage.getItem(AUTH_STATE_KEY) === 'true';
+}
+
+function updateHeaderAuthState() {
+    const authButtons = document.querySelector('.auth-buttons');
+    const userPanel = document.querySelector('.user-panel');
+    const body = document.body;
+    const userMenu = document.querySelector('.user-menu');
+    const moreButton = document.querySelector('.more-button');
+
+    if (!authButtons || !userPanel) {
+        return;
+    }
+
+    if (isUserLoggedIn()) {
+        authButtons.classList.add('is-hidden');
+        userPanel.classList.add('is-visible');
+        if (body) {
+            body.classList.add('logged-in');
+        }
+    } else {
+        authButtons.classList.remove('is-hidden');
+        userPanel.classList.remove('is-visible');
+        if (body) {
+            body.classList.remove('logged-in');
+        }
+        if (userMenu) {
+            userMenu.classList.remove('is-open');
+        }
+        if (moreButton) {
+            moreButton.setAttribute('aria-expanded', 'false');
+        }
+    }
+}
+
+function initUserMenu() {
+    const moreButton = document.querySelector('.more-button');
+    const userMenu = document.querySelector('.user-menu');
+    if (!moreButton || !userMenu) {
+        return;
+    }
+
+    const toggleMenu = (force) => {
+        const willOpen = force !== undefined ? force : !userMenu.classList.contains('is-open');
+        userMenu.classList.toggle('is-open', willOpen);
+        moreButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    };
+
+    const closeMenu = () => toggleMenu(false);
+
+    moreButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    userMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', () => {
+        closeMenu();
+    });
+
+    const logoutButton = userMenu.querySelector('[data-action="logout"]');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            setUserLoggedIn(false);
+            closeMenu();
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadModal(); // Load modal trước
+    await loadHeader(); // Đợi header load xong
+    await loadFooter(); // Đợi footer load xong
+    loadPopup(); // Gọi loadPopup SAU KHI cả modal và header đã load xong
+});
