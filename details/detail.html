@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobb Salad - Product Detail</title>
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+    <div class="page">
+        <!-- Header Navigation -->
+        <header class="header">
+            <div class="header__logo">Logo</div>
+            <button class="header__location-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                </svg>
+                Location
+            </button>
+            <nav class="header__nav">
+                <a href="#" class="header__nav-link">Menu</a>
+                <a href="#" class="header__nav-link">Promotion</a>
+                <a href="#" class="header__nav-link">Store</a>
+                <a href="#" class="header__nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="product">
+            <!-- Product Image -->
+            <div class="product__image">
+                <svg viewBox="0 0 400 400" fill="none">
+                    <rect width="400" height="400" rx="40" fill="#94A3B8"/>
+                    <circle cx="200" cy="150" r="40" fill="#CBD5E1"/>
+                    <path d="M140 250L200 200L260 250L200 300Z" fill="#CBD5E1"/>
+                </svg>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product__info">
+                <h1 class="product__title">Cobb</h1>
+                <h2 class="product__subtitle">Salad</h2>
+                <p class="product__description">
+                    A hearty salad composed of chopped greens, bacon, hard-boiled eggs, 
+                    avocado, tomatoes, blue cheese, and your choice of protein, 
+                    typically chicken or turkey.
+                </p>
+                <div class="product__price">120.000đ</div>
+                
+                <!-- Quantity Controls -->
+                <div class="product__controls">
+                    <button class="product__quantity-btn product__quantity-btn--minus">−</button>
+                    <input type="number" class="product__quantity-input" value="1" min="1">
+                    <button class="product__quantity-btn product__quantity-btn--plus">+</button>
+                    <button class="product__add-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="3" y="6" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M7 6V5C7 3.34315 8.34315 2 10 2V2C11.6569 2 13 3.34315 13 5V6" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        Add Food
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Related Products -->
+        <section class="related">
+            <div class="related__item">
+                <svg viewBox="0 0 200 150" fill="none">
+                    <rect width="200" height="150" rx="15" fill="#CBD5E1"/>
+                    <rect x="40" y="60" width="120" height="30" rx="5" fill="#94A3B8"/>
+                </svg>
+            </div>
+            <div class="related__item">
+                <svg viewBox="0 0 200 150" fill="none">
+                    <rect width="200" height="150" rx="15" fill="#CBD5E1"/>
+                    <rect x="40" y="60" width="120" height="30" rx="5" fill="#94A3B8"/>
+                </svg>
+            </div>
+            <div class="related__item">
+                <svg viewBox="0 0 200 150" fill="none">
+                    <rect width="200" height="150" rx="15" fill="#CBD5E1"/>
+                    <rect x="40" y="60" width="120" height="30" rx="5" fill="#94A3B8"/>
+                </svg>
+            </div>
+            <div class="related__item">
+                <svg viewBox="0 0 200 150" fill="none">
+                    <rect width="200" height="150" rx="15" fill="#CBD5E1"/>
+                    <rect x="40" y="60" width="120" height="30" rx="5" fill="#94A3B8"/>
+                </svg>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Quantity controls
+        const minusBtn = document.querySelector('.product__quantity-btn--minus');
+        const plusBtn = document.querySelector('.product__quantity-btn--plus');
+        const quantityInput = document.querySelector('.product__quantity-input');
+
+        minusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #4A90E2 0%, #67B8E3 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.page {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #A8B9CC;
+    border-radius: 30px;
+    padding: 30px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.header__logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.header__location-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header__location-btn:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+}
+
+.header__nav {
+    display: flex;
+    gap: 35px;
+    margin-left: auto;
+}
+
+.header__nav-link {
+    text-decoration: none;
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.header__nav-link:hover {
+    color: #475569;
+}
+
+/* Progress Steps */
+.progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.progress__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.progress__icon--active {
+    background: white;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+.progress__icon--completed {
+    background: #22c55e;
+    color: white;
+}
+
+.progress__label {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.progress__label--active {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.progress__line {
+    width: 100px;
+    height: 2px;
+    background: #cbd5e1;
+    margin: 0 10px;
+}
+
+/* Main Content */
+.payment {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    gap: 30px;
+}
+
+/* Cart Panel */
+.cart {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.cart__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.cart__header svg {
+    color: #64748b;
+}
+
+.cart__header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.cart__items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cart__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.cart__item-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cart__item-controls svg {
+    color: #22c55e;
+}
+
+.cart__control-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.cart__control-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.cart__item-quantity {
+    min-width: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.cart__item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart__item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.cart__item-price {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.cart__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 2px solid #f1f5f9;
+    border-bottom: 2px solid #f1f5f9;
+    margin-bottom: 20px;
+}
+
+.cart__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #475569;
+}
+
+.cart__row--total {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ef4444;
+}
+
+.cart__btn {
+    width: 100%;
+    padding: 14px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.cart__btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Payment Panel */
+.payment__methods {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Search and Discount Section */
+.payment__search {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.payment__search-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.payment__search-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.payment__search-btn--active {
+    background: #22c55e;
+    color: white;
+}
+
+.payment__search-btn:hover {
+    background: #1ea654;
+    color: white;
+}
+
+.payment__discount-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #64748b;
+    background: #f8fafc;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.payment__discount-input::placeholder {
+    color: #94a3b8;
+}
+
+.payment__discount-input:focus {
+    border-color: #22c55e;
+    background: white;
+}
+
+.payment__tabs {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.payment__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.payment__tab:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+.payment__tab--active {
+    background: white;
+    border-color: #22c55e;
+    color: #1e293b;
+}
+
+.payment__tab--active::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+.payment__tab svg {
+    color: currentColor;
+}
+
+/* Payment Content */
+.payment__content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 300px;
+}
+
+.payment__method {
+    display: none;
+}
+
+.payment__method--active {
+    display: block;
+}
+
+/* Cash Payment */
+.payment__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.payment__description {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #475569;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.payment__note {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 15px 20px;
+    background: white;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+}
+
+.payment__note-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ef4444;
+}
+
+.payment__note svg {
+    color: #ef4444;
+}
+
+/* Card & Wallet Options */
+.payment__gateway {
+    width: 100%;
+    padding: 12px 24px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment__gateway svg {
+    color: #64748b;
+}
+
+.payment__options {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.payment__option {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment__option:hover {
+    border-color: #22c55e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+}
+
+.payment__option--active {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.payment__option img {
+    width: 80px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.payment__note-text {
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Scrollbar Styling */
+.cart__items::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cart__items::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.cart__items::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.cart__items::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .payment {
+        grid-template-columns: 1fr;
+    }
+
+    .cart {
+        order: 2;
+    }
+
+    .payment__methods {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 20px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+    }
+
+    .header__nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .progress {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .progress__line {
+        width: 2px;
+        height: 40px;
+    }
+
+    .payment__tabs {
+        flex-wrap: wrap;
+    }
+
+    .payment__tab {
+        min-width: calc(50% - 7.5px);
+    }
+
+    .settings-btn {
+        width: 100%;
+    }
+
+    .payment__options {
+        flex-direction: column;
+    }
+}

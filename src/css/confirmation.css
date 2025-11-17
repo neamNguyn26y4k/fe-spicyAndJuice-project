@@ -1,0 +1,14 @@
+.confirmation-container { max-width: 700px; margin: 40px auto; padding: 40px; border: 1px solid #eee; border-radius: 8px; text-align: center; background-color: #fff; }
+.confirmation-container__title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
+.confirmation-container__description { color: #666; margin-bottom: 30px; font-size: 1.1rem; }
+.booking-summary { text-align: left; background-color: #f9f9f9; padding: 25px; border-radius: 6px; margin-bottom: 30px; }
+.summary-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1rem; }
+.summary-item__label { font-weight: 500; color: #555; }
+.summary-item__value { color: #000; font-weight: bold; }
+.summary-divider { border: 0; border-top: 1px solid #ddd; margin: 20px 0; }
+.confirmation-actions { display: flex; gap: 20px; justify-content: center; }
+.action-button { padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: all 0.3s; }
+.action-button--back { background-color: #eee; color: #333; border: 1px solid #ccc; }
+.action-button--back:hover { background-color: #ddd; }
+.action-button--confirm { background-color: #333; color: #fff; border: 1px solid #333; }
+.action-button--confirm:hover { background-color: #E6B34B; color: #333; border-color: #E6B34B; }
