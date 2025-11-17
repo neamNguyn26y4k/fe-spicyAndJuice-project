@@ -13,9 +13,27 @@
             <a href="/public/pages/stores.html" class="nav-item" data-page="stores">Đặt bàn</a>
             <a href="/public/pages/about.html" class="nav-item" data-page="about">Về SandJ</a>
         </nav>
-        <div class="auth-buttons">
-            <button class="btn btn-login">Log in</button>
-            <button class="btn btn-signup">Sign Up</button>
+        <div class="header-actions">
+            <div class="auth-buttons">
+                <button class="btn btn-login">Log in</button>
+                <button class="btn btn-signup">Sign Up</button>
+            </div>
+            <div class="user-panel" aria-live="polite">
+                <button class="icon-button cart-button" aria-label="Giỏ hàng">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge">2</span>
+                </button>
+                <div class="user-profile">
+                    <img src="/src/assets/images/van-nam.jpg" alt="Ảnh đại diện Nam Nguyễn" class="user-avatar">
+                    <div class="user-meta">
+                        <span class="user-name">Nam Nguyễn</span>
+                        <span class="user-location">Tp. Hồ Chí Minh</span>
+                    </div>
+                </div>
+                <button class="icon-button more-button" aria-label="Thêm tùy chọn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </div>
 </header>
