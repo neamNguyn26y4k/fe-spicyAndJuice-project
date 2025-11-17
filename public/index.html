@@ -8,18 +8,80 @@
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="/src/css/style.css">
 </head>
 
 <body>
     <div id="main">
         <div id="header"></div>
-        <div id="slider"></div>
-        <div id="content"></div>
+        <div id="content" class="page-content homepage">
+            <div class="background-slider">
+                <div class="bg-image active" style="background-image: url('/src/assets/images/nhahang.png');"></div>
+                <div class="bg-image" style="background-image: url('/src/assets/images/lau2.png');"></div>
+                <div class="bg-image" style="background-image: url('/src/assets/images/chen-lau.png');"></div>
+            </div>
+
+            <div class="gradient-overlay"></div>
+
+            <div class="content">
+                <h1 class="page-title">Đặt món ngon mọi lúc mọi nơi</h1>
+                <p>Thực đơn đa dạng – Cơm, Phở, Mì, Đồ uống – giao hàng nhanh chóng.</p>
+                <button class="btn btn-primary">Đặt món ngay</button>
+            </div>
+
+            <div class="indicators">
+                <div class="indicator active" data-index="0"
+                    style="background-image: url('/src/assets/images/nhahang.png');"></div>
+                <div class="indicator" data-index="1" style="background-image: url('/src/assets/images/lau2.png');">
+                </div>
+                <div class="indicator" data-index="2" style="background-image: url('/src/assets/images/chen-lau.png');">
+                </div>
+            </div>
+        </div>
+
+        <section class="immersive-gallery">
+            <div class="gallery-intro">
+                <h2 class="gallery-title">Spicy&Juice Bộ Sưu Tập</h2>
+                <div class="gallery-divider"></div>
+            </div>
+            <section class="gallery-section" data-section="1">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80&auto=format&fit=crop"
+                    alt="Không gian nhà hàng" class="gallery-image">
+                <div class="image-overlay"></div>
+                <div class="image-caption">
+                    <span class="caption-accent"></span>
+                    <p>Không gian ấm cúng & hiện đại – phù hợp cho gia đình, bạn bè, và những dịp đặc biệt.</p>
+                </div>
+            </section>
+
+            <section class="gallery-section" data-section="2">
+                <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80&auto=format&fit=crop"
+                    alt="Ẩm thực tinh tế" class="gallery-image">
+                <div class="image-overlay"></div>
+                <div class="image-caption">
+                    <span class="caption-accent"></span>
+                    <p>Ẩm thực tinh tế với hương vị độc đáo – mỗi món ăn là một hành trình khám phá.</p>
+                </div>
+            </section>
+
+            <section class="gallery-section" data-section="3">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80&auto=format&fit=crop"
+                    alt="Khu vực quầy bar" class="gallery-image">
+                <div class="image-overlay"></div>
+                <div class="image-caption">
+                    <span class="caption-accent"></span>
+                    <p>Thức uống sáng tạo & cocktail đặc biệt – nơi hội tụ của hương vị và nghệ thuật.</p>
+                </div>
+            </section>
+        </section>
         <div id="footer"></div>
     </div>
 
     <script src="/src/js/loader.js"></script>
+    <script src="/src/js/homepage-slider.js"></script>
+    <script src="/src/js/gallery.js"></script>
 </body>
 
 </html>
