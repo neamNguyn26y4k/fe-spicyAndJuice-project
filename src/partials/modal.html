@@ -2,58 +2,83 @@
 <div class="modal" id="modal">
     <div class="modal-container">
         <div class="close-btn">&times;</div>
+        
+        <!-- Form Đăng Ký -->
         <div class="form-modal sign-up-modal">
             <form action="#">
-                <h1>Create Account</h1>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <div class="social-buttons">
-                    <a href="#" class="icn-social" aria-label="Sign in with Google"><img
-                            src="/src/assets/images/google.png" alt="Google"></a>
-                    <a href="#" class="icn-social" aria-label="Sign in with Apple"><img
-                            src="/src/assets/images/apple-logo.png" alt="Apple"></a>
-                    <a href="#" class="icn-social" aria-label="Sign in with Facebook"><img
-                            src="/src/assets/images/facebook.png" alt="Facebook"></a>
+                <h1>Tạo Tài Khoản</h1>
+                <p>Đăng ký để bắt đầu hành trình của bạn</p>
+                
+                <input type="text" placeholder="Họ và tên" required />
+                <input type="email" placeholder="Địa chỉ email" required />
+                <input type="password" placeholder="Mật khẩu" required />
+                
+                <button type="submit">Đăng Ký</button>
+                
+                <div class="divider">
+                    <span>hoặc</span>
                 </div>
-                <button>Sign Up</button>
+                
+                <div class="social-buttons">
+                    <a href="#" class="icn-social" aria-label="Đăng ký với Google">
+                        <img src="/src/assets/images/google.png" alt="Google">
+                    </a>
+                    <a href="#" class="icn-social" aria-label="Đăng ký với Apple">
+                        <img src="/src/assets/images/apple-logo.png" alt="Apple">
+                    </a>
+                    <a href="#" class="icn-social" aria-label="Đăng ký với Facebook">
+                        <img src="/src/assets/images/facebook.png" alt="Facebook">
+                    </a>
+                </div>
             </form>
         </div>
+        
+        <!-- Form Đăng Nhập -->
         <div class="form-modal sign-in-modal">
             <form action="#">
-                <h1>Sign in</h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <div class="social-buttons">
-                    <a href="#" class="icn-social" aria-label="Sign in with Google"><img
-                            src="/src/assets/images/google.png" alt="Google"></a>
-                    <a href="#" class="icn-social" aria-label="Sign in with Apple"><img
-                            src="/src/assets/images/apple-logo.png" alt="Apple"></a>
-                    <a href="#" class="icn-social" aria-label="Sign in with Facebook"><img
-                            src="/src/assets/images/facebook.png" alt="Facebook"></a>
+                <h1>Đăng Nhập</h1>
+                <p>Chào mừng bạn trở lại!</p>
+                
+                <input type="email" placeholder="Địa chỉ email" required />
+                <input type="password" placeholder="Mật khẩu" required />
+                <a href="#">Quên mật khẩu?</a>
+                
+                <button type="submit">Đăng Nhập</button>
+                
+                <div class="divider">
+                    <span>hoặc</span>
                 </div>
-                <button>Sign In</button>
+                
+                <div class="social-buttons">
+                    <a href="#" class="icn-social" aria-label="Đăng nhập với Google">
+                        <img src="/src/assets/images/google.png" alt="Google">
+                    </a>
+                    <a href="#" class="icn-social" aria-label="Đăng nhập với Apple">
+                        <img src="/src/assets/images/apple-logo.png" alt="Apple">
+                    </a>
+                    <a href="#" class="icn-social" aria-label="Đăng nhập với Facebook">
+                        <img src="/src/assets/images/facebook.png" alt="Facebook">
+                    </a>
+                </div>
             </form>
         </div>
+        
+        <!-- Overlay Panels -->
         <div class="overlay-modal">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <img src="/src/assets/images/logo.png" alt="Logo" class="panel-logo">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your
-                        personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
+                    <h1>Chào Mừng Trở Lại!</h1>
+                    <p>Đăng nhập để tiếp tục kết nối với chúng tôi và trải nghiệm những tính năng tuyệt vời</p>
+                    <button class="ghost" id="signIn">Đăng Nhập</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <img src="/src/assets/images/logo.png" alt="Logo" class="panel-logo">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with
-                        us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
+                    <h1>Xin Chào Bạn!</h1>
+                    <p>Tạo tài khoản mới và bắt đầu hành trình khám phá cùng chúng tôi ngay hôm nay</p>
+                    <button class="ghost" id="signUp">Đăng Ký</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
