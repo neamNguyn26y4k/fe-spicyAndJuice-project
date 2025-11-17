@@ -15,10 +15,6 @@ body {
   line-height: 1.6;
 }
 
-/* ========================================
-   CSS VARIABLES
-   ======================================== */
-
 :root {
   --primary-color: #d32f2f;
   --secondary-color: #111827;
@@ -29,27 +25,13 @@ body {
   --border-color: #e5e7eb;
 }
 
-/* ========================================
-   HEADER & NAVIGATION
-   ======================================== */
-
+/*! header & nav */
 #header {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
-/* Header transparent trên homepage */
-body:has(.homepage) #header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
 }
 
 .header-container {
@@ -62,7 +44,6 @@ body:has(.homepage) #header {
   gap: 1.5rem;
 }
 
-/* Logo Section */
 .logo-section {
   display: flex;
   align-items: center;
@@ -89,7 +70,6 @@ body:has(.homepage) #header {
   object-fit: contain;
 }
 
-/* Navigation Menu */
 .nav-menu {
   display: flex;
   justify-content: center;
@@ -112,7 +92,7 @@ body:has(.homepage) #header {
   color: var(--primary-color);
 }
 
-/* Underline animation on hover */
+
 .nav-item::after {
   content: "";
   position: absolute;
@@ -136,7 +116,6 @@ body:has(.homepage) #header {
   width: 100%;
 }
 
-/* Auth Buttons */
 .auth-buttons {
   display: flex;
   gap: 10px;
@@ -174,10 +153,7 @@ body:has(.homepage) #header {
   background: var(--secondary-color-hover);
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
-
+/*! footer */
 #footer {
   background-color: var(--background-color);
   padding: 0;
@@ -191,7 +167,6 @@ body:has(.homepage) #header {
   min-height: 400px;
 }
 
-/* Footer Left - Image */
 .footer-left {
   flex: 0 0 auto;
   position: relative;
@@ -207,7 +182,6 @@ body:has(.homepage) #header {
   object-position: center;
 }
 
-/* Footer Right - Content */
 .footer-right {
   flex: 1;
   background-color: #f9f9f9;
@@ -261,7 +235,6 @@ body:has(.homepage) #header {
   line-height: 1.5;
 }
 
-/* Social Icons */
 .social-icons {
   display: flex;
   gap: 0.75rem;
@@ -353,10 +326,7 @@ body:has(.homepage) #header {
   margin: 0;
 }
 
-/* ========================================
-   PAGE CONTENT & LAYOUT
-   ======================================== */
-
+/** page content & layout */
 .page-content {
   min-height: 60vh;
   padding: 2rem 0;
@@ -390,11 +360,7 @@ body:has(.homepage) #header {
   text-align: center;
 }
 
-/* ========================================
-   HOMEPAGE SPECIFIC STYLES
-   ======================================== */
-
-/* Background Slider */
+/** Homepage Background Slider */
 .background-slider {
   position: absolute;
   top: 0;
@@ -436,7 +402,7 @@ body:has(.homepage) #header {
   z-index: 2;
 }
 
-/* Homepage Content */
+
 .homepage .content {
   position: absolute;
   top: 50%;
@@ -485,7 +451,7 @@ body:has(.homepage) #header {
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
 }
 
-/* Slider Indicators */
+/** Slider */
 .indicators {
   position: absolute;
   bottom: 50px;
@@ -518,7 +484,7 @@ body:has(.homepage) #header {
   box-shadow: 0 5px 20px rgba(255, 255, 255, 0.5);
 }
 
-/* Immersive Gallery */
+/** Immersive Gallery */
 .immersive-gallery {
   background-color: #050505;
   color: #fff;
@@ -533,7 +499,7 @@ body:has(.homepage) #header {
 }
 
 .gallery-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   font-weight: 600;
@@ -618,10 +584,7 @@ body:has(.homepage) #header {
   background: linear-gradient(90deg, #d4af37, #f0e28c);
 }
 
-/* ========================================
-   MODAL (LOGIN/SIGNUP)
-   ======================================== */
-
+/* !: Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -967,7 +930,7 @@ body:has(.homepage) #header {
   }
 }
 
-/* Homepage Responsive */
+
 @media (max-width: 768px) {
   .homepage .content {
     left: 5%;
