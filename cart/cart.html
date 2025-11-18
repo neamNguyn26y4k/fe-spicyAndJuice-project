@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Spicy & Juicy</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="header"></div>
+        
+        <div class="page-content">
+            <div class="container">
+                <div class="cart-page">
+                    <div class="cart-header">
+                        <h1 class="cart-title">Giỏ hàng của bạn</h1>
+                        <p class="cart-subtitle">Xem lại món ăn trước khi đặt hàng</p>
+                    </div>
+
+                    <div class="cart-layout">
+                        <!-- Cart Items Section -->
+                        <div class="cart-items-section">
+                            <div class="cart-items-header">
+                                <span class="items-count" id="itemsCount">3 món</span>
+                                <button class="clear-cart-btn" id="clearCartBtn">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Xóa tất cả
+                                </button>
+                            </div>
+
+                            <div class="cart-items-list" id="cartItemsList">
+                                <!-- Cart items will be dynamically added here -->
+                            </div>
+
+                            <!-- Empty Cart State -->
+                            <div class="empty-cart" style="display: none;">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <h3>Giỏ hàng trống</h3>
+                                <p>Hãy thêm món ăn vào giỏ hàng để tiếp tục</p>
+                                <a href="/public/pages/menu.html" class="btn btn-primary">Xem thực đơn</a>
+                            </div>
+                        </div>
+
+                        <!-- Cart Summary Section -->
+                        <div class="cart-summary">
+                            <h2 class="summary-title">Tổng đơn hàng</h2>
+                            
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Tạm tính</span>
+                                    <span id="subtotal">680.000 VNĐ</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Giảm giá</span>
+                                    <span class="discount" id="discount">-50.000 VNĐ</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Phí vận chuyển</span>
+                                    <span id="shipping">25.000 VNĐ</span>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-row summary-total">
+                                    <span>Tổng cộng</span>
+                                    <span id="total">655.000 VNĐ</span>
+                                </div>
+                            </div>
+
+                            <div class="promo-code">
+                                <input type="text" placeholder="Mã giảm giá" class="promo-input" id="promoInput">
+                                <button class="promo-btn" id="applyPromoBtn">Áp dụng</button>
+                            </div>
+
+                            <button class="checkout-btn" id="checkoutBtn">
+                                <i class="fa-solid fa-arrow-right"></i>
+                                Tiến hành đặt hàng
+                            </button>
+
+                            <div class="continue-shopping">
+                                <a href="/public/pages/menu.html">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    Tiếp tục mua hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer"></div>
+    </div>
+
+    <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
+    <script src="cart.js"></script>
+</body>
+
+</html>
