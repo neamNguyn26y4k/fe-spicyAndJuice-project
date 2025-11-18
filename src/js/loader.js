@@ -249,9 +249,37 @@ function initUserMenu() {
     }
 }
 
+// Hàm khởi tạo nút giỏ hàng
+function initCartButton() {
+    const cartButton = document.querySelector('.cart-button');
+    if (cartButton) {
+        cartButton.addEventListener('click', () => {
+            window.location.href = '/cart/cart.html';
+        });
+        cartButton.style.cursor = 'pointer';
+    }
+}
+
+// Hàm cập nhật số lượng badge giỏ hàng
+function updateCartBadge() {
+    const cartBadge = document.querySelector('.cart-badge');
+    if (cartBadge && typeof cart !== 'undefined') {
+        const itemCount = cart.getItemCount();
+        cartBadge.textContent = itemCount;
+        // Ẩn badge nếu giỏ hàng rỗng
+        if (itemCount === 0) {
+            cartBadge.style.display = 'none';
+        } else {
+            cartBadge.style.display = 'block';
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     await loadModal(); // Load modal trước
     await loadHeader(); // Đợi header load xong
     await loadFooter(); // Đợi footer load xong
     loadPopup(); // Gọi loadPopup SAU KHI cả modal và header đã load xong
+    initCartButton(); // Khởi tạo nút giỏ hàng
+    updateCartBadge(); // Cập nhật badge giỏ hàng
 });

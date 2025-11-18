@@ -3,28 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đặt hàng - Order</title>
+    <title>Đặt hàng - Spicy & Juicy</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/src/css/style.css">
     <link rel="stylesheet" href="order.css">
 </head>
 <body>
-    <div class="page">
-        <!-- Header Navigation -->
-        <header class="header">
-            <div class="header__logo">Logo</div>
-            <button class="header__location-btn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
-                    <circle cx="8" cy="8" r="2" fill="currentColor"/>
-                </svg>
-                Location
-            </button>
-            <nav class="header__nav">
-                <a href="#" class="header__nav-link">Menu</a>
-                <a href="#" class="header__nav-link">Promotion</a>
-                <a href="#" class="header__nav-link">Store</a>
-                <a href="#" class="header__nav-link">About</a>
-            </nav>
-        </header>
+    <div id="main">
+        <div id="header"></div>
+        
+        <div class="page-content">
+            <div class="page">
 
         <!-- Progress Steps -->
         <div class="progress">
@@ -219,6 +212,10 @@
 
             </div>
         </div>
+        </div>
+        </div>
+        
+        <div id="footer"></div>
     </div>
 
     <!-- Modal for adding/editing address -->
@@ -273,6 +270,8 @@
         </div>
     </div>
 
+    <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
     <script src="order.js"></script>
 </body>
 </html>

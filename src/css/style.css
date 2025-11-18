@@ -166,6 +166,12 @@ body.no-scroll {
 
 .cart-button {
   position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cart-button:hover {
+  transform: scale(1.1);
 }
 
 .cart-badge {
@@ -180,6 +186,7 @@ body.no-scroll {
   padding: 2px 5px;
   min-width: 18px;
   text-align: center;
+  pointer-events: none;
 }
 
 .user-profile {

@@ -40,4 +40,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", handleParallax, { passive: true });
 });
-
