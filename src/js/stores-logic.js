@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Logic tìm kiếm
+    // tìm kiếm
     function renderStores(stores) {
         storeListContainer.innerHTML = ''; // Xóa heet
     }
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Logic xử lý khi click nút "Đặt Bàn"
+    // xử lý khi click nút "Đặt Bàn"
     storeListContainer.addEventListener('click', function(e) {
         if (e.target.matches('.store-card__button--book')) {
             e.preventDefault();

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'reserve.html';
     }
 
-    // new: Xóa dữ liệu tạm khi người dùng xác nhận
+    // Xóa dữ liệu tạm khi người dùng xác nhận
     const confirmButton = document.getElementById('confirmButton');
     if(confirmButton) {
         confirmButton.addEventListener('click', function() {
