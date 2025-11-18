@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const selectedStore = e.target.dataset.storeName;
             localStorage.setItem('selectedStore', selectedStore);
-            window.location.href = 'reserve.html';
+            window.location.href = '/public/pages/reservation/reserve.html';
         }
     });
 

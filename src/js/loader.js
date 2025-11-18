@@ -254,7 +254,7 @@ function initCartButton() {
     const cartButton = document.querySelector('.cart-button');
     if (cartButton) {
         cartButton.addEventListener('click', () => {
-            window.location.href = '/cart/cart.html';
+            window.location.href = '/public/pages/checkout/cart.html';
         });
         cartButton.style.cursor = 'pointer';
     }

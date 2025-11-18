@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('summary-notes').textContent = bookingData.notes || 'Không có';
     } else {
         // nếu không có dữ liệu thì chuyển người dùng về trang đặt bàn
-        window.location.href = 'reserve.html';
+        window.location.href = '/public/pages/reservation/reserve.html';
     }
 
     // new: Xóa dữ liệu tạm khi người dùng xác nhận

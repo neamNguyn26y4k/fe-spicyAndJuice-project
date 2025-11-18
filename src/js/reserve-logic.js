@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 notes: document.getElementById('notes').value
             };
             localStorage.setItem('pendingBooking', JSON.stringify(bookingData));
-            window.location.href = 'confirmation.html';
+            window.location.href = '/public/pages/reservation/confirmation.html';
         });
     }
 
