@@ -1023,28 +1023,26 @@ body.no-scroll {
   position: absolute;
   top: 20px;
   right: 25px;
-  font-size: 28px;
-  font-weight: 300;
-  color: #666;
-  cursor: pointer;
-  z-index: 1001;
-  line-height: 1;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  padding: 0;
   width: 36px;
   height: 36px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  background: #ffffff;
+  color: #555;
+  font-size: 24px;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  z-index: 1001;
 }
 
 .close-btn:hover {
-  color: #ff4b2b;
-  background: #fff;
-  transform: rotate(90deg);
+  background: #ffebe5;
+  color: #e54424;
+  transform: translateY(-1px);
 }
 
 .modal h1 {
