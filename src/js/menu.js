@@ -1,56 +1,7 @@
-// 1. Dữ liệu sản phẩm mẫu (Khớp với HTML của bạn)
-const products = [
-    {
-        id: 1,
-        title: "Lẩu bò Tây Bắc",
-        img: "../../src/assets/images/Lau-vn/Lau-bo.jpg",
-        price: 200000,
-        desc: "Lẩu bò Tây Bắc là món ăn mang đậm phong vị núi rừng, nổi bật bởi sự hòa quyện của nước dùng ngọt xương, vị cay nồng thơm đặc trưng từ mắc khén – hạt dổi – ớt khô, cùng các loại rau rừng thanh mát.",
-    },
-    {
-        id: 2,
-        title: "Lẩu cá đuối",
-        img: "../../src/assets/images/Lau-vn/Lau-ca-duoi.jpg",
-        price: 180000,
-        desc: "Lẩu cá đuối chua cay, thịt cá dai ngọt, đặc sản vùng biển.",
-    },
-    {
-        id: 3,
-        title: "Lẩu cá hồi",
-        img: "../../src/assets/images/Lau-vn/Lau-ca-hoi.jpg",
-        price: 180000,
-        desc: "Cá hồi tươi béo ngậy nấu cùng nước lẩu chua thanh mát.",
-    },
-    {
-        id: 4,
-        title: "Lẩu cá hú",
-        img: "../../src/assets/images/Lau-vn/Lau-ca-hu.jpg",
-        price: 699000,
-        desc: "Món lẩu truyền thống miền Tây với cá hú tươi ngon.",
-    },
-    {
-        id: 5,
-        title: "Lẩu cá kèo rau đắng",
-        img: "../../src/assets/images/Lau-vn/Lau-ca-keo-rau-dang.jpg",
-        price: 280000,
-        desc: "Sự kết hợp hoàn hảo giữa cá kèo ngọt thịt và vị đắng nhẹ của rau.",
-    },
-    {
-        id: 6,
-        title: "Lẩu cháo chim bồ câu",
-        img: "../../src/assets/images/Lau-vn/Lau-chao-chim-bo-cau.jpeg",
-        price: 540000,
-        desc: "Món ăn bổ dưỡng, cháo sánh mịn ngọt lịm từ thịt chim bồ câu.",
-    },
-    // Bạn có thể thêm tiếp các món khác vào đây...
-];
+// 1. Dữ liệu sản phẩm được import từ data.js
+// (File data.js phải được load trước file này trong HTML)
 
-// 2. Hàm định dạng tiền tệ (VD: 200.000 đ)
-function vnd(price) {
-    return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
-}
-
-// 3. Hàm hiển thị Popup chi tiết (Được gọi khi bấm nút ĐẶT MÓN)
+// 2. Hàm hiển thị Popup chi tiết (Được gọi khi bấm nút ĐẶT MÓN)
 function detailProduct(id) {
     const modal = document.querySelector(".modal.product-detail");
     const product = products.find((p) => p.id === id);
@@ -91,7 +42,7 @@ function detailProduct(id) {
                 <span class="price">${vnd(product.price)}</span>
             </div>
             <div class="modal-footer-control">
-                <button class="button-dathangngay" onclick="alert('Đã đặt hàng thành công!')">Đặt hàng ngay</button>
+                <button class="button-dathangngay" onclick="addToCartFromModal(${product.id})">Đặt hàng ngay</button>
             </div>
         </div>
     `;
@@ -121,6 +72,43 @@ function detailProduct(id) {
             setTimeout(updatePrice, 0); // Đợi value input cập nhật xong mới tính tiền
         });
     });
+}
+
+// Hàm thêm sản phẩm vào giỏ hàng từ modal
+function addToCartFromModal(productId) {
+    const modal = document.querySelector(".modal.product-detail");
+    const qtyInput = modal.querySelector(".input-qty");
+    const noteInput = modal.querySelector("#popup-detail-note");
+    
+    const quantity = parseInt(qtyInput.value) || 1;
+    const note = noteInput ? noteInput.value.trim() : '';
+    
+    // Thêm vào giỏ hàng
+    cart.addItem(productId, quantity, note);
+    
+    // Cập nhật badge giỏ hàng
+    updateCartBadge();
+    
+    // Thông báo
+    alert('Đã thêm vào giỏ hàng!');
+    
+    // Đóng modal
+    modal.classList.remove("open");
+}
+
+// Hàm cập nhật số lượng badge giỏ hàng
+function updateCartBadge() {
+    const cartBadge = document.querySelector('.cart-badge');
+    if (cartBadge) {
+        const itemCount = cart.getItemCount();
+        cartBadge.textContent = itemCount;
+        // Ẩn badge nếu giỏ hàng rỗng
+        if (itemCount === 0) {
+            cartBadge.style.display = 'none';
+        } else {
+            cartBadge.style.display = 'block';
+        }
+    }
 }
 
 // 4. Các hàm xử lý nút tăng giảm số lượng
@@ -282,4 +270,18 @@ function initCategoryScroll() {
 // Gọi hàm khi web tải xong
 document.addEventListener("DOMContentLoaded", () => {
     initCategoryScroll();
+    initCartButton();
+    updateCartBadge(); // Cập nhật badge khi trang load
 });
+
+// Hàm khởi tạo nút giỏ hàng
+function initCartButton() {
+    const cartButton = document.querySelector('.cart-button');
+    if (cartButton) {
+        cartButton.addEventListener('click', () => {
+            window.location.href = '/cart/cart.html';
+        });
+        // Thêm cursor pointer
+        cartButton.style.cursor = 'pointer';
+    }
+}
