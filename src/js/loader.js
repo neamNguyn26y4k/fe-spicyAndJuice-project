@@ -1,3 +1,5 @@
+const AUTH_STATE_KEY = 'saj-user-logged-in';
+
 async function loadHeader() {
     const headerElement = document.getElementById('header');
     if (headerElement) {
@@ -8,6 +10,8 @@ async function loadHeader() {
                 headerElement.innerHTML = html;
 
                 highlightCurrentPage();
+                initUserMenu();
+                updateHeaderAuthState();
             } else {
                 console.error('Failed to load header');
             }
@@ -100,9 +104,8 @@ function loadPopup() {
     const btnLogin = document.querySelector('.btn-login');
     const btnSignup = document.querySelector('.btn-signup');
 
-    // Kiểm tra xem các elements có tồn tại không
-    if (!btnLogin || !btnSignup || !modal) {
-        console.error('Required elements not found');
+    if (!modal) {
+        console.error('Modal element not found');
         return;
     }
 
@@ -120,16 +123,20 @@ function loadPopup() {
     }
 
     // Hiển thị modal khi click button Login từ header
-    btnLogin.addEventListener('click', () => {
-        modal.classList.remove("right-panel-active");
-        modal.style.display = 'flex';
-    });
+    if (btnLogin) {
+        btnLogin.addEventListener('click', () => {
+            modal.classList.remove("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
 
     // Hiển thị modal khi click button Sign Up từ header
-    btnSignup.addEventListener('click', () => {
-        modal.classList.add("right-panel-active");
-        modal.style.display = 'flex';
-    });
+    if (btnSignup) {
+        btnSignup.addEventListener('click', () => {
+            modal.classList.add("right-panel-active");
+            modal.style.display = 'flex';
+        });
+    }
 
     // Đóng modal khi click vào nút close
     if (closeBtn) {
@@ -144,6 +151,128 @@ function loadPopup() {
             modal.style.display = 'none';
         }
     });
+
+    bindMockLoginSuccess(modal);
+    updateHeaderAuthState();
+}
+
+function bindMockLoginSuccess(modal) {
+    const signInForm = document.querySelector('#modal .sign-in-modal form');
+    if (!signInForm) {
+        return;
+    }
+
+    signInForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        setUserLoggedIn(true);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+function setUserLoggedIn(isLoggedIn) {
+    localStorage.setItem(AUTH_STATE_KEY, isLoggedIn ? 'true' : 'false');
+    updateHeaderAuthState();
+}
+
+function isUserLoggedIn() {
+    return localStorage.getItem(AUTH_STATE_KEY) === 'true';
+}
+
+function updateHeaderAuthState() {
+    const authButtons = document.querySelector('.auth-buttons');
+    const userPanel = document.querySelector('.user-panel');
+    const body = document.body;
+    const userMenu = document.querySelector('.user-menu');
+    const moreButton = document.querySelector('.more-button');
+
+    if (!authButtons || !userPanel) {
+        return;
+    }
+
+    if (isUserLoggedIn()) {
+        authButtons.classList.add('is-hidden');
+        userPanel.classList.add('is-visible');
+        if (body) {
+            body.classList.add('logged-in');
+        }
+    } else {
+        authButtons.classList.remove('is-hidden');
+        userPanel.classList.remove('is-visible');
+        if (body) {
+            body.classList.remove('logged-in');
+        }
+        if (userMenu) {
+            userMenu.classList.remove('is-open');
+        }
+        if (moreButton) {
+            moreButton.setAttribute('aria-expanded', 'false');
+        }
+    }
+}
+
+function initUserMenu() {
+    const moreButton = document.querySelector('.more-button');
+    const userMenu = document.querySelector('.user-menu');
+    if (!moreButton || !userMenu) {
+        return;
+    }
+
+    const toggleMenu = (force) => {
+        const willOpen = force !== undefined ? force : !userMenu.classList.contains('is-open');
+        userMenu.classList.toggle('is-open', willOpen);
+        moreButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    };
+
+    const closeMenu = () => toggleMenu(false);
+
+    moreButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    userMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', () => {
+        closeMenu();
+    });
+
+    const logoutButton = userMenu.querySelector('[data-action="logout"]');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            setUserLoggedIn(false);
+            closeMenu();
+        });
+    }
+}
+
+// Hàm khởi tạo nút giỏ hàng
+function initCartButton() {
+    const cartButton = document.querySelector('.cart-button');
+    if (cartButton) {
+        cartButton.addEventListener('click', () => {
+            window.location.href = '/cart/cart.html';
+        });
+        cartButton.style.cursor = 'pointer';
+    }
+}
+
+// Hàm cập nhật số lượng badge giỏ hàng
+function updateCartBadge() {
+    const cartBadge = document.querySelector('.cart-badge');
+    if (cartBadge && typeof cart !== 'undefined') {
+        const itemCount = cart.getItemCount();
+        cartBadge.textContent = itemCount;
+        // Ẩn badge nếu giỏ hàng rỗng
+        if (itemCount === 0) {
+            cartBadge.style.display = 'none';
+        } else {
+            cartBadge.style.display = 'block';
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -151,4 +280,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadHeader(); // Đợi header load xong
     await loadFooter(); // Đợi footer load xong
     loadPopup(); // Gọi loadPopup SAU KHI cả modal và header đã load xong
+    initCartButton(); // Khởi tạo nút giỏ hàng
+    updateCartBadge(); // Cập nhật badge giỏ hàng
 });

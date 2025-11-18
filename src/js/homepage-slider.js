@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 5000);
+        autoSlideInterval = setInterval(nextSlide, 3000);
     }
 
     function resetAutoSlide() {
@@ -41,4 +41,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startAutoSlide();
 });
-
