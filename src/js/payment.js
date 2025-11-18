@@ -133,10 +133,10 @@ document.getElementById('confirmBtn').addEventListener('click', function() {
         // Xóa giỏ hàng sau khi thanh toán thành công
         cart.clearCart();
         // Chuyển đến trang thành công
-        window.location.href = '/payment/payment_success.html';
+        window.location.href = '/public/pages/checkout/payment_success.html';
     } else {
         // Chuyển đến trang thất bại
-        window.location.href = '/payment/payment_fail.html';
+        window.location.href = '/public/pages/checkout/payment_fail.html';
     }
 });
 

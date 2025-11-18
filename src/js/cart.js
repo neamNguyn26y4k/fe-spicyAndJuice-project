@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             // Navigate to order page
-            window.location.href = '/order/order.html';
+            window.location.href = '/public/pages/checkout/order.html';
         });
     }
     

@@ -354,7 +354,7 @@ document.getElementById('orderBtn').onclick = () => {
     }
     
     // Chuyển sang trang thanh toán
-    window.location.href = '/payment/payment.html';
+    window.location.href = '/public/pages/checkout/payment.html';
 };
 
 // Delivery option handling
