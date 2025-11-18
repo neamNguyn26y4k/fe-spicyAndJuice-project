@@ -92,7 +92,6 @@ body {
   color: var(--primary-color);
 }
 
-
 .nav-item::after {
   content: "";
   position: absolute;
@@ -401,7 +400,6 @@ body {
   );
   z-index: 2;
 }
-
 
 .homepage .content {
   position: absolute;
@@ -930,7 +928,6 @@ body {
   }
 }
 
-
 @media (max-width: 768px) {
   .homepage .content {
     left: 5%;
@@ -978,4 +975,3 @@ body {
     width: 50px;
   }
 }
-

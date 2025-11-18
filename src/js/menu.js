@@ -20,7 +20,7 @@ const products = [
     id: 3,
     category: "lau-viet",
     title: "Lẩu Cá Kèo Rau Đắng",
-    img: "../../src/assets/images/Lau-vn/lau-ca-keo.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-ca-keo-rau-dang.jpg",
     price: 180000,
     desc: "Cá kèo tươi sống, nước lẩu chua dịu ăn kèm rau đắng giòn ngon.",
   },
@@ -36,7 +36,7 @@ const products = [
     id: 5,
     category: "lau-viet",
     title: "Lẩu Riêu Cua Bắp Bò",
-    img: "../../src/assets/images/Lau-vn/lau-rieu-cua.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-rieu-cua-suon-sun-bo.png",
     price: 280000,
     desc: "Nước dùng ngọt thanh từ cua đồng, riêu cua vàng óng, bắp bò giòn sần sật.",
   },
@@ -44,7 +44,7 @@ const products = [
     id: 6,
     category: "lau-viet",
     title: "Lẩu Cá Đuối Vũng Tàu",
-    img: "../../src/assets/images/Lau-vn/lau-ca-duoi.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-ca-duoi.jpg",
     price: 195000,
     desc: "Thịt cá đuối sụn giòn, nước lẩu chua cay nấu cùng măng chua.",
   },
@@ -52,7 +52,7 @@ const products = [
     id: 7,
     category: "lau-viet",
     title: "Lẩu Vịt Nấu Chao",
-    img: "../../src/assets/images/Lau-vn/lau-vit.jpg",
+    img: "../../src/assets/images/Lau-vn/vit-nau-chao.jpg",
     price: 210000,
     desc: "Thịt vịt mềm béo ngậy hòa quyện cùng vị bùi bùi, thơm nức của chao đỏ.",
   },
@@ -60,7 +60,7 @@ const products = [
     id: 8,
     category: "lau-viet",
     title: "Lẩu Ếch Măng Cay",
-    img: "../../src/assets/images/Lau-vn/lau-ech.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-ech (1).jpg",
     price: 170000,
     desc: "Thịt ếch xào săn chắc, nước dùng cay nồng ấm bụng, đặc sản miền Bắc.",
   },
@@ -68,7 +68,7 @@ const products = [
     id: 9,
     category: "lau-viet",
     title: "Lẩu Cá Lăng Măng Chua",
-    img: "../../src/assets/images/Lau-vn/lau-ca-lang.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-ca-lang-mang-cay.jpg",
     price: 260000,
     desc: "Cá lăng sông Đà ít xương, thịt ngọt, nấu măng chua giải nhiệt mùa hè.",
   },
@@ -84,7 +84,7 @@ const products = [
     id: 11,
     category: "lau-viet",
     title: "Lẩu Cháo Chim Bồ Câu",
-    img: "../../src/assets/images/Lau-vn/lau-chao.jpg",
+    img: "../../src/assets/images/Lau-vn/Lau-chao-chim-bo-cau.jpeg",
     price: 290000,
     desc: "Cháo sánh mịn, ngọt lịm từ thịt chim câu, thích hợp bồi bổ người mới ốm dậy.",
   },
@@ -755,59 +755,86 @@ function detailProduct(id) {
   const modal = document.querySelector(".modal.product-detail");
   const product = products.find((p) => p.id === id);
 
-  if (!product) {
-    console.error("Không tìm thấy sản phẩm ID:", id);
-    return;
-  }
+  if (!product) return;
 
+  // 1. Tạo HTML (Lưu ý: Đã XÓA onclick ở 2 nút bấm cuối cùng)
   const html = `
-          <div class="modal-header">
-              <img class="product-image" src="${product.img}" alt="${
+        <div class="modal-header">
+            <img class="product-image" src="${product.img}" alt="${
     product.title
   }">
-          </div>
-          <div class="modal-body">
-              <h2 class="product-title">${product.title}</h2>
-              <div class="product-control">
-                  <div class="priceBox">
-                      <span class="current-price">${vnd(product.price)}</span>
-                  </div>
-                  <div class="buttons_added">
-                      <input class="minus is-form" type="button" value="-" onclick="decreasingNumber(this)">
-                      <input class="input-qty" type="number" value="1" min="1" readonly>
-                      <input class="plus is-form" type="button" value="+" onclick="increasingNumber(this)">
-                  </div>
-              </div>
-              <p class="product-description">${product.desc}</p>
-          </div>
-          <div class="notebox">
-              <p class="notebox-title">GHI CHÚ</p>
-              <textarea class="text-note" id="popup-detail-note" placeholder="Ví dụ: Không hành, ít cay..."></textarea>
-          </div>
-          <div class="modal-footer">
-              <div class="price-total">
-                  <span class="thanhtien">Thành tiền</span>
-                  <span class="price">${vnd(product.price)}</span>
-              </div>
-              <div class="modal-footer-control">
-                  <button class="button-primary-modal" onclick="alert('Đã đặt hàng: ${
-                    product.title
-                  }')">Đặt món ngay</button>
-              </div>
-          </div>
-      `;
+        </div>
+        <div class="modal-body">
+            <h2 class="product-title">${product.title}</h2>
+            <div class="product-control">
+                <div class="priceBox">
+                    <span class="current-price">${vnd(product.price)}</span>
+                </div>
+                <div class="buttons_added">
+                    <input class="minus is-form" type="button" value="-" onclick="decreasingNumber(this)">
+                    <input class="input-qty" type="number" value="1" min="1" readonly>
+                    <input class="plus is-form" type="button" value="+" onclick="increasingNumber(this)">
+                </div>
+            </div>
+            <p class="product-description">${product.desc}</p>
+        </div>
+        <div class="notebox">
+            <p class="notebox-title">GHI CHÚ</p>
+            <textarea class="text-note" id="popup-detail-note" placeholder="Ví dụ: Không hành, ít cay..."></textarea>
+        </div>
+        <div class="modal-footer">
+            <div class="price-total">
+                <span class="thanhtien">Thành tiền</span>
+                <span class="price">${vnd(product.price)}</span>
+            </div>
+            <div class="modal-footer-control">
+                <button class="button-datmonngay">ĐẶT MÓN NGAY</button>
+            </div>
+        </div>
+    `;
 
-  document.getElementById("product-detail-content").innerHTML = html;
+  // 2. Đổ HTML vào modal và hiện lên
+  const contentBox = document.getElementById("product-detail-content");
+  contentBox.innerHTML = html;
   modal.classList.add("open");
 
-  // Logic tính tiền khi tăng giảm số lượng
-  const qtyInput = document.querySelector("#product-detail-content .input-qty");
-  const priceDisplay = document.querySelector("#product-detail-content .price");
-  const btns = document.querySelectorAll("#product-detail-content .is-form");
+  // 3. XỬ LÝ SỰ KIỆN CLICK CHO CÁC NÚT (Logic kiểm tra đăng nhập ở đây)
+
+  // --- Nút ĐẶT MÓN NGAY ---
+  const btnBuyNow = contentBox.querySelector(".button-datmonngay");
+  btnBuyNow.addEventListener("click", () => {
+    if (checkLogin()) {
+      // Nếu đã đăng nhập: Xử lý đặt hàng (Alert hoặc logic thanh toán)
+      alert(`Đã đặt hàng thành công món: ${product.title}`);
+      modal.classList.remove("open"); // Đóng popup
+    } else {
+      // Nếu CHƯA đăng nhập: Chuyển trang
+      alert("Vui lòng đăng nhập để đặt món!");
+      // Sửa đường dẫn 'login.html' cho đúng với file đăng nhập của bạn
+      modal.classList.remove("open"); // Đóng modal món ăn trước
+      openLoginModal(); 
+    }
+  });
+
+  // --- Nút THÊM VÀO GIỎ ---
+  const btnAddToCart = contentBox.querySelector(".button-dat");
+  btnAddToCart.addEventListener("click", () => {
+    if (checkLogin()) {
+      alert("Đã thêm vào giỏ hàng!");
+      // Logic thêm vào giỏ hàng (localStorage) viết ở đây...
+    } else {
+      alert("Bạn cần đăng nhập để thêm vào giỏ!");
+      window.location.href = "/login.html";
+    }
+  });
+
+  // 4. Logic tính tiền khi tăng giảm số lượng (Giữ nguyên)
+  const qtyInput = contentBox.querySelector(".input-qty");
+  const priceDisplay = contentBox.querySelector(".price");
+  const btns = contentBox.querySelectorAll(".is-form");
 
   btns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // Dùng setTimeout để đảm bảo input đã cập nhật giá trị mới
       setTimeout(() => {
         let qty = parseInt(qtyInput.value);
         priceDisplay.innerText = vnd(qty * product.price);
@@ -844,3 +871,16 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof initHeroSlider === "function") initHeroSlider();
   if (typeof initCategoryScroll === "function") initCategoryScroll();
 });
+
+// Hàm kiểm tra trạng thái đăng nhập
+function checkLogin() {
+  // Kiểm tra xem trong bộ nhớ có lưu thông tin user chưa
+  // 'currentuser' là key bạn dùng lúc lưu khi đăng nhập (dựa theo code mẫu ban đầu bạn gửi)
+  const user = localStorage.getItem("currentuser");
+
+  if (user) {
+    return true; // Đã đăng nhập
+  } else {
+    return false; // Chưa đăng nhập
+  }
+}
