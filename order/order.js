@@ -1,10 +1,5 @@
-// Sample cart data
-const cartData = [
-    { id: 1, name: 'Mỳ rau củ', price: 90000, quantity: 1 },
-    { id: 2, name: 'Pizza phô mai', price: 250000, quantity: 1 },
-    { id: 3, name: 'Pizza Đặc biệt', price: 380000, quantity: 1 },
-    { id: 4, name: 'Coca-Cola', price: 15000, quantity: 1 }
-];
+// Cart data from localStorage
+const cartData = cart.getItems();
 
 // Address data
 let addresses = [];
@@ -16,6 +11,11 @@ function renderCartItems() {
     const cartItemsContainer = document.getElementById('cartItems');
     cartItemsContainer.innerHTML = '';
 
+    if (cartData.length === 0) {
+        cartItemsContainer.innerHTML = '<p style="text-align: center; color: #64748b;">Giỏ hàng trống</p>';
+        return;
+    }
+
     cartData.forEach(item => {
         const cartItem = document.createElement('div');
         cartItem.className = 'cart__item';
@@ -25,9 +25,9 @@ function renderCartItems() {
                     <rect x="3" y="6" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/>
                     <path d="M7 6V5C7 3.34315 8.34315 2 10 2C11.6569 2 13 3.34315 13 5V6" stroke="currentColor" stroke-width="1.5"/>
                 </svg>
-                <button class="cart__control-btn" onclick="decreaseQuantity(${item.id})">−</button>
+                <button class="cart__control-btn" onclick="decreaseQuantity(${item.productId}, '${item.note}')">−</button>
                 <span class="cart__item-quantity">${item.quantity}</span>
-                <button class="cart__control-btn" onclick="increaseQuantity(${item.id})">+</button>
+                <button class="cart__control-btn" onclick="increaseQuantity(${item.productId}, '${item.note}')">+</button>
             </div>
             <div class="cart__item-info">
                 <div class="cart__item-name">${item.name}</div>
@@ -107,20 +107,18 @@ function updateDeliveryInfo() {
 }
 
 // Increase quantity
-function increaseQuantity(id) {
-    const item = cartData.find(item => item.id === id);
-    if (item) {
-        item.quantity++;
-        renderCartItems();
-    }
+function increaseQuantity(productId, note = '') {
+    cart.updateQuantity(productId, cart.getItems().find(i => i.productId === productId && i.note === note).quantity + 1, note);
+    // Reload cart data
+    location.reload();
 }
 
 // Decrease quantity
-function decreaseQuantity(id) {
-    const item = cartData.find(item => item.id === id);
+function decreaseQuantity(productId, note = '') {
+    const item = cart.getItems().find(i => i.productId === productId && i.note === note);
     if (item && item.quantity > 1) {
-        item.quantity--;
-        renderCartItems();
+        cart.updateQuantity(productId, item.quantity - 1, note);
+        location.reload();
     }
 }
 
@@ -337,7 +335,26 @@ document.getElementById('editPickupBtn').onclick = () => {
 
 // Order button
 document.getElementById('orderBtn').onclick = () => {
-    alert('Đặt hàng thành công! Đơn hàng của bạn đang được xử lý.');
+    if (cartData.length === 0) {
+        alert('Giỏ hàng trống! Vui lòng thêm món ăn.');
+        return;
+    }
+    
+    // Kiểm tra xem đã chọn địa chỉ giao hàng hoặc điền thông tin tự lấy chưa
+    const pickupSelected = document.querySelector('.delivery__option[data-delivery="pickup"]').classList.contains('delivery__option--active');
+    
+    if (!pickupSelected && !selectedAddressId) {
+        alert('Vui lòng thêm địa chỉ giao hàng!');
+        return;
+    }
+    
+    if (pickupSelected && (!pickupInfo.name || !pickupInfo.phone || !pickupInfo.time)) {
+        alert('Vui lòng điền đầy đủ thông tin tự lấy!');
+        return;
+    }
+    
+    // Chuyển sang trang thanh toán
+    window.location.href = '/payment/payment.html';
 };
 
 // Delivery option handling
