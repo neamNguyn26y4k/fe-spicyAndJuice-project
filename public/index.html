@@ -6,18 +6,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Spicy & Juicy</title>
 
+        <!-- Favicon và icon -->
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+
+        <!-- Font Awesome icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+        <!-- Stylesheet chính -->
         <link rel="stylesheet" href="/src/css/style.css">
     </head>
 
     <body>
         <div id="main">
+            <!-- Header: được load động từ /src/partials/header.html -->
             <div id="header"></div>
+
+            <!-- Content chính: Hero section với background slider -->
             <div id="content" class="page-content homepage">
+                <!-- Background slider: 3 hình nền tự động chuyển đổi -->
                 <div class="background-slider">
                     <div class="bg-image active"
                         style="background-image: url('/src/assets/images/bgr-food3.jpg');"></div>
@@ -27,8 +35,10 @@
                         style="background-image: url('/src/assets/images/nhahang.png');"></div>
                 </div>
 
+                <!-- Gradient overlay để làm tối background -->
                 <div class="gradient-overlay"></div>
 
+                <!-- Hero content: Tiêu đề, mô tả, CTA button -->
                 <div class="content">
                     <h1 class="page-title">Nhà Hàng Bạn Yêu, Ngay Trong Phòng
                         Khách</h1>
@@ -39,6 +49,7 @@
                         món ngay</button>
                 </div>
 
+                <!-- Indicators: cho phép người dùng chọn slide thủ công -->
                 <div class="indicators">
                     <div class="indicator active" data-index="0"
                         style="background-image: url('/src/assets/images/bgr-food3.jpg');"></div>
@@ -51,11 +62,15 @@
                 </div>
             </div>
 
+            <!-- Gallery Section: Bộ sưu tập ảnh với hiệu ứng parallax và intersection observer -->
             <section class="immersive-gallery">
+                <!-- Gallery intro: Tiêu đề và divider -->
                 <div class="gallery-intro">
                     <h2 class="gallery-title">Spicy&Juice Bộ Sưu Tập</h2>
                     <div class="gallery-divider"></div>
                 </div>
+
+                <!-- Gallery item 1 -->
                 <section class="gallery-section" data-section="1">
                     <img
                         src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80&auto=format&fit=crop"
@@ -68,6 +83,7 @@
                     </div>
                 </section>
 
+                <!-- Gallery item 2 -->
                 <section class="gallery-section" data-section="2">
                     <img
                         src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80&auto=format&fit=crop"
@@ -80,6 +96,7 @@
                     </div>
                 </section>
 
+                <!-- Gallery item 3 -->
                 <section class="gallery-section" data-section="3">
                     <img
                         src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80&auto=format&fit=crop"
@@ -93,6 +110,7 @@
                 </section>
             </section>
 
+            <!-- Booking Section: Form đặt bàn trực tuyến -->
             <section class="booking-section" id="booking">
                 <div class="container booking-grid">
                     <div class="booking-copy">
@@ -114,6 +132,7 @@
                         </ul>
                     </div>
 
+                    <!-- Form đặt bàn: thu thập thông tin khách hàng -->
                     <form class="booking-form" id="bookingForm">
                         <div class="form-grid">
                             <div class="form-group">
@@ -174,6 +193,7 @@
                 </div>
             </section>
 
+            <!-- Popup thông báo đặt bàn thành công -->
             <div class="booking-popup-overlay" id="bookingPopup">
                 <div class="booking-popup">
                     <div class="popup-icon">✓</div>
@@ -185,9 +205,11 @@
                 </div>
             </div>
 
+            <!-- Footer: được load động từ /src/partials/footer.html -->
             <div id="footer"></div>
         </div>
 
+        <!-- Scripts: load theo thứ tự để đảm bảo dependencies -->
         <script src="/src/js/loader.js"></script>
         <script src="/src/js/homepage-slider.js"></script>
         <script src="/src/js/gallery.js"></script>
