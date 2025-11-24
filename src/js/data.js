@@ -61,21 +61,42 @@ const products = [
 
 // === GIỎ HÀNG - Shopping Cart Class ===
 
+/**
+ * Class quản lý giỏ hàng
+ * Xử lý các thao tác thêm, sửa, xóa sản phẩm trong giỏ hàng
+ * Dữ liệu được lưu vào localStorage để giữ trạng thái khi reload trang
+ */
 class ShoppingCart {
+    /**
+     * Constructor - Khởi tạo giỏ hàng
+     * Tự động load dữ liệu từ localStorage khi khởi tạo
+     */
     constructor() {
         this.items = this.loadCart();
     }
 
+    /**
+     * Load giỏ hàng từ localStorage
+     * @returns {Array} Mảng các sản phẩm trong giỏ hàng
+     */
     loadCart() {
         const cartData = localStorage.getItem('shoppingCart');
         return cartData ? JSON.parse(cartData) : [];
     }
 
+    /**
+     * Lưu giỏ hàng vào localStorage
+     * Tự động cập nhật badge hiển thị số lượng sản phẩm
+     */
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.items));
         this.updateCartBadge();
     }
 
+    /**
+     * Cập nhật badge hiển thị số lượng sản phẩm trên icon giỏ hàng
+     * Badge sẽ ẩn khi giỏ hàng trống
+     */
     updateCartBadge() {
         const badge = document.querySelector('.cart-badge');
         if (badge) {
@@ -85,6 +106,15 @@ class ShoppingCart {
         }
     }
 
+    /**
+     * Thêm sản phẩm vào giỏ hàng
+     * Nếu sản phẩm đã tồn tại (cùng ID và note), tăng số lượng
+     * Nếu chưa tồn tại, thêm mới vào giỏ
+     * @param {number} productId - ID của sản phẩm
+     * @param {number} quantity - Số lượng cần thêm (mặc định: 1)
+     * @param {string} note - Ghi chú cho sản phẩm (mặc định: '')
+     * @returns {Array} Mảng sản phẩm sau khi thêm
+     */
     addItem(productId, quantity = 1, note = '') {
         const product = products.find(p => p.id === productId);
         if (!product) return;
@@ -111,6 +141,14 @@ class ShoppingCart {
         return this.items;
     }
 
+    /**
+     * Cập nhật số lượng của một sản phẩm trong giỏ hàng
+     * Nếu quantity <= 0, sản phẩm sẽ bị xóa khỏi giỏ
+     * @param {number} productId - ID của sản phẩm
+     * @param {number} quantity - Số lượng mới
+     * @param {string} note - Ghi chú để phân biệt các item cùng productId
+     * @returns {Array} Mảng sản phẩm sau khi cập nhật
+     */
     updateQuantity(productId, quantity, note = '') {
         const itemIndex = this.items.findIndex(item => 
             item.productId === productId && item.note === note
@@ -127,6 +165,12 @@ class ShoppingCart {
         return this.items;
     }
 
+    /**
+     * Xóa một sản phẩm khỏi giỏ hàng
+     * @param {number} productId - ID của sản phẩm cần xóa
+     * @param {string} note - Ghi chú để xác định chính xác item cần xóa
+     * @returns {Array} Mảng sản phẩm sau khi xóa
+     */
     removeItem(productId, note = '') {
         this.items = this.items.filter(item => 
             !(item.productId === productId && item.note === note)
@@ -135,29 +179,49 @@ class ShoppingCart {
         return this.items;
     }
 
+    /**
+     * Xóa toàn bộ giỏ hàng
+     * @returns {Array} Mảng rỗng
+     */
     clearCart() {
         this.items = [];
         this.saveCart();
         return this.items;
     }
 
+    /**
+     * Lấy danh sách tất cả sản phẩm trong giỏ hàng
+     * @returns {Array} Mảng các sản phẩm
+     */
     getItems() {
         return this.items;
     }
 
+    /**
+     * Lấy tổng số lượng sản phẩm trong giỏ hàng
+     * @returns {number} Tổng số lượng
+     */
     getItemCount() {
         return this.items.reduce((total, item) => total + item.quantity, 0);
     }
 
+    /**
+     * Tính tổng giá trị đơn hàng
+     * @returns {number} Tổng tiền
+     */
     getTotal() {
         return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
 }
 
-// Khởi tạo giỏ hàng toàn cục
+// Khởi tạo giỏ hàng toàn cục - có thể sử dụng trong toàn bộ website
 const cart = new ShoppingCart();
 
-// Hàm định dạng tiền tệ
+/**
+ * Hàm định dạng tiền tệ theo chuẩn Việt Nam
+ * @param {number} price - Số tiền cần định dạng
+ * @returns {string} Chuỗi tiền tệ đã định dạng (VD: 200.000 ₫)
+ */
 function vnd(price) {
     return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
 }

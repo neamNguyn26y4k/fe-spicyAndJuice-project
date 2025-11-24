@@ -1,7 +1,15 @@
-// Cart data from localStorage
+// ===================================
+// XỬ LÝ CHỨC NĂNG TRANG THANH TOÁN
+// ===================================
+
+// Lấy dữ liệu giỏ hàng từ localStorage
 const cartData = cart.getItems();
 
-// Render cart items
+/**
+ * Render danh sách sản phẩm trong giỏ hàng
+ * Hiển thị tóm tắt thông tin: tên, giá, số lượng
+ * Cho phép tăng/giảm số lượng trực tiếp trên trang thanh toán
+ */
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cartItems');
     cartItemsContainer.innerHTML = '';
@@ -35,7 +43,10 @@ function renderCartItems() {
     updateCartSummary();
 }
 
-// Update cart summary
+/**
+ * Cập nhật phần tổng kết đơn hàng
+ * Tính toán tổng tiền dựa trên:
+ */
 function updateCartSummary() {
     const subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
@@ -50,7 +61,11 @@ function updateCartSummary() {
     document.getElementById('totalAmount').textContent = formatPrice(total);
 }
 
-// Increase quantity
+/**
+ * Tăng số lượng sản phẩm
+ * @param {number} productId - ID sản phẩm
+ * @param {string} note - Ghi chú sản phẩm
+ */
 function increaseQuantity(productId, note = '') {
     const item = cart.getItems().find(i => i.productId === productId && i.note === note);
     if (item) {
@@ -59,7 +74,12 @@ function increaseQuantity(productId, note = '') {
     }
 }
 
-// Decrease quantity
+/**
+ * Giảm số lượng sản phẩm
+ * Không cho phép giảm xuống dưới 1
+ * @param {number} productId - ID sản phẩm
+ * @param {string} note - Ghi chú sản phẩm
+ */
 function decreaseQuantity(productId, note = '') {
     const item = cart.getItems().find(i => i.productId === productId && i.note === note);
     if (item && item.quantity > 1) {
@@ -68,12 +88,20 @@ function decreaseQuantity(productId, note = '') {
     }
 }
 
-// Format price
+/**
+ * Định dạng giá tiền
+ * @param {number} price - Số tiền
+ * @returns {string} Chuỗi tiền tệ đã format (VD: 200.000 VNĐ)
+ */
 function formatPrice(price) {
     return price.toLocaleString('vi-VN') + ' VNĐ';
 }
 
-// Payment method tabs
+/**
+ * Xử lý chuyển đổi giữa các tab phương thức thanh toán
+ * 3 phương thức: Tiền mặt, Thẻ tín dụng, Ví điện tử
+ * Khi chọn một tab, hiển thị nội dung tương ứng
+ */
 document.querySelectorAll('.payment__tab').forEach(tab => {
     tab.addEventListener('click', function() {
         // Remove active from all tabs
@@ -103,20 +131,29 @@ document.querySelectorAll('.payment__tab').forEach(tab => {
     });
 });
 
-// Handle card option clicks
+/**
+ * Xử lý chọn loại thẻ/ví điện tử
+ * Người dùng chọn Visa, Mastercard, Napas, ZaloPay, VNPay, Momo...
+ */
 document.querySelectorAll('.payment__option').forEach(option => {
     option.addEventListener('click', function() {
-        // Remove active from all card options
+        // Bỏ active khỏi tất cả options
         document.querySelectorAll('.payment__option').forEach(o => {
             o.classList.remove('payment__option--active');
         });
         
-        // Add active to clicked option
+        // Thêm active cho option được chọn
         this.classList.add('payment__option--active');
     });
 });
 
-// Confirm payment button
+/**
+ * Xử lý nút xác nhận thanh toán
+ * - Kiểm tra giỏ hàng không trống
+ * - Lấy phương thức thanh toán đã chọn
+ * - Mô phỏng thanh toán (90% thành công, 10% thất bại)
+ * - Chuyển hướng đến trang kết quả
+ */
 document.getElementById('confirmBtn').addEventListener('click', function() {
     if (cartData.length === 0) {
         alert('Giỏ hàng trống!');

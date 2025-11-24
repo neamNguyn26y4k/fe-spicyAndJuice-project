@@ -1,9 +1,13 @@
-/* Cart Page Specific Styles */
+/* ===================================
+   STYLES CHO TRANG GIỎ HÀNG
+   =================================== */
 
+/* Container chính của trang giỏ hàng */
 .cart-page {
     padding: 40px 0 60px;
 }
 
+/* Phần header/tiêu đề của giỏ hàng */
 .cart-header {
     text-align: center;
     margin-bottom: 40px;
@@ -21,6 +25,7 @@
     color: #6b7280;
 }
 
+/* Layout 2 cột: Danh sách món ăn (trái) và Tổng đơn hàng (phải) */
 .cart-layout {
     display: grid;
     grid-template-columns: 1fr 400px;
@@ -28,7 +33,10 @@
     align-items: start;
 }
 
-/* Cart Items Section */
+/* ===================================
+   PHẦN DANH SÁCH MÓN ĂN
+   =================================== */
+/* Container chứa danh sách các món ăn */
 .cart-items-section {
     background: #fff;
     border-radius: 16px;
@@ -36,6 +44,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Header hiển thị số lượng món và nút xóa tất cả */
 .cart-items-header {
     display: flex;
     justify-content: space-between;
@@ -78,7 +87,10 @@
     gap: 20px;
 }
 
-/* Cart Item */
+/* ===================================
+   ITEM MÓN ĂN TRONG GIỎ HÀNG
+   =================================== */
+/* Card hiển thị thông tin từng món ăn */
 .cart-item {
     display: flex;
     gap: 20px;
@@ -134,6 +146,7 @@
     gap: 15px;
 }
 
+/* Nhóm nút điều chỉnh số lượng món ăn (+/-) */
 .quantity-controls {
     display: flex;
     align-items: center;
@@ -191,7 +204,10 @@
     transform: scale(1.05);
 }
 
-/* Empty Cart State */
+/* ===================================
+   TRẠNG THÁI GIỎ HÀNG TRỐNG
+   =================================== */
+/* Hiển thị khi không có món ăn nào trong giỏ */
 .empty-cart {
     text-align: center;
     padding: 60px 20px;
@@ -216,7 +232,10 @@
     margin-bottom: 30px;
 }
 
-/* Cart Summary */
+/* ===================================
+   PHẦN TỔNG KẾT ĐỞN HÀNG
+   =================================== */
+/* Panel hiển thị tổng tiền, giảm giá, phí vận chuyển */
 .cart-summary {
     background: #fff;
     border-radius: 16px;
@@ -273,7 +292,10 @@
     color: var(--primary-color);
 }
 
-/* Promo Code */
+/* ===================================
+   PHẦN NHẬP MÃ GIẢM GIÁ
+   =================================== */
+/* Form nhập và áp dụng mã giảm giá */
 .promo-code {
     display: flex;
     gap: 10px;
@@ -311,7 +333,10 @@
     transform: translateY(-1px);
 }
 
-/* Checkout Button */
+/* ===================================
+   NÚT TIẾN HÀNH ĐẶT HÀNG
+   =================================== */
+/* Nút chính để chuyển sang trang đặt hàng */
 .checkout-btn {
     width: 100%;
     padding: 16px;
@@ -359,7 +384,10 @@
     color: var(--primary-color);
 }
 
-/* Responsive Design */
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE/TABLET
+   =================================== */
+/* Tablet: Chuyển layout thành 1 cột */
 @media (max-width: 1024px) {
     .cart-layout {
         grid-template-columns: 1fr;
@@ -370,6 +398,7 @@
     }
 }
 
+/* Mobile: Điều chỉnh kích thước và layout cho màn hình nhỏ */
 @media (max-width: 768px) {
     .cart-title {
         font-size: 2rem;
@@ -406,6 +435,7 @@
     }
 }
 
+/* Extra small devices: Điều chỉnh cho điện thoại nhỏ */
 @media (max-width: 480px) {
     .cart-items-header {
         flex-direction: column;

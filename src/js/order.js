@@ -1,12 +1,20 @@
-// Cart data from localStorage
+// ===================================
+// XỬ LÝ CHỨC NĂNG TRANG ĐẶT HÀNG
+// ===================================
+
+// Lấy dữ liệu giỏ hàng từ localStorage
 const cartData = cart.getItems();
 
-// Address data
+// Mảng lưu trữ các địa chỉ giao hàng của người dùng
 let addresses = [];
 
+// ID của địa chỉ đang được chọn
 let selectedAddressId = null;
 
-// Render cart items
+/**
+ * Render danh sách sản phẩm trong giỏ hàng
+ * Hiển thị tên, giá, số lượng và cho phép điều chỉnh số lượng
+ */
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cartItems');
     cartItemsContainer.innerHTML = '';
@@ -40,7 +48,13 @@ function renderCartItems() {
     updateCartSummary();
 }
 
-// Render address cards
+/**
+ * Render danh sách các địa chỉ giao hàng đã lưu
+ * Mỗi địa chỉ hiển thị dưới dạng card với:
+ * - Địa chỉ, tên người nhận, số điện thoại
+ * - Nút xóa và chỉnh sửa
+ * - Highlight địa chỉ đang được chọn
+ */
 function renderAddressCards() {
     const addressCardsContainer = document.getElementById('addressCards');
     const mapSection = document.getElementById('mapSection');
@@ -88,14 +102,21 @@ function renderAddressCards() {
     }
 }
 
-// Select address
+/**
+ * Chọn địa chỉ giao hàng
+ * Cập nhật UI và hiển thị thông tin địa chỉ đã chọn
+ * @param {number} id - ID của địa chỉ được chọn
+ */
 function selectAddress(id) {
     selectedAddressId = id;
     renderAddressCards();
     updateDeliveryInfo();
 }
 
-// Update delivery info
+/**
+ * Cập nhật thông tin giao hàng lên phần map section
+ * Hiển thị địa chỉ, SĐT, tên người nhận, thời gian giao
+ */
 function updateDeliveryInfo() {
     const selectedAddress = addresses.find(addr => addr.id === selectedAddressId);
     if (selectedAddress) {
@@ -106,14 +127,23 @@ function updateDeliveryInfo() {
     }
 }
 
-// Increase quantity
+/**
+ * Tăng số lượng sản phẩm trong giỏ
+ * @param {number} productId - ID sản phẩm
+ * @param {string} note - Ghi chú sản phẩm
+ */
 function increaseQuantity(productId, note = '') {
     cart.updateQuantity(productId, cart.getItems().find(i => i.productId === productId && i.note === note).quantity + 1, note);
-    // Reload cart data
+    // Reload lại trang để cập nhật UI
     location.reload();
 }
 
-// Decrease quantity
+/**
+ * Giảm số lượng sản phẩm trong giỏ
+ * Không cho phép giảm xuống dưới 1
+ * @param {number} productId - ID sản phẩm
+ * @param {string} note - Ghi chú sản phẩm
+ */
 function decreaseQuantity(productId, note = '') {
     const item = cart.getItems().find(i => i.productId === productId && i.note === note);
     if (item && item.quantity > 1) {
@@ -122,7 +152,12 @@ function decreaseQuantity(productId, note = '') {
     }
 }
 
-// Delete address
+/**
+ * Xóa một địa chỉ khỏi danh sách
+ * Yêu cầu confirm trước khi xóa
+ * Không cho phép xóa nếu chỉ còn 1 địa chỉ
+ * @param {number} id - ID địa chỉ cần xóa
+ */
 function deleteAddress(id) {
     if (addresses.length > 1) {
         if (confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) {
@@ -138,7 +173,11 @@ function deleteAddress(id) {
     }
 }
 
-// Edit address
+/**
+ * Chỉnh sửa thông tin địa chỉ
+ * Mở modal và điền sẵn thông tin địa chỉ hiện tại
+ * @param {number} id - ID địa chỉ cần chỉnh sửa
+ */
 let editingAddressId = null;
 
 function editAddress(id) {
@@ -146,28 +185,28 @@ function editAddress(id) {
     const address = addresses.find(addr => addr.id === id);
     
     if (address) {
-        // Update modal title
+        // Cập nhật tiêu đề modal thành "Chỉnh sửa"
         document.getElementById('modalTitle').textContent = 'Chỉnh sửa thông tin';
         document.getElementById('confirmBtnText').textContent = 'Cập nhật';
-        
-        // Fill form with existing data
+
         document.getElementById('addressName').value = address.address || '';
         document.getElementById('addressPersonName').value = address.personName || '';
         document.getElementById('addressPhone').value = address.phone || '';
         document.getElementById('addressTime').value = address.deliveryTime || '';
         document.getElementById('defaultAddress').checked = address.isDefault || false;
-        
-        // Show modal
+
         modal.classList.add('active');
     }
 }
 
-// Update cart summary
+/**
+ * Cập nhật tổng tiền đơn hàng
+ */
 function updateCartSummary() {
     const subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const discount = 58000;
     
-    // Check if pickup is selected
+    // Kiểm tra xem có chọn lấy tại chỗ không
     const pickupSelected = document.querySelector('.delivery__option[data-delivery="pickup"]').classList.contains('delivery__option--active');
     const shipping = pickupSelected ? 0 : 25000;
     
@@ -178,18 +217,24 @@ function updateCartSummary() {
     document.getElementById('totalAmount').textContent = formatPrice(total);
 }
 
-// Format price
+// Format giá tiền
 function formatPrice(price) {
     return price.toLocaleString('vi-VN') + ' VNĐ';
 }
 
-// Modal functionality
+/**
+ * XỬ LÝ MODAL THÊM/SỬA ĐỊA CHỈ
+ */
+
 const modal = document.getElementById('addressModal');
 const addAddressBtn = document.getElementById('addAddressBtn');
 const closeModal = document.getElementById('closeModal');
 const confirmBtn = document.getElementById('confirmBtn');
 
-// Reset modal to add mode
+/**
+ * Reset modal về chế độ thêm mới
+ * Xóa toàn bộ dữ liệu trong form
+ */
 function resetModal() {
     editingAddressId = null;
     document.getElementById('modalTitle').textContent = 'Đăng kí địa chỉ';
@@ -201,19 +246,16 @@ function resetModal() {
     document.getElementById('defaultAddress').checked = false;
 }
 
-// Open modal for adding new address
 addAddressBtn.onclick = () => {
     resetModal();
     modal.classList.add('active');
 };
 
-// Close modal
 closeModal.onclick = () => {
     modal.classList.remove('active');
     resetModal();
 };
 
-// Close modal when clicking outside
 window.onclick = (event) => {
     if (event.target === modal) {
         modal.classList.remove('active');
@@ -221,7 +263,14 @@ window.onclick = (event) => {
     }
 };
 
-// Confirm button (Add or Update)
+/**
+ * Xử lý nút Xác nhận trong modal
+ * Chức năng:
+ * - Thêm địa chỉ mới nếu đang ở chế độ Add
+ * - Cập nhật địa chỉ nếu đang ở chế độ Edit
+ * - Validate dữ liệu trước khi lưu
+ * - Xử lý logic địa chỉ mặc định
+ */
 confirmBtn.onclick = () => {
     const name = document.getElementById('addressName').value.trim();
     const personName = document.getElementById('addressPersonName').value.trim();
@@ -235,7 +284,6 @@ confirmBtn.onclick = () => {
     }
 
     if (editingAddressId) {
-        // Update existing address
         const addressIndex = addresses.findIndex(addr => addr.id === editingAddressId);
         if (addressIndex !== -1) {
             addresses[addressIndex] = {
@@ -247,8 +295,7 @@ confirmBtn.onclick = () => {
                 deliveryTime: deliveryTime,
                 isDefault: isDefault
             };
-            
-            // If set as default, unset others
+
             if (isDefault) {
                 addresses.forEach(addr => {
                     if (addr.id !== editingAddressId) {
@@ -260,10 +307,10 @@ confirmBtn.onclick = () => {
             updateDeliveryInfo();
         }
     } else {
-        // Add new address
+        // Thêm địa chỉ mới
         const newId = addresses.length > 0 ? Math.max(...addresses.map(a => a.id)) + 1 : 1;
         
-        // If set as default, unset others
+        // Nếu đặt làm mặc định, bỏ chọn các địa chỉ khác
         if (isDefault) {
             addresses.forEach(addr => {
                 addr.isDefault = false;
@@ -280,7 +327,7 @@ confirmBtn.onclick = () => {
             isDefault: isDefault
         });
         
-        // If it's the first address or set as default, select it
+        // Nếu là địa chỉ đầu tiên hoặc được đặt làm mặc định, chọn nó
         if (addresses.length === 1 || isDefault) {
             selectedAddressId = newId;
             updateDeliveryInfo();
@@ -292,13 +339,21 @@ confirmBtn.onclick = () => {
     resetModal();
 };
 
-// Save pickup info
+/**
+ * XỬ LÝ THÔNG TIN LẤY HÀNG TẠI CHỖ (PICKUP)
+ */
+
+// Object lưu thông tin người nhận khi chọn lấy tại chỗ
 let pickupInfo = {
     name: '',
     phone: '',
     time: ''
 };
 
+/**
+ * Lưu thông tin pickup
+ * Validate dữ liệu và chuyển sang chế độ hiển thị
+ */
 document.getElementById('savePickupBtn').onclick = () => {
     const name = document.getElementById('pickupName').value.trim();
     const phone = document.getElementById('pickupPhone').value.trim();
@@ -309,7 +364,6 @@ document.getElementById('savePickupBtn').onclick = () => {
         return;
     }
     
-    // Save pickup info
     pickupInfo = {
         name: name,
         phone: phone,
@@ -326,14 +380,24 @@ document.getElementById('savePickupBtn').onclick = () => {
     document.getElementById('pickupInfoDisplay').classList.remove('pickup__display--hidden');
 };
 
-// Edit pickup info
+/**
+ * Nút chỉnh sửa thông tin pickup
+ * Chuyển từ chế độ hiển thị sang chế độ chỉnh sửa
+ */
 document.getElementById('editPickupBtn').onclick = () => {
-    // Show form, hide display
+    // Hiển thị form, ẩn phần hiển thị
     document.getElementById('pickupForm').classList.remove('pickup__form--hidden');
     document.getElementById('pickupInfoDisplay').classList.add('pickup__display--hidden');
 };
 
-// Order button
+/**
+ * Xử lý nút Đặt món ăn
+ * Validate:
+ * - Giỏ hàng không trống
+ * - Đã chọn địa chỉ giao hàng (nếu chọn giao hàng)
+ * - Đã điền thông tin (nếu chọn lấy tại chỗ)
+ * Sau đó chuyển sang trang thanh toán
+ */
 document.getElementById('orderBtn').onclick = () => {
     if (cartData.length === 0) {
         alert('Giỏ hàng trống! Vui lòng thêm món ăn.');
@@ -357,7 +421,12 @@ document.getElementById('orderBtn').onclick = () => {
     window.location.href = '/public/pages/checkout/payment.html';
 };
 
-// Delivery option handling
+/**
+ * Xử lý chuyển đổi giữa 2 phương thức:
+ * - Giao hàng tận nơi: Hiển thị form nhập địa chỉ
+ * - Lấy tại chỗ: Hiển thị form nhập thông tin người nhận
+ * Tự động cập nhật phí vận chuyển khi thay đổi
+ */
 document.querySelectorAll('.delivery__option').forEach(option => {
     option.addEventListener('click', function() {
         // Remove active from all options
@@ -383,7 +452,7 @@ document.querySelectorAll('.delivery__option').forEach(option => {
             mapSection.classList.add('map--hidden');
             pickupInfoSection.classList.remove('pickup--hidden');
         } else {
-            // Show address section, hide pickup info
+            // Show address and map sections, hide pickup info
             addressSection.classList.remove('address--hidden');
             pickupInfoSection.classList.add('pickup--hidden');
             
