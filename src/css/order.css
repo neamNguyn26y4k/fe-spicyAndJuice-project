@@ -1,12 +1,19 @@
-/* Order Page Styles */
+/* ===================================
+   STYLES CHO TRANG ĐẶT HÀNG
+   =================================== */
 
+/* Container chính của trang */
 .page {
     max-width: 1400px;
     margin: 0 auto;
     padding: 30px 40px;
 }
 
-/* Progress Steps */
+/* ===================================
+   THANH TIẾN TRÌNH ĐẶT HÀNG
+   =================================== */
+/* Hiển thị 3 bước: Giỏ hàng -> Hoàn tất thông tin -> Thanh toán */
+/* Container thanh tiến trình */
 .progress {
     display: flex;
     align-items: center;
@@ -71,14 +78,20 @@
     border-radius: 2px;
 }
 
-/* Main Content */
+/* ===================================
+   NỘI DUNG CHÍNH
+   =================================== */
+/* Layout 2 cột: Giỏ hàng (trái) và Thông tin giao hàng (phải) */
 .order {
     display: grid;
     grid-template-columns: 500px 1fr;
     gap: 30px;
 }
 
-/* Cart Panel */
+/* ===================================
+   PANEL GIỎ HÀNG (CỘT TRÁI)
+   =================================== */
+/* Hiển thị danh sách món ăn và tổng tiền */
 .cart {
     background: white;
     border-radius: 20px;
@@ -244,13 +257,17 @@
     transform: translateY(0);
 }
 
-/* Delivery Panel */
+/* ===================================
+   PANEL THÔNG TIN GIAO HÀNG (CỘT PHẢI)
+   =================================== */
+/* Chứa các tùy chọn giao hàng và thông tin người nhận */
 .delivery {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* Lựa chọn phương thức: Giao hàng tận nơi hoặc Lấy tại chỗ */
 .delivery__options {
     background: white;
     border-radius: 20px;
@@ -318,7 +335,10 @@
     display: flex;
 }
 
-/* Address Section */
+/* ===================================
+   PHẦN QUẢN LÝ ĐỊA CHỈ GIAO HÀNG
+   =================================== */
+/* Hiển thị danh sách địa chỉ đã lưu */
 .address {
     background: white;
     border-radius: 20px;
@@ -330,7 +350,10 @@
     display: none;
 }
 
-/* Pickup Info Section */
+/* ===================================
+   PHẦN THÔNG TIN LẤY HÀNG TẠI CHỖ
+   =================================== */
+/* Form nhập thông tin khi chọn lấy hàng tại cửa hàng */
 .pickup {
     background: white;
     border-radius: 20px;
@@ -381,7 +404,7 @@
     transform: translateY(0);
 }
 
-/* Pickup Info Display */
+/* Thông tin pickup */
 .pickup__display {
     display: flex;
     flex-direction: column;
@@ -622,7 +645,10 @@
     color: #1e293b;
 }
 
-/* Responsive Design */
+/* ===================================
+   MODAL POPUP THÊM/SỬA ĐỊA CHỈ
+   =================================== */
+/* Popup overlay để thêm hoặc chỉnh sửa địa chỉ giao hàng */
 .modal {
     display: none;
     position: fixed;
@@ -688,7 +714,10 @@
     gap: 24px;
 }
 
-/* Floating Label Input */
+/* ===================================
+   FORM INPUT VỚI FLOATING LABEL
+   =================================== */
+/* Label tự động nhảy lên khi focus hoặc có giá trị */
 .form__group {
     position: relative;
 }
@@ -747,7 +776,10 @@
     transform: translateY(-50%);
 }
 
-/* Checkbox */
+/* ===================================
+   CHECKBOX TÙY CHỈNH
+   =================================== */
+/* Checkbox với style tùy chỉnh (ví dụ: đặt làm địa chỉ mặc định) */
 .form__checkbox {
     display: flex;
     align-items: center;
@@ -829,7 +861,10 @@
     transform: translateY(0);
 }
 
-/* Responsive Design */
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE/TABLET
+   =================================== */
+/* Tablet: Chuyển layout thành 1 cột */
 @media (max-width: 1200px) {
     .order {
         grid-template-columns: 1fr;
@@ -879,7 +914,10 @@
     }
 }
 
-/* Scrollbar Styling */
+/* ===================================
+   TÙY CHỈNH THANH SCROLLBAR
+   =================================== */
+/* Custom scrollbar cho danh sách món ăn */
 .cart__items::-webkit-scrollbar {
     width: 6px;
 }

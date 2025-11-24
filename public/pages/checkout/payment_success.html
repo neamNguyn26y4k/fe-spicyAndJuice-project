@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,8 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="/src/css/style.css">
+    <!-- CSS inline cho trang này -->
     <style>
         .page-content {
             min-height: 70vh;
@@ -179,11 +180,13 @@
 </head>
 <body>
     <div id="main">
+        <!-- Header sẽ được load động từ header.html -->
         <div id="header"></div>
 
+        <!-- Nội dung trang thông báo thanh toán thành công -->
         <div class="page-content">
             <div class="container">
-                <!-- Confetti -->
+                <!-- Hiệu ứng pháo giấy rơi để tạo không khí vui vẻ -->
                 <div class="confetti"></div>
                 <div class="confetti"></div>
                 <div class="confetti"></div>
@@ -195,13 +198,19 @@
                 <div class="confetti"></div>
                 <div class="confetti"></div>
 
+                <!-- Container chứa thông báo thành công -->
                 <div class="success-container">
+                    <!-- Icon dấu tick thành công -->
                     <div class="success-icon">
                         <i class="fa-solid fa-check"></i>
                     </div>
+                    <!-- Tiêu đề thông báo -->
                     <h1 class="success-title">Thanh toán thành công!</h1>
+                    <!-- Lời cảm ơn khách hàng -->
                     <p class="success-message">Cảm ơn bạn đã đặt hàng tại Spicy & Juicy</p>
+                    <!-- Mã đơn hàng để theo dõi -->
                     <p class="order-id">Mã theo dõi đơn hàng: <strong>#21549019</strong></p>
+                    <!-- Các nút hành động -->
                     <div class="success-buttons">
                         <a href="#" class="success-btn btn-primary" onclick="trackOrder()">
                             <i class="fa-solid fa-truck"></i>
@@ -216,13 +225,15 @@
             </div>
         </div>
 
+        <!-- Footer sẽ được load động từ footer.html -->
         <div id="footer"></div>
     </div>
 
+    <!-- JavaScript để load header/footer -->
     <script src="/src/js/loader.js"></script>
+    <!-- Script xử lý chức năng theo dõi đơn hàng -->
     <script>
         function trackOrder() {
-            // Implement order tracking functionality
             alert('Chức năng theo dõi đơn hàng sẽ được cập nhật sớm!');
         }
     </script>
