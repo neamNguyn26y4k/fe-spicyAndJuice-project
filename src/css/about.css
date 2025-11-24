@@ -493,9 +493,9 @@
 .team-members {
   padding: 3rem 0;
   position: relative;
-  
+
   /* Background image - món ăn */
-  background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80');
+  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -509,7 +509,7 @@
    - Content (.team-members__inner): z-index 2 (layer cao nhất)
    Lý do dùng ::before: Không cần thêm div wrapper trong HTML */
 .team-members::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -571,12 +571,12 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  
+
   /* Background image for dish */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
+
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -589,7 +589,7 @@
    - ::before white overlay: z-index 1
    - photo & info: z-index 2 (phải cao hơn overlay) */
 .team-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
