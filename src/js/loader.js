@@ -1,5 +1,7 @@
+// Key lưu trạng thái đăng nhập (mock) trong localStorage
 const AUTH_STATE_KEY = 'saj-user-logged-in';
 
+// Nạp nội dung header và khởi tạo các component liên quan sau khi load xong
 async function loadHeader() {
     const headerElement = document.getElementById('header');
     if (headerElement) {
@@ -12,6 +14,7 @@ async function loadHeader() {
                 highlightCurrentPage();
                 initUserMenu();
                 updateHeaderAuthState();
+                initMobileMenu();
             } else {
                 console.error('Failed to load header');
             }
@@ -21,6 +24,7 @@ async function loadHeader() {
     }
 }
 
+// Nạp nội dung footer (chỉ cần inject HTML)
 async function loadFooter() {
     const footerElement = document.getElementById('footer');
     if (footerElement) {
@@ -38,6 +42,7 @@ async function loadFooter() {
     }
 }
 
+// Nạp modal đăng nhập/đăng ký nếu chưa tồn tại trong DOM
 async function loadModal() {
     // Kiểm tra xem modal đã tồn tại chưa (có thể đã có trong index.html)
     let modalElement = document.getElementById('modal');
@@ -62,6 +67,7 @@ async function loadModal() {
     }
 }
 
+// Đánh dấu nav-item tương ứng với trang hiện tại bằng class 'active'
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navItems = document.querySelectorAll('.nav-item');
@@ -94,11 +100,13 @@ function highlightCurrentPage() {
     });
 }
 
+// Thiết lập logic hiển thị / chuyển đổi modal đăng nhập / đăng ký và thao tác trên mobile
 function loadPopup() {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const modal = document.getElementById('modal');
     const closeBtn = document.querySelector('.close-btn');
+    const modalContainer = document.querySelector('.modal-container');
 
     // Lấy các button từ header
     const btnLogin = document.querySelector('.btn-login');
@@ -152,10 +160,33 @@ function loadPopup() {
         }
     });
 
+    // Xử lý toggle cho mobile (click vào toggle area)
+    if (modalContainer) {
+        modalContainer.addEventListener('click', (e) => {
+            // Kiểm tra nếu click vào khu vực toggle (phía trên form)
+            const rect = modalContainer.getBoundingClientRect();
+            const clickY = e.clientY - rect.top;
+            const clickX = e.clientX - rect.left;
+
+            // Khu vực toggle: top 55-100px, width 100%
+            if (clickY >= 55 && clickY <= 105 && window.innerWidth <= 768) {
+                // Click vào nửa trái = Sign In
+                if (clickX < rect.width / 2) {
+                    modal.classList.remove("right-panel-active");
+                }
+                // Click vào nửa phải = Sign Up
+                else {
+                    modal.classList.add("right-panel-active");
+                }
+            }
+        });
+    }
+
     bindMockLoginSuccess(modal);
     updateHeaderAuthState();
 }
 
+// Bind submit form Sign In -> giả lập đăng nhập thành công
 function bindMockLoginSuccess(modal) {
     const signInForm = document.querySelector('#modal .sign-in-modal form');
     if (!signInForm) {
@@ -171,15 +202,18 @@ function bindMockLoginSuccess(modal) {
     });
 }
 
+// Cập nhật trạng thái đăng nhập vào localStorage và refresh UI header
 function setUserLoggedIn(isLoggedIn) {
     localStorage.setItem(AUTH_STATE_KEY, isLoggedIn ? 'true' : 'false');
     updateHeaderAuthState();
 }
 
+// Kiểm tra trạng thái đăng nhập mock
 function isUserLoggedIn() {
     return localStorage.getItem(AUTH_STATE_KEY) === 'true';
 }
 
+// Cập nhật hiển thị nút auth / user panel tùy trạng thái đăng nhập
 function updateHeaderAuthState() {
     const authButtons = document.querySelector('.auth-buttons');
     const userPanel = document.querySelector('.user-panel');
@@ -212,6 +246,7 @@ function updateHeaderAuthState() {
     }
 }
 
+// Khởi tạo menu người dùng (toggle mở/đóng + logout)
 function initUserMenu() {
     const moreButton = document.querySelector('.more-button');
     const userMenu = document.querySelector('.user-menu');
@@ -249,7 +284,7 @@ function initUserMenu() {
     }
 }
 
-// Hàm khởi tạo nút giỏ hàng
+// Khởi tạo nút giỏ hàng: click chuyển tới trang cart
 function initCartButton() {
     const cartButton = document.querySelector('.cart-button');
     if (cartButton) {
@@ -260,7 +295,80 @@ function initCartButton() {
     }
 }
 
-// Hàm cập nhật số lượng badge giỏ hàng
+// Khởi tạo mobile menu: tạo nút toggle, xử lý đóng/mở, responsive
+function initMobileMenu() {
+    const headerContainer = document.querySelector('.header-container');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (!headerContainer || !navMenu) {
+        return;
+    }
+
+    // Tạo nút toggle menu cho mobile
+    const menuToggle = document.createElement('button');
+    menuToggle.className = 'mobile-menu-toggle';
+    menuToggle.setAttribute('aria-label', 'Toggle menu');
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+    // Thêm nút toggle vào header (trước header-actions)
+    const headerActions = document.querySelector('.header-actions');
+    if (headerActions) {
+        headerContainer.insertBefore(menuToggle, headerActions);
+    }
+
+    // Xử lý click toggle menu
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+        headerContainer.classList.toggle('menu-open');
+
+        // Đổi icon
+        const icon = menuToggle.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Đóng menu khi click vào nav item
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            headerContainer.classList.remove('menu-open');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+
+    // Đóng menu khi click bên ngoài
+    document.addEventListener('click', (e) => {
+        if (!headerContainer.contains(e.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            headerContainer.classList.remove('menu-open');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Đóng menu khi resize về desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 820 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            headerContainer.classList.remove('menu-open');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+}
+
+// Cập nhật số lượng badge giỏ hàng dựa trên cart.getItemCount(), ẩn nếu = 0
 function updateCartBadge() {
     const cartBadge = document.querySelector('.cart-badge');
     if (cartBadge && typeof cart !== 'undefined') {
@@ -275,11 +383,13 @@ function updateCartBadge() {
     }
 }
 
+// Chuỗi khởi tạo chính sau khi DOM sẵn sàng
+// Thứ tự đảm bảo: modal -> header -> footer -> popup logic -> cart & badge
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadModal(); // Load modal trước
-    await loadHeader(); // Đợi header load xong
-    await loadFooter(); // Đợi footer load xong
-    loadPopup(); // Gọi loadPopup SAU KHI cả modal và header đã load xong
-    initCartButton(); // Khởi tạo nút giỏ hàng
-    updateCartBadge(); // Cập nhật badge giỏ hàng
+    await loadModal(); // 1. Load modal trước để popup có sẵn
+    await loadHeader(); // 2. Header (nav, auth, user menu)
+    await loadFooter(); // 3. Footer
+    loadPopup(); // 4. Bind sự kiện popup sau khi modal & header đã có
+    initCartButton(); // 5. Nút giỏ hàng
+    updateCartBadge(); // 6. Badge số lượng giỏ hàng
 });
