@@ -42,7 +42,7 @@ function detailProduct(id) {
                 <span class="price">${vnd(product.price)}</span>
             </div>
             <div class="modal-footer-control">
-                <button class="button-dathangngay" onclick="addToCartFromModal(${product.id})">Đặt hàng ngay</button>
+                <button class="button-dathangngay" onclick="addToCartFromModal(${product.id})">Thêm vào giỏ</button>
             </div>
         </div>
     `;
@@ -279,7 +279,7 @@ function initCartButton() {
     const cartButton = document.querySelector('.cart-button');
     if (cartButton) {
         cartButton.addEventListener('click', () => {
-            window.location.href = '/cart/cart.html';
+            window.location.href = '/public/pages/checkout/cart.html';
         });
         // Thêm cursor pointer
         cartButton.style.cursor = 'pointer';

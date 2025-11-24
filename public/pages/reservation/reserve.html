@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt bàn Chuyên nghiệp - Spicy & Juicy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Flatpickr Lib -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/reserve.css">
+</head>
+
+<body>
+    <div id="main">
+        <header id="header"></header>
+
+        <main id="content" class="page-content">
+            <div class="booking-wrapper">
+
+                <!-- ===== CỘT BÊN TRÁI - FORM ĐẶT BÀN ===== -->
+                <section class="booking-form-container">
+                    <h1 class="booking-form-container__title">Đặt Bàn Online</h1>
+                    <p class="booking-form-container__description">Vui lòng điền thông tin để chúng tôi phục vụ bạn tốt
+                        nhất.</p>
+
+                    <form id="reservationForm" class="booking-form">
+
+                        <div class="booking-form__group">
+                            <label for="branch" class="booking-form__label">Chọn chi nhánh</label>
+                            <select id="branch" name="branch" class="booking-form__select" required>
+                                <option value="" disabled selected>-- Vui lòng chọn một nhà hàng --</option>
+                            </select>
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="people" class="booking-form__label">Số người</label>
+                            <input type="number" id="people" name="people" class="booking-form__input" min="1" max="50"
+                                placeholder="1" required>
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="date" class="booking-form__label">Chọn ngày</label>
+                            <input type="text" id="date" name="date" class="booking-form__input"
+                                placeholder="Nhấp để chọn ngày" readonly required>
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="time" class="booking-form__label">Chọn giờ</label>
+                            <select id="time" name="time" class="booking-form__select" required>
+                                <option value="" disabled selected>-- Chọn khung giờ --</option>
+                                <optgroup label="Buổi trưa">
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:15">10:15</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="10:45">10:45</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:15">11:15</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="11:45">11:45</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:15">12:15</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="12:45">12:45</option>
+                                    <option value="13:00">13:00</option>
+                                </optgroup>
+                                <optgroup label="Buổi tối">
+                                    <option value="17:30">17:30</option>
+                                    <option value="17:45">17:45</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:15">18:15</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="18:45">18:45</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:15">19:15</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="19:45">19:45</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:15">20:15</option>
+                                    <option value="20:30">20:30</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <h2 class="booking-form__sub-title">Thông Tin Liên Hệ</h2>
+
+                        <div class="booking-form__group">
+                            <label for="fullname" class="booking-form__label">Họ và tên</label>
+                            <input type="text" id="fullname" name="fullname" class="booking-form__input" placeholder=" "
+                                required>
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="phone" class="booking-form__label">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" class="booking-form__input" placeholder=" "
+                                required>
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="email" class="booking-form__label">Email</label>
+                            <input type="email" id="email" name="email" class="booking-form__input"
+                                placeholder="email@example.com">
+                        </div>
+
+                        <div class="booking-form__group">
+                            <label for="notes" class="booking-form__label">Ghi chú (tùy chọn)</label>
+                            <textarea id="notes" name="notes" class="booking-form__textarea" rows="4"
+                                placeholder="Ví dụ: Cho tôi bàn gần cửa sổ..."></textarea>
+                        </div>
+
+                        <button type="submit" class="booking-form__submit">Tiếp Tục</button>
+                    </form>
+                </section>
+
+                <!-- ===== CỘT BÊN PHẢI : THÔNG TIN THÊM ===== -->
+                <aside class="booking-info">
+                    <div class="booking-info__card">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop"
+                            alt="Không gian nhà hàng" class="booking-info__image">
+                        <h3 class="booking-info__title">Điều khoản đặt bàn</h3>
+                        <ul class="booking-info__list">
+                            <li>Vui lòng đến đúng giờ để đảm bảo giữ chỗ.</li>
+                            <li>Nhà hàng sẽ chỉ giữ bàn cho quý khách trong vòng 30 phút.</li>
+                            <li>Nếu có thay đổi, xin vui lòng liên hệ hotline 1900 1234.</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <footer id="footer"></footer>
+    </div>
+    <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
+    <script src="/src/js/reserve-logic.js"></script>
+</body>
+
+</html>
