@@ -4,9 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeInput = document.getElementById('time');
     const branchSelect = document.getElementById('branch');
 
-    // TẠO DANH SÁCH LỰA CHỌN CỬA HÀNG
     function populateBranchOptions() {
-        // Kiểm tra xem biến storesData (từ file data.js) có không?
         if (typeof storesData !== 'undefined' && storesData.length > 0) {
             storesData.forEach(store => {
                 const option = document.createElement('option');
@@ -17,17 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    populateBranchOptions(); //điền danh sách cửa hàng vào dropdown
-
-    // --- TỰ ĐỘNG CHỌN CHI NHÁNH ---
+    populateBranchOptions(); 
     const selectedStore = localStorage.getItem('selectedStore');
     if (selectedStore && branchSelect) {
         branchSelect.value = selectedStore;
         branchSelect.disabled = true;
         localStorage.removeItem('selectedStore');
     }
-
-    // --- KÍCH HOẠT LỊCH FLATPICKR ---
     if (datePicker) {
         flatpickr(datePicker, {
             "locale": "vn",
@@ -41,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- XỬ LÝ KHI SUBMIT FORM ---
+
     if (reservationForm) {
         reservationForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -60,8 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'confirmation.html';
         });
     }
-
-    // --- CẬP NHẬT GIỜ ---
     function updateAvailableTimes(selectedDateStr) {
         if (!selectedDateStr) return;
         const now = new Date();
