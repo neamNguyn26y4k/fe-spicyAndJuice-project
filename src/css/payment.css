@@ -1,84 +1,28 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ===================================
+   STYLES CHO TRANG THANH TOÁN
+   =================================== */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #4A90E2 0%, #67B8E3 100%);
-    min-height: 100vh;
-    padding: 20px;
-}
-
+/* Container chính của trang */
 .page {
     max-width: 1400px;
     margin: 0 auto;
-    background: #A8B9CC;
-    border-radius: 30px;
     padding: 30px 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Styles */
-.header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.header__logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #1e293b;
-}
-
-.header__location-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    color: #475569;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.header__location-btn:hover {
-    background: #f1f5f9;
-    transform: translateY(-1px);
-}
-
-.header__nav {
-    display: flex;
-    gap: 35px;
-    margin-left: auto;
-}
-
-.header__nav-link {
-    text-decoration: none;
-    color: #1e293b;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.header__nav-link:hover {
-    color: #475569;
-}
-
-/* Progress Steps */
+/* ===================================
+   THANH TIẾN TRÌNH (BƯỚC 3)
+   =================================== */
+/* Hiển thị tiến trình đang ở bước Thanh toán */
 .progress {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
     margin-bottom: 40px;
-    padding: 20px 0;
+    padding: 30px 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .progress__step {
@@ -89,54 +33,64 @@ body {
 }
 
 .progress__icon {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: white;
+    background: #f3f4f6;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #64748b;
+    color: #9ca3af;
+    border: 2px solid #e5e7eb;
     transition: all 0.3s ease;
 }
 
 .progress__icon--active {
-    background: white;
-    color: #64748b;
-    border: 2px solid #e2e8f0;
+    background: linear-gradient(90deg, #d31027, #ea384d);
+    color: white;
+    border-color: #d31027;
+    box-shadow: 0 4px 12px rgba(211, 16, 39, 0.3);
 }
 
 .progress__icon--completed {
     background: #22c55e;
     color: white;
+    border-color: #22c55e;
 }
 
 .progress__label {
-    font-size: 13px;
-    color: #64748b;
+    font-size: 14px;
+    color: #6b7280;
     font-weight: 500;
 }
 
 .progress__label--active {
-    color: #1e293b;
-    font-weight: 600;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 .progress__line {
     width: 100px;
-    height: 2px;
-    background: #cbd5e1;
+    height: 3px;
+    background: #e5e7eb;
     margin: 0 10px;
+    border-radius: 2px;
 }
 
-/* Main Content */
+/* ===================================
+   NỘI DUNG CHÍNH
+   =================================== */
+/* Layout 2 cột: Giỏ hàng (trái) và Phương thức thanh toán (phải) */
 .payment {
     display: grid;
     grid-template-columns: 500px 1fr;
     gap: 30px;
 }
 
-/* Cart Panel */
+/* ===================================
+   PANEL GIỎ HÀNG (CỘT TRÁI)
+   =================================== */
+/* Hiển thị tóm tắt đơn hàng và tổng tiền */
 .cart {
     background: white;
     border-radius: 20px;
@@ -259,13 +213,13 @@ body {
 .cart__row--total {
     font-size: 16px;
     font-weight: 700;
-    color: #ef4444;
+    color: var(--primary-color);
 }
 
 .cart__btn {
     width: 100%;
-    padding: 14px;
-    background: #ef4444;
+    padding: 16px;
+    background: linear-gradient(90deg, #d31027, #ea384d);
     color: white;
     border: none;
     border-radius: 12px;
@@ -277,22 +231,33 @@ body {
     justify-content: center;
     gap: 10px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(211, 16, 39, 0.3);
 }
 
 .cart__btn:hover {
-    background: #dc2626;
+    background: linear-gradient(90deg, #b91c1c, #dc2626);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 6px 20px rgba(211, 16, 39, 0.4);
 }
 
-/* Payment Panel */
+.cart__btn:active {
+    transform: translateY(0);
+}
+
+/* ===================================
+   PANEL PHƯƠNG THỨC THANH TOÁN (CỘT PHẢI)
+   =================================== */
+/* Chứa các tùy chọn thanh toán */
 .payment__methods {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Search and Discount Section */
+/* ===================================
+   PHẦN TÌM VÀ NHẬP MÃ GIẢM GIÁ
+   =================================== */
+/* Section để nhập mã giảm giá cho đơn hàng */
 .payment__search {
     background: white;
     border-radius: 20px;
@@ -319,12 +284,13 @@ body {
 }
 
 .payment__search-btn--active {
-    background: #22c55e;
+    background: linear-gradient(90deg, #d31027, #ea384d);
     color: white;
+    box-shadow: 0 2px 8px rgba(211, 16, 39, 0.3);
 }
 
 .payment__search-btn:hover {
-    background: #1ea654;
+    background: var(--secondary-color);
     color: white;
 }
 
@@ -345,10 +311,14 @@ body {
 }
 
 .payment__discount-input:focus {
-    border-color: #22c55e;
+    border-color: var(--primary-color);
     background: white;
 }
 
+/* ===================================
+   TAB CHỌN PHƯƠNG THỨC THANH TOÁN
+   =================================== */
+/* 3 tabs: Tiền mặt, Thẻ tín dụng, Ví điện tử */
 .payment__tabs {
     background: white;
     border-radius: 20px;
@@ -381,8 +351,8 @@ body {
 }
 
 .payment__tab--active {
-    background: white;
-    border-color: #22c55e;
+    background: #fef2f2;
+    border-color: var(--primary-color);
     color: #1e293b;
 }
 
@@ -390,7 +360,7 @@ body {
     content: '';
     width: 8px;
     height: 8px;
-    background: #22c55e;
+    background: var(--primary-color);
     border-radius: 50%;
     margin-left: auto;
 }
@@ -399,7 +369,10 @@ body {
     color: currentColor;
 }
 
-/* Payment Content */
+/* ===================================
+   NỘI DUNG CHI TIẾT TỪNG PHƯƠNG THỨC
+   =================================== */
+/* Container chứa thông tin chi tiết của phương thức được chọn */
 .payment__content {
     background: white;
     border-radius: 20px;
@@ -415,7 +388,10 @@ body {
     display: block;
 }
 
-/* Cash Payment */
+/* ===================================
+   THANH TOÁN TIỀN MẶT
+   =================================== */
+/* Thông tin và hướng dẫn thanh toán bằng tiền mặt */
 .payment__info {
     display: flex;
     flex-direction: column;
@@ -453,7 +429,10 @@ body {
     color: #ef4444;
 }
 
-/* Card & Wallet Options */
+/* ===================================
+   THANH TOÁN QUA THẺ & VÍ ĐIỆN TỬ
+   =================================== */
+/* Cổng thanh toán và lựa chọn ngân hàng/ví */
 .payment__gateway {
     width: 100%;
     padding: 12px 24px;
@@ -497,14 +476,14 @@ body {
 }
 
 .payment__option:hover {
-    border-color: #22c55e;
+    border-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+    box-shadow: 0 4px 12px rgba(211, 16, 39, 0.1);
 }
 
 .payment__option--active {
-    border-color: #22c55e;
-    background: #f0fdf4;
+    border-color: var(--primary-color);
+    background: #fef2f2;
 }
 
 .payment__option img {
@@ -520,7 +499,10 @@ body {
     line-height: 1.6;
 }
 
-/* Scrollbar Styling */
+/* ===================================
+   TÙY CHỈNH THANH SCROLLBAR
+   =================================== */
+/* Custom scrollbar cho danh sách món ăn */
 .cart__items::-webkit-scrollbar {
     width: 6px;
 }
@@ -539,7 +521,10 @@ body {
     background: #94a3b8;
 }
 
-/* Responsive Design */
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE/TABLET
+   =================================== */
+/* Tablet: Chuyển layout thành 1 cột */
 @media (max-width: 1200px) {
     .payment {
         grid-template-columns: 1fr;

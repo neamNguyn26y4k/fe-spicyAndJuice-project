@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Spicy & Juicy</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/payment.css">
+</head>
+
+<body>
+    <div id="main">
+        <!-- Header sẽ được load động từ header.html -->
+        <div id="header"></div>
+
+        <!-- Nội dung chính của trang thanh toán -->
+        <div class="page-content">
+            <div class="page">
+
+                <!-- Thanh tiến trình đặt hàng (Bước 3: Thanh toán) -->
+                <div class="progress">
+                    <div class="progress__step progress__step--completed">
+                        <div class="progress__icon progress__icon--completed">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="progress__label">Hoàn tất thông tin</span>
+                    </div>
+                    <div class="progress__line"></div>
+                    <div class="progress__step progress__step--active">
+                        <div class="progress__icon progress__icon--active">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path
+                                    d="M17 6V4a1 1 0 0 0-1-1H4a2 2 0 0 0 0 4h13a1 1 0 0 1 1 1v3h-2a2 2 0 0 0 0 4h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"
+                                    stroke="currentColor" stroke-width="1.5" />
+                                <path d="M2 4v11a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-3" stroke="currentColor"
+                                    stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <span class="progress__label progress__label--active">Thanh toán</span>
+                    </div>
+                    <div class="progress__line"></div>
+                    <div class="progress__step progress__step--completed">
+                        <div class="progress__icon progress__icon--completed">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="progress__label">Giỏ hàng</span>
+                    </div>
+                </div>
+
+                <!-- Nội dung chính: 2 cột (Giỏ hàng bên trái, Phương thức thanh toán bên phải) -->
+                <div class="payment">
+                    <!-- Cột bên trái: Hiển thị giỏ hàng và tổng tiền -->
+                    <div class="cart">
+                        <div class="cart__header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <h2>Giỏ hàng</h2>
+                        </div>
+
+                        <!-- Danh sách món ăn trong giỏ hàng (được tạo động) -->
+                        <div class="cart__items" id="cartItems">>
+                            <!-- Các món ăn sẽ được thêm động vào đây -->
+                        </div>
+
+                        <!-- Phần tính toán tổng tiền -->
+                        <div class="cart__summary">
+                            <div class="cart__row">
+                                <span>Giảm giá sản phẩm</span>
+                                <span id="discountAmount">58.000 VNĐ</span>
+                            </div>
+                            <div class="cart__row">
+                                <span>Chi phí vận chuyển</span>
+                                <span id="shippingFee">25.000 VNĐ</span>
+                            </div>
+                            <div class="cart__row cart__row--total">
+                                <span>Thành tiền</span>
+                                <span id="totalAmount">707.000 VNĐ</span>
+                            </div>
+                        </div>
+
+                        <!-- Nút xác nhận thanh toán -->
+                        <button class="cart__btn" id="confirmBtn">
+                            Xác nhận thanh toán
+                        </button>
+                    </div>
+
+                    <!-- Cột bên phải: Lựa chọn phương thức thanh toán -->
+                    <div class="payment__methods">
+                        <!-- Phần tìm kiếm và nhập mã giảm giá -->
+                        <div class="payment__search">
+                            <div class="payment__search-container">
+                                <button class="payment__search-btn payment__search-btn--active">Tìm mã</button>
+                                <input type="text" class="payment__discount-input" placeholder="Mã giảm giá">
+                            </div>
+                        </div>
+
+                        <!-- Các tab phương thức thanh toán: Tiền mặt, Thẻ tín dụng, Ví điện tử -->
+                        <div class="payment__tabs">
+                            <button class="payment__tab payment__tab--active" data-method="cash">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <rect x="2" y="5" width="16" height="10" rx="1" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                Tiền mặt
+                            </button>
+                            <button class="payment__tab" data-method="card">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <path d="M2 8H18" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                Thẻ tín dụng
+                            </button>
+                            <button class="payment__tab" data-method="ewallet">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <rect x="4" y="4" width="12" height="12" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                Ví điện tử
+                            </button>
+                        </div>
+
+                        <!-- Nội dung chi tiết của từng phương thức thanh toán -->
+                        <div class="payment__content">
+                            <!-- Phương thức 1: Thanh toán bằng tiền mặt (mặc định) -->
+                            <div class="payment__method payment__method--active" id="cashMethod">
+                                <div class="payment__info">
+                                    <p class="payment__description"> Đơn hàng của bạn sẽ được tính phí khi giao hàng.
+                                        Vui lòng mang theo thẻ tín dụng hoặc tiền mặt trước khi giao hàng và không yêu
+                                        cầu thanh toán sau hoặc trả bằng thẻ tín dụng. Cảm ơn sự hợp tác của bạn.
+                                    </p>
+                                    <div class="payment__note">
+                                        <span class="payment__note-label">Chú ý</span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5" />
+                                            <path d="M10 6V10M10 14H10.01" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phương thức 2: Thanh toán bằng thẻ tín dụng -->
+                            <div class="payment__method" id="cardMethod">
+                                <div class="payment__gateway">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <line x1="2" y1="10" x2="22" y2="10" />
+                                    </svg>
+                                    Cổng thanh toán
+                                </div>
+                                <div class="payment__options">
+                                    <div class="payment__option">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                                            alt="Mastercard">
+                                    </div>
+                                    <div class="payment__option">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
+                                            alt="Visa">
+                                    </div>
+                                    <div class="payment__option">
+                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-Napas.png"
+                                            alt="Napas">
+                                    </div>
+                                </div>
+                                <p class="payment__note-text">Có thể thanh toán thông qua tất cả các thẻ thanh
+                                    toán<br>(Vui lòng kiểm tra số dư trước khi thanh toán)</p>
+                            </div>
+
+                            <!-- Phương thức 3: Thanh toán bằng ví điện tử -->
+                            <div class="payment__method" id="ewalletMethod">
+                                <div class="payment__gateway">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+                                        <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+                                    </svg>
+                                    Cổng thanh toán
+                                </div>
+                                <div class="payment__options">
+                                    <div class="payment__option">
+                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay.png"
+                                            alt="ZaloPay">
+                                    </div>
+                                    <div class="payment__option">
+                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-VNPAY-QR.png"
+                                            alt="VNPay">
+                                    </div>
+                                    <div class="payment__option">
+                                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+                                            alt="Momo">
+                                    </div>
+                                </div>
+                                <p class="payment__note-text">Có thể thanh toán thông qua tất cả các ví điện tử<br>(Vui
+                                    lòng kiểm tra số dư trước khi thanh toán.)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer sẽ được load động từ footer.html -->
+        <div id="footer"></div>
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="/src/js/data.js"></script>
+    <script src="/src/js/loader.js"></script> 
+    <script src="/src/js/payment.js"></script> 
+</body>
+
+</html>

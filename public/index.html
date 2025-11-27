@@ -1,93 +1,277 @@
 <!DOCTYPE html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spicy & Juicy</title>
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon và icon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png" />
 
-    <link rel="stylesheet" href="/src/css/style.css">
-</head>
+    <!-- Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-<body>
+    <!-- Stylesheet chính -->
+    <link rel="stylesheet" href="/src/css/style.css" />
+  </head>
+
+  <body>
     <div id="main">
-        <div id="header"></div>
-        <div id="content" class="page-content homepage">
-            <div class="background-slider">
-                <div class="bg-image active" style="background-image: url('/src/assets/images/bgr-food3.jpg');"></div>
-                <div class="bg-image" style="background-image: url('/src/assets/images/dinner.png');"></div>
-                <div class="bg-image" style="background-image: url('/src/assets/images/nhahang.png');"></div>
-            </div>
+      <!-- Header: được load động từ /src/partials/header.html -->
+      <div id="header"></div>
 
-            <div class="gradient-overlay"></div>
-
-            <div class="content">
-                <h1 class="page-title">Đặt món ngon mọi lúc mọi nơi</h1>
-                <p>Thực đơn đa dạng – Cơm, Phở, Mì, Đồ uống – giao hàng nhanh chóng.</p>
-                <button class="btn btn-primary">Đặt món ngay</button>
-            </div>
-
-            <div class="indicators">
-                <div class="indicator active" data-index="0"
-                    style="background-image: url('/src/assets/images/bgr-food3.jpg');"></div>
-                <div class="indicator" data-index="1" style="background-image: url('/src/assets/images/dinner.png');">
-                </div>
-                <div class="indicator" data-index="2" style="background-image: url('/src/assets/images/nhahang.png');">
-                </div>
-            </div>
+      <!-- Content chính: Hero section với background slider -->
+      <div id="content" class="page-content homepage">
+        <!-- Background slider: 3 hình nền tự động chuyển đổi -->
+        <div class="background-slider">
+          <div
+            class="bg-image active"
+            style="background-image: url('/src/assets/images/bgr-food3.jpg')"
+          ></div>
+          <div
+            class="bg-image"
+            style="background-image: url('/src/assets/images/dinner.png')"
+          ></div>
+          <div
+            class="bg-image"
+            style="background-image: url('/src/assets/images/nhahang.png')"
+          ></div>
         </div>
 
-        <section class="immersive-gallery">
-            <div class="gallery-intro">
-                <h2 class="gallery-title">Spicy&Juice Bộ Sưu Tập</h2>
-                <div class="gallery-divider"></div>
-            </div>
-            <section class="gallery-section" data-section="1">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80&auto=format&fit=crop"
-                    alt="Không gian nhà hàng" class="gallery-image">
-                <div class="image-overlay"></div>
-                <div class="image-caption">
-                    <span class="caption-accent"></span>
-                    <p>Không gian ấm cúng & hiện đại – phù hợp cho gia đình, bạn bè, và những dịp đặc biệt.</p>
-                </div>
-            </section>
+        <!-- Gradient overlay để làm tối background -->
+        <div class="gradient-overlay"></div>
 
-            <section class="gallery-section" data-section="2">
-                <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80&auto=format&fit=crop"
-                    alt="Ẩm thực tinh tế" class="gallery-image">
-                <div class="image-overlay"></div>
-                <div class="image-caption">
-                    <span class="caption-accent"></span>
-                    <p>Ẩm thực tinh tế với hương vị độc đáo – mỗi món ăn là một hành trình khám phá.</p>
-                </div>
-            </section>
+        <!-- Hero content: Tiêu đề, mô tả, CTA button -->
+        <div class="content">
+          <h1 class="page-title">Nhà Hàng Bạn Yêu, Ngay Trong Phòng Khách</h1>
+          <p>
+            Thực đơn đa dạng – Cơm, Phở, Mì, Đồ uống – giao hàng nhanh chóng.
+          </p>
+          <button
+            class="btn btn-primary"
+            onclick="window.location.href='/public/pages/menu.html'"
+          >
+            Đặt món ngay
+          </button>
+        </div>
 
-            <section class="gallery-section" data-section="3">
-                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80&auto=format&fit=crop"
-                    alt="Khu vực quầy bar" class="gallery-image">
-                <div class="image-overlay"></div>
-                <div class="image-caption">
-                    <span class="caption-accent"></span>
-                    <p>Thức uống sáng tạo & cocktail đặc biệt – nơi hội tụ của hương vị và nghệ thuật.</p>
-                </div>
-            </section>
+        <!-- Indicators: cho phép người dùng chọn slide thủ công -->
+        <div class="indicators">
+          <div
+            class="indicator active"
+            data-index="0"
+            style="background-image: url('/src/assets/images/bgr-food3.jpg')"
+          ></div>
+          <div
+            class="indicator"
+            data-index="1"
+            style="background-image: url('/src/assets/images/dinner.png')"
+          ></div>
+          <div
+            class="indicator"
+            data-index="2"
+            style="background-image: url('/src/assets/images/nhahang.png')"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Gallery Section: Bộ sưu tập ảnh với hiệu ứng parallax và intersection observer -->
+      <section class="immersive-gallery">
+        <!-- Gallery intro: Tiêu đề và divider -->
+        <div class="gallery-intro">
+          <h2 class="gallery-title">Spicy&Juice Bộ Sưu Tập</h2>
+          <div class="gallery-divider"></div>
+        </div>
+
+        <!-- Gallery item 1 -->
+        <section class="gallery-section" data-section="1">
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80&auto=format&fit=crop"
+            alt="Không gian nhà hàng"
+            class="gallery-image"
+          />
+          <div class="image-overlay"></div>
+          <div class="image-caption">
+            <span class="caption-accent"></span>
+            <p>
+              Không gian ấm cúng & hiện đại – phù hợp cho gia đình, bạn bè, và
+              những dịp đặc biệt.
+            </p>
+          </div>
         </section>
 
-        <div>
-            <form action="">
+        <!-- Gallery item 2 -->
+        <section class="gallery-section" data-section="2">
+          <img
+            src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80&auto=format&fit=crop"
+            alt="Ẩm thực tinh tế"
+            class="gallery-image"
+          />
+          <div class="image-overlay"></div>
+          <div class="image-caption">
+            <span class="caption-accent"></span>
+            <p>
+              Ẩm thực tinh tế với hương vị độc đáo – mỗi món ăn là một hành
+              trình khám phá.
+            </p>
+          </div>
+        </section>
 
-            </form>
+        <!-- Gallery item 3 -->
+        <section class="gallery-section" data-section="3">
+          <img
+            src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80&auto=format&fit=crop"
+            alt="Khu vực quầy bar"
+            class="gallery-image"
+          />
+          <div class="image-overlay"></div>
+          <div class="image-caption">
+            <span class="caption-accent"></span>
+            <p>
+              Thức uống sáng tạo & cocktail đặc biệt – nơi hội tụ của hương vị
+              và nghệ thuật.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <!-- Booking Section: Form đặt bàn trực tuyến -->
+      <section class="booking-section" id="booking">
+        <div class="container booking-grid">
+          <div class="booking-copy">
+            <p class="booking-eyebrow">ĐẶT BÀN</p>
+            <h2>Trải nghiệm vị ngon tại Spicy &amp; Juicy</h2>
+            <p>
+              Đặt bàn trực tuyến để giữ chỗ cho những buổi hẹn quan trọng. Đội
+              ngũ của chúng tôi sẽ liên hệ lại để xác nhận và tư vấn thực đơn
+              phù hợp nhất với bạn.
+            </p>
+            <ul class="booking-benefits">
+              <li>
+                <i class="fa-solid fa-check"></i>Không phụ phí, xác nhận trong
+                10 phút
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i>Không gian riêng tư theo yêu
+                cầu
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i>Thực đơn theo mùa &amp; dịp đặc
+                biệt
+              </li>
+            </ul>
+          </div>
+
+          <!-- Form đặt bàn: thu thập thông tin khách hàng -->
+          <form class="booking-form" id="bookingForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullname">Họ và tên *</label>
+                <input
+                  type="text"
+                  id="fullname"
+                  name="fullname"
+                  required
+                  placeholder="Nhập họ và tên"
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone">Số điện thoại *</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="093 xxx xxxx"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="spicyandjuicy@email.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="guests">Số khách *</label>
+                <input
+                  type="number"
+                  id="guests"
+                  name="guests"
+                  min="1"
+                  required
+                  placeholder="Từ 2 - 20 người"
+                />
+              </div>
+              <div class="form-group">
+                <label for="date">Ngày dùng bữa *</label>
+                <input type="date" id="date" name="date" required />
+              </div>
+              <div class="form-group">
+                <label for="time">Khung giờ *</label>
+                <select id="time" name="time" required>
+                  <option value>Chọn khung giờ</option>
+                  <option value="11:00">11:00</option>
+                  <option value="11:30">11:30</option>
+                  <option value="12:00">12:00</option>
+                  <option value="12:30">12:30</option>
+                  <option value="13:00">13:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="17:30">17:30</option>
+                  <option value="18:00">18:00</option>
+                  <option value="18:30">18:30</option>
+                  <option value="19:00">19:00</option>
+                  <option value="19:30">19:30</option>
+                  <option value="20:00">20:00</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label for="note">Ghi chú</label>
+                <textarea
+                  id="note"
+                  name="note"
+                  placeholder="Yêu cầu đặc biệt (nếu có)..."
+                ></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary booking-submit">
+              Đặt bàn ngay
+            </button>
+          </form>
         </div>
-        <div id="footer"></div>
+      </section>
+
+      <!-- Popup thông báo đặt bàn thành công -->
+      <div class="booking-popup-overlay" id="bookingPopup">
+        <div class="booking-popup">
+          <div class="popup-icon">✓</div>
+          <h3>Đặt bàn thành công!</h3>
+          <p>
+            Chúng tôi sẽ liên hệ để xác nhận thông tin của bạn trong thời gian
+            sớm nhất.
+          </p>
+          <button class="btn btn-primary close-popup" type="button">
+            Đã rõ
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer: được load động từ /src/partials/footer.html -->
+      <div id="footer"></div>
     </div>
 
+    <!-- Scripts: load theo thứ tự để đảm bảo dependencies -->
     <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
     <script src="/src/js/homepage-slider.js"></script>
     <script src="/src/js/gallery.js"></script>
-</body>
-
+    <script src="/src/js/homepage-booking.js"></script>
+  </body>
 </html>

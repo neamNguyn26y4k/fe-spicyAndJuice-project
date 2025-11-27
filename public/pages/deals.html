@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
     <link rel="stylesheet" href="/src/css/style.css">
     <link rel="stylesheet" href="/src/css/deal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
   <body>
@@ -22,20 +23,30 @@
                     <div class="promotion-grid">
                         <!-- Left Column -->
                         <div class="promo-left-column">
-                            <!-- Top Image -->
+                            <!-- Voucher Image 1: 50k -->
                             <div class="promo-image-top">
-                                <img src="https://placehold.co/600x400/E2E8F0/A0AEC0?text=Promo+Image+1" alt="Promotion 1" class="promo-img">
+                                <img src="/src/assets/images/voucher-50k.png" alt="Voucher giảm 50.000 VNĐ" class="promo-img">
                             </div>
 
-                            <!-- Bottom Image -->
+                            <!-- Voucher Image 2: 100k -->
+                            <div class="promo-image-top">
+                                <img src="/src/assets/images/voucher-100k.png" alt="Voucher giảm 100.000 VNĐ" class="promo-img">
+                            </div>
+
+                            <!-- Voucher Image 3: 200k -->
                             <div class="promo-image-bottom">
-                                <img src="https://placehold.co/600x400/E2E8F0/A0AEC0?text=Promo+Image+2" alt="Promotion 2" class="promo-img">
+                                <img src="/src/assets/images/voucher-200k.png" alt="Voucher giảm 200.000 VNĐ" class="promo-img">
+                            </div>
+
+                            <!-- Voucher Image 4: Drink -->
+                            <div class="promo-image-bottom">
+                                <img src="/src/assets/images/drink-voucher.png" alt="Voucher đồ uống miễn phí" class="promo-img">
                             </div>
                         </div>
 
                         <!-- Right Column -->
                         <div class="promo-right-column">
-                            <!-- Voucher Card 1 -->
+                            <!-- Voucher Card 1: 50k -->
                             <article class="voucher-card">
                                 <div class="voucher-card__header">
                                     <h3 class="voucher-card__title">COUPON 50.000 VNĐ</h3>
@@ -55,7 +66,27 @@
                                 </div>
                             </article>
 
-                            <!-- Voucher Card 2 -->
+                            <!-- Voucher Card 2: 100k -->
+                            <article class="voucher-card">
+                                <div class="voucher-card__header">
+                                    <h3 class="voucher-card__title">COUPON 100.000 VNĐ</h3>
+                                </div>
+                                <div class="voucher-card__body">
+                                    <div class="voucher-card__info">
+                                        <div class="voucher-info-item">
+                                            <span class="voucher-info-item__label">Thời gian áp dụng:</span>
+                                            <span class="voucher-info-item__value">01/12/2025 - 31/12/2025</span>
+                                        </div>
+                                        <div class="voucher-info-item">
+                                            <span class="voucher-info-item__label">Hết hạn sau:</span>
+                                            <span class="voucher-info-item__value">30 ngày</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="voucher-card__cta btn btn--primary">Xem chi tiết</a>
+                                </div>
+                            </article>
+
+                            <!-- Voucher Card 3: 200k -->
                             <article class="voucher-card">
                                 <div class="voucher-card__header">
                                     <h3 class="voucher-card__title">COUPON 200.000 VNĐ</h3>
@@ -74,6 +105,26 @@
                                     <a href="#" class="voucher-card__cta btn btn--primary">Xem chi tiết</a>
                                 </div>
                             </article>
+
+                            <!-- Voucher Card 4: Drink -->
+                            <article class="voucher-card">
+                                <div class="voucher-card__header">
+                                    <h3 class="voucher-card__title">VOUCHER NƯỚC UỐNG</h3>
+                                </div>
+                                <div class="voucher-card__body">
+                                    <div class="voucher-card__info">
+                                        <div class="voucher-info-item">
+                                            <span class="voucher-info-item__label">Thời gian áp dụng:</span>
+                                            <span class="voucher-info-item__value">01/11/2025 - 31/01/2026</span>
+                                        </div>
+                                        <div class="voucher-info-item">
+                                            <span class="voucher-info-item__label">Hết hạn sau:</span>
+                                            <span class="voucher-info-item__value">60 ngày</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="voucher-card__cta btn btn--primary">Xem chi tiết</a>
+                                </div>
+                            </article>
                         </div>
                     </div>
 
@@ -81,367 +132,14 @@
                     <div class="promotion-pagination" role="group" aria-label="Promotion slides navigation">
                         <button class="promotion-pagination__dot promotion-pagination__dot--active" aria-label="Slide 1" aria-current="true"></button>
                         <button class="promotion-pagination__dot" aria-label="Slide 2"></button>
-                        <button class="promotion-pagination__dot" aria-label="Slide 3"></button>
-                        <button class="promotion-pagination__dot" aria-label="Slide 4"></button>
                     </div>
                 </div>
             </section>
         </div>
-
-        <!-- category-slider -->
-        <div class="category-slider">
-          <div class="category-slider__viewport">
-            <div class="category-slider__wrapper" id="slider-wrapper">
-              <a href="#" class="category-card">
-                <img src="../../src/assets/images/Lau-viet.jpg" alt="Lẩu" />
-                <span>Lẩu Việt</span>
-              </a>
-              <a href="#" class="category-card">
-                <img
-                  src="../../src/assets/images/Lau-thai.jpg"
-                  alt="Lẩu Thái"
-                />
-                <span>Lẩu Thái</span>
-              </a>
-              <a href="#" class="category-card">
-                <img
-                  src="../../src/assets/images/Lau-trung.jpg"
-                  alt="Món Nhật"
-                />
-                <span>Lẩu Trung</span>
-              </a>
-              <a href="#" class="category-card">
-                <img src="../../src/assets/images/mon_han.webp" alt="Món Hàn" />
-                <span>Lẩu Hàn</span>
-              </a>
-              <a href="#" class="category-card">
-                <img src="../../src/assets/images/sushi.webp" alt="Sushi" />
-                <span>Shushi</span>
-              </a>
-              <a href="#" class="category-card">
-                <img src="../../src/assets/images/com.webp" alt="Cơm" />
-                <span>Cơm</span>
-              </a>
-              <a href="#" class="category-card">
-                <img src="../../src/assets/images/bento.webp" alt="Bento" />
-                <span>Bento</span>
-              </a>
-            </div>
-          </div>
-
-          <button class="slider-btn slider-btn--prev" id="prev-btn">❮</button>
-          <button class="slider-btn slider-btn--next" id="next-btn">❯</button>
-        </div>
-
-        <section class="product-section">
-          <h2 class="product-section__title">
-            KHÁM PHÁ THỰC ĐƠN CỦA CHÚNG TÔI
-          </h2>
-
-          <div class="product-grid">
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-bo.jpg"
-                alt="Lẩu bò"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu bò Tây Bắc</h3>
-                <p class="product-card__price">Giá: 200.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(1)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ca-duoi.jpg"
-                alt="Rau xào ngũ sắc"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu cá đuối</h3>
-                <p class="product-card__price">Giá: 180.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(2)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ca-hoi.jpg"
-                alt="Bánh lava phô mai nướng"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu cá hồi</h3>
-                <p class="product-card__price">Giá: 180.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(3)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ca-hu.jpg"
-                alt="Lẩu cá hú"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu cá hú</h3>
-                <p class="product-card__price">Giá: 699.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(4)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ca-keo-rau-dang.jpg"
-                alt="Lẩu cá kèo rau đắng"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu cá kèo rau đắng</h3>
-                <p class="product-card__price">Giá: 280.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(5)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-chao-chim-bo-cau.jpeg"
-                alt="Lẩu cháo chim bồ câu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu cháo chim bồ câu</h3>
-                <p class="product-card__price">Giá: 540.000 đ</p>
-                <button class="product-card__button" onclick="detailProduct(6)">
-                  ĐẶT MÓN
-                </button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-de.jpg"
-                alt="Lẩu dê Tây Nguyên"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu dê Tây Nguyên</h3>
-                <p class="product-card__price">Giá: 340.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <img
-                src="../../src/assets/images/Lau-vn/Lau-ech (1).jpg"
-                alt="Lẩu ếch Năm Lâu"
-                class="product-card__image"
-              />
-              <div class="product-card__content">
-                <h3 class="product-card__name">Lẩu ếch Năm Lâu</h3>
-                <p class="product-card__price">Giá: 140.000 đ</p>
-                <button class="product-card__button">ĐẶT MÓN</button>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="modal product-detail">
-          <button class="modal-close close-popup">
-            <i class="bx bx-x"></i>
-          </button>
-          <div
-            class="modal-container mdl-cnt"
-            id="product-detail-content"
-          ></div>
-        </div>
-      </div>
-
       <div id="footer"></div>
-
-      <script>
-        src = "/src/js/menu.js";
-      </script>
-      <script
-        type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-      ></script>
-      <script
-        nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-      ></script>
     </div>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-
-    <script src="/src/js/menu.js"></script>
-    <script src="/src/js/initialization.js"></script>
     <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
+    
   </body>
 </html>

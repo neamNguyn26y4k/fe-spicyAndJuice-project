@@ -28,6 +28,7 @@
 }
 
 .promotion-pagination__dot {
+  /* Dot size 10x10px*/
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -66,14 +67,25 @@
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  max-height: 220px;
+  /* height 220px cố định cho voucher image container
+     - Nếu voucher image có tỷ lệ khác sẽ bị crop hoặc có white space
+     - Không flexible khi thay đổi nội dung
+     Lý do dùng: Đồng bộ chiều cao với voucher-card để layout đồng đều*/
+  height: 220px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .promo-img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  /* object-fit: contain thay vì cover
+     Lý do: Voucher/promo images thường có text quan trọng, không được crop
+     Trade-off: Có thể có white space (letterbox) nếu tỷ lể image khác container*/
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
@@ -96,6 +108,14 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* height 220px match với promo-image height
+     - Nếu voucher info dài hơn (nhiều fields), text sẽ overflow hoặc bị truncate
+     - Nếu thay đổi promo-image height, phải đồng bộ thay đổi ở 3 breakpoints
+     Lý do: Giữ symmetry giữa 2 cột (left: images, right: cards)*/
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .voucher-card:hover {
@@ -158,73 +178,6 @@
   font-size: 0.9rem;
 }
 
-/* ===== Testimonial Card (Reusable) ===== */
-.testimonial-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 2rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-height: 280px;
-}
-
-.testimonial-card__avatar-wrap {
-  margin-bottom: 1rem;
-  flex-shrink: 0;
-}
-
-.testimonial-card__avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-card__body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.testimonial-card__quote-icon {
-  color: var(--primary-color);
-  margin-bottom: 0.75rem;
-  display: inline-flex;
-  justify-content: center;
-}
-
-.testimonial-card__text {
-  font-size: 0.875rem;
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  font-style: italic;
-  flex: 1;
-}
-
-.testimonial-card__meta {
-  margin-top: auto;
-}
-
-.testimonial-card__name {
-  font-weight: 700;
-  color: var(--secondary-color);
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-
-.testimonial-card__role {
-  color: #888;
-  font-size: 0.8rem;
-}
-
 /* ===== Responsive - Tablet ===== */
 @media (min-width: 768px) {
   .promotion-section {
@@ -243,29 +196,19 @@
 
   .voucher-card {
     padding: 2.25rem 2rem;
+    height: 260px;
   }
 
   .voucher-card__title {
     font-size: 1.65rem;
   }
 
+  /* 3 breakpoints (768px, 1024px) với height khác nhau
+   Mobile: 220px | Tablet: 260px | Desktop: 300px */
+
   .promo-image-top,
   .promo-image-bottom {
-    max-height: 260px;
-  }
-
-  .testimonial-card {
-    padding: 2rem 1.75rem;
-    min-height: 300px;
-  }
-
-  .testimonial-card__avatar {
-    width: 75px;
-    height: 75px;
-  }
-
-  .testimonial-card__text {
-    font-size: 0.9rem;
+    height: 260px;
   }
 }
 
@@ -301,11 +244,12 @@
 
   .promo-image-top,
   .promo-image-bottom {
-    max-height: 300px;
+    height: 300px;
   }
 
   .voucher-card {
     padding: 1.75rem 1.75rem;
+    height: 300px;
   }
 
   .voucher-card__title {
@@ -317,20 +261,6 @@
   }
 
   .voucher-info-item__value {
-    font-size: 0.95rem;
-  }
-
-  .testimonial-card {
-    padding: 2rem 1.75rem;
-    min-height: 320px;
-  }
-
-  .testimonial-card__avatar {
-    width: 80px;
-    height: 80px;
-  }
-
-  .testimonial-card__text {
     font-size: 0.95rem;
   }
 }

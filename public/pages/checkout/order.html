@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="vi">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đặt hàng - Order</title>
-    <link rel="stylesheet" href="order.css">
+    <title>Đặt hàng - Spicy & Juicy</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/order.css">
 </head>
 <body>
-    <div class="page">
-        <!-- Header Navigation -->
-        <header class="header">
-            <div class="header__logo">Logo</div>
-            <button class="header__location-btn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
-                    <circle cx="8" cy="8" r="2" fill="currentColor"/>
-                </svg>
-                Location
-            </button>
-            <nav class="header__nav">
-                <a href="#" class="header__nav-link">Menu</a>
-                <a href="#" class="header__nav-link">Promotion</a>
-                <a href="#" class="header__nav-link">Store</a>
-                <a href="#" class="header__nav-link">About</a>
-            </nav>
-        </header>
+    <div id="main">
+        <!-- Header sẽ được load động từ header.html -->
+        <div id="header"></div>
+        
+        <!-- Nội dung chính của trang đặt hàng -->
+        <div class="page-content">
+            <div class="page">
 
-        <!-- Progress Steps -->
+        <!-- Thanh tiến trình đặt hàng (3 bước: Giỏ hàng -> Hoàn tất thông tin -> Thanh toán) -->
         <div class="progress">
             <div class="progress__step">
                 <div class="progress__icon">
@@ -57,10 +51,11 @@
             </div>
         </div>
 
-        <!-- Main Content -->
+        <!-- Nội dung chính: 2 cột (Giỏ hàng bên trái, Thông tin giao hàng bên phải) -->
         <div class="order">
-            <!-- Left Panel - Cart -->
+            <!-- Cột bên trái: Hiển thị giỏ hàng và tổng tiền -->
             <div class="cart">
+                <!-- Header của giỏ hàng -->
                 <div class="cart__header">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -68,10 +63,12 @@
                     <h2>Giỏ hàng</h2>
                 </div>
 
+                <!-- Danh sách món ăn trong giỏ hàng (được tạo động) -->
                 <div class="cart__items" id="cartItems">
-                    <!-- Cart items will be dynamically added -->
+                    <!-- Các món ăn sẽ được thêm động vào đây -->
                 </div>
 
+                <!-- Phần tính toán tổng tiền -->
                 <div class="cart__summary">
                     <div class="cart__row">
                         <span>Giảm giá sản phẩm</span>
@@ -87,6 +84,7 @@
                     </div>
                 </div>
 
+                <!-- Nút đặt món ăn -->
                 <button class="cart__btn" id="orderBtn">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="currentColor" stroke-width="2"/>
@@ -95,9 +93,9 @@
                 </button>
             </div>
 
-            <!-- Right Panel - Delivery Info -->
+            <!-- Cột bên phải: Thông tin giao hàng và người nhận -->
             <div class="delivery">
-                <!-- Delivery Options -->
+                <!-- Lựa chọn phương thức: Giao hàng tận nơi hoặc Lấy tại chỗ -->
                 <div class="delivery__options">
                     <label class="delivery__option delivery__option--active" data-delivery="delivery">
                         <input type="radio" name="delivery" value="delivery" checked>
@@ -129,12 +127,13 @@
                     </label>
                 </div>
 
-                <!-- Pickup Info Section (hidden by default) -->
+                <!-- Phần thông tin lấy hàng tại chỗ (ẩn mặc định, hiện khi chọn "Lấy tại chỗ") -->
                 <div class="pickup pickup--hidden" id="pickupInfoSection">
                     <div class="pickup__header">
                         <h3>Thông tin người nhận</h3>
                     </div>
                     
+                    <!-- Form nhập thông tin người nhận khi lấy hàng tại chỗ -->
                     <div class="pickup__form" id="pickupForm">
                         <div class="form__group">
                             <input type="text" id="pickupName" class="form__input" placeholder=" " required>
@@ -159,7 +158,7 @@
                         </button>
                     </div>
                     
-                    <!-- Saved Pickup Info Display (hidden initially) -->
+                    <!-- Hiển thị thông tin đã lưu (ẩn ban đầu, hiện sau khi lưu) -->
                     <div class="pickup__display pickup__display--hidden" id="pickupInfoDisplay">
                         <div class="pickup__info">
                             <span class="pickup__info-label">Số điện thoại:</span>
@@ -182,7 +181,7 @@
                     </div>
                 </div>
 
-                <!-- Address Section -->
+                <!-- Phần quản lý địa chỉ giao hàng (hiện khi chọn "Giao hàng tận nơi") -->
                 <div class="address" id="addressSection">
                     <div class="address__header">
                         <h3>Thông tin người nhận</h3>
@@ -194,12 +193,13 @@
                         </button>
                     </div>
 
+                    <!-- Danh sách các địa chỉ đã lưu (được tạo động) -->
                     <div class="address__cards" id="addressCards">
-                        <!-- Address cards will be dynamically added -->
+                        <!-- Các card địa chỉ sẽ được thêm động vào đây -->
                     </div>
                 </div>
 
-                <!-- Map Section -->
+                <!-- Phần hiển thị thông tin địa chỉ giao hàng đã chọn -->
                 <div class="map map--hidden" id="mapSection">
                     <div class="map__header">
                         <h3>Địa chỉ nhận hàng</h3>
@@ -219,9 +219,14 @@
 
             </div>
         </div>
+        </div>
+        </div>
+        
+        <!-- Footer sẽ được load động từ footer.html -->
+        <div id="footer"></div>
     </div>
 
-    <!-- Modal for adding/editing address -->
+    <!-- Modal popup để thêm/sửa địa chỉ giao hàng -->
     <div class="modal" id="addressModal">
         <div class="modal__content">
             <div class="modal__header">
@@ -266,6 +271,7 @@
                 </div>
             </div>
             <div class="modal__footer">
+                <!-- Nút xác nhận thêm/sửa địa chỉ -->
                 <button class="modal__btn" id="confirmBtn">
                     <span id="confirmBtnText">Xác nhận</span>
                 </button>
@@ -273,6 +279,9 @@
         </div>
     </div>
 
-    <script src="order.js"></script>
+    <!-- JavaScript files -->
+    <script src="/src/js/loader.js"></script> 
+    <script src="/src/js/data.js"></script> 
+    <script src="/src/js/order.js"></script> 
 </body>
 </html>

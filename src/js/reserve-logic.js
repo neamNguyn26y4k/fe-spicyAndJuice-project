@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const reservationForm = document.getElementById('reservationForm');
     const datePicker = document.getElementById('date');
     const timeInput = document.getElementById('time');
@@ -17,10 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- CHẠY CÁC HÀM KHỞI TẠO ---
-    populateBranchOptions(); // Gọi hàm điền danh sách cửa hàng vào dropdown
+    populateBranchOptions(); //điền danh sách cửa hàng vào dropdown
 
-    // --- LOGIC TỰ ĐỘNG CHỌN CHI NHÁNH (TỪ TRANG stores.html) ---
+    // --- TỰ ĐỘNG CHỌN CHI NHÁNH ---
     const selectedStore = localStorage.getItem('selectedStore');
     if (selectedStore && branchSelect) {
         branchSelect.value = selectedStore;
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- XỬ LÝ KHI SUBMIT FORM ---
     if (reservationForm) {
-        reservationForm.addEventListener('submit', function(e) {
+        reservationForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const branchValue = branchSelect.options[branchSelect.selectedIndex].value;
             const bookingData = {
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 notes: document.getElementById('notes').value
             };
             localStorage.setItem('pendingBooking', JSON.stringify(bookingData));
-            window.location.href = 'confirmation.html';
+            window.location.href = '/public/pages/reservation/confirmation.html';
         });
     }
 
