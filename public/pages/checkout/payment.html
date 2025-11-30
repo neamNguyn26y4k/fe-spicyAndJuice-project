@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán - Spicy & Juicy</title>
-
+    
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/src/assets/images/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" href="/src/css/style.css">
     <link rel="stylesheet" href="/src/css/payment.css">
 </head>
 
 <body>
     <div id="main">
+        <!-- Header sẽ được load động từ header.html -->
         <div id="header"></div>
 
+        <!-- Nội dung chính của trang thanh toán -->
         <div class="page-content">
             <div class="page">
 
-                <!-- Progress Steps -->
+                <!-- Thanh tiến trình đặt hàng (Bước 3: Thanh toán) -->
                 <div class="progress">
                     <div class="progress__step progress__step--completed">
                         <div class="progress__icon progress__icon--completed">
@@ -57,9 +58,9 @@
                     </div>
                 </div>
 
-                <!-- Main Content -->
+                <!-- Nội dung chính: 2 cột (Giỏ hàng bên trái, Phương thức thanh toán bên phải) -->
                 <div class="payment">
-                    <!-- Left Panel - Cart -->
+                    <!-- Cột bên trái: Hiển thị giỏ hàng và tổng tiền -->
                     <div class="cart">
                         <div class="cart__header">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -70,10 +71,12 @@
                             <h2>Giỏ hàng</h2>
                         </div>
 
+                        <!-- Danh sách món ăn trong giỏ hàng (được tạo động) -->
                         <div class="cart__items" id="cartItems">>
-                            <!-- Cart items will be dynamically added -->
+                            <!-- Các món ăn sẽ được thêm động vào đây -->
                         </div>
 
+                        <!-- Phần tính toán tổng tiền -->
                         <div class="cart__summary">
                             <div class="cart__row">
                                 <span>Giảm giá sản phẩm</span>
@@ -89,14 +92,15 @@
                             </div>
                         </div>
 
+                        <!-- Nút xác nhận thanh toán -->
                         <button class="cart__btn" id="confirmBtn">
                             Xác nhận thanh toán
                         </button>
                     </div>
 
-                    <!-- Right Panel - Payment Methods -->
+                    <!-- Cột bên phải: Lựa chọn phương thức thanh toán -->
                     <div class="payment__methods">
-                        <!-- Search and Discount Section -->
+                        <!-- Phần tìm kiếm và nhập mã giảm giá -->
                         <div class="payment__search">
                             <div class="payment__search-container">
                                 <button class="payment__search-btn payment__search-btn--active">Tìm mã</button>
@@ -104,7 +108,7 @@
                             </div>
                         </div>
 
-                        <!-- Payment Method Tabs -->
+                        <!-- Các tab phương thức thanh toán: Tiền mặt, Thẻ tín dụng, Ví điện tử -->
                         <div class="payment__tabs">
                             <button class="payment__tab payment__tab--active" data-method="cash">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -132,9 +136,9 @@
                             </button>
                         </div>
 
-                        <!-- Payment Content -->
+                        <!-- Nội dung chi tiết của từng phương thức thanh toán -->
                         <div class="payment__content">
-                            <!-- Cash Payment (Default) -->
+                            <!-- Phương thức 1: Thanh toán bằng tiền mặt (mặc định) -->
                             <div class="payment__method payment__method--active" id="cashMethod">
                                 <div class="payment__info">
                                     <p class="payment__description"> Đơn hàng của bạn sẽ được tính phí khi giao hàng.
@@ -152,7 +156,7 @@
                                 </div>
                             </div>
 
-                            <!-- Card Payment -->
+                            <!-- Phương thức 2: Thanh toán bằng thẻ tín dụng -->
                             <div class="payment__method" id="cardMethod">
                                 <div class="payment__gateway">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -180,7 +184,7 @@
                                     toán<br>(Vui lòng kiểm tra số dư trước khi thanh toán)</p>
                             </div>
 
-                            <!-- E-Wallet Payment -->
+                            <!-- Phương thức 3: Thanh toán bằng ví điện tử -->
                             <div class="payment__method" id="ewalletMethod">
                                 <div class="payment__gateway">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -214,12 +218,14 @@
             </div>
         </div>
 
+        <!-- Footer sẽ được load động từ footer.html -->
         <div id="footer"></div>
     </div>
 
+    <!-- JavaScript files -->
     <script src="/src/js/data.js"></script>
-    <script src="/src/js/loader.js"></script>
-    <script src="/src/js/payment.js"></script>
+    <script src="/src/js/loader.js"></script> 
+    <script src="/src/js/payment.js"></script> 
 </body>
 
 </html>

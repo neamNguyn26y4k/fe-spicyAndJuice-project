@@ -1,22 +1,223 @@
-// 1. Dữ liệu sản phẩm được import từ data.js
-// (File data.js phải được load trước file này trong HTML)
+// ==============================================================
+function initHeroSlider() {
+    const wrapper = document.getElementById('hero-wrapper');
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const pagination = document.getElementById('hero-pagination');
+    const slides = document.querySelectorAll('.hero-slider__slide');
 
-// 2. Hàm hiển thị Popup chi tiết (Được gọi khi bấm nút ĐẶT MÓN)
-function detailProduct(id) {
-    const modal = document.querySelector(".modal.product-detail");
-    const product = products.find((p) => p.id === id);
+    // Kiểm tra nếu không có slider thì dừng
+    if (!wrapper || slides.length === 0) return;
 
-    // Nếu không tìm thấy sản phẩm trong database giả lập thì dừng
-    if (!product) {
-        alert("Chưa có dữ liệu cho sản phẩm này!");
-        return;
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    // 1. Tạo các chấm tròn (Pagination Dots)
+    if (pagination) {
+        pagination.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetAutoSlide();
+            });
+            pagination.appendChild(dot);
+        });
     }
 
-    // Tạo mã HTML cho Popup (Khớp với CSS tôi đã gửi trước đó)
-    const html = `
+    // 2. Hàm chuyển slide
+    function goToSlide(index) {
+        // Xử lý vòng lặp: nếu < 0 thì về cuối, nếu >= tổng thì về 0
+        if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (index >= totalSlides) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+
+        // Di chuyển wrapper
+        const offset = -currentIndex * 100; // Dịch chuyển -100%, -200%...
+        wrapper.style.transform = `translateX(${offset}%)`;
+
+        // Cập nhật chấm tròn active
+        if (pagination) {
+            const dots = pagination.querySelectorAll('.dot');
+            dots.forEach(d => d.classList.remove('active'));
+            if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+        }
+    }
+
+    // 3. Sự kiện nút bấm
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+            resetAutoSlide();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+            resetAutoSlide();
+        });
+    }
+
+    // 4. Tự động chạy (Auto Play) - 3 giây chuyển 1 lần
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 4000); // 4000ms = 4 giây
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    // Bắt đầu chạy
+    startAutoSlide();
+}
+// ==============================================================
+// 1. CẤU HÌNH & BIẾN TOÀN CỤC
+// ==============================================================
+let currentPage = 1;
+const itemsPerPage = 12; // Hiển thị 12 món mỗi trang
+let currentFilteredList = []; // Danh sách món đang hiển thị (sau khi lọc)
+
+// ==============================================================
+// 2. CHỨC NĂNG XEM MÓN & PHÂN TRANG
+// ==============================================================
+
+// A. Vẽ danh sách món ăn ra HTML
+function renderProducts(listData) {
+  const grid = document.getElementById("product-list");
+
+  // Kiểm tra nếu HTML thiếu div id="product-list" thì dừng
+  if (!grid) return;
+
+  grid.innerHTML = ""; // Xóa nội dung cũ
+
+  if (listData.length === 0) {
+    grid.innerHTML =
+      '<p style="text-align:center; width:100%; grid-column: 1/-1; padding: 20px; font-size: 18px; color: #666;">Không tìm thấy món ăn nào.</p>';
+    return;
+  }
+
+  let html = "";
+  listData.forEach((item) => {
+    // Tạo thẻ HTML cho từng món
+    html += `
+        <div class="product-card">
+            <div class="card-image-container">
+                <img src="${item.img}" alt="${
+      item.title
+    }" class="product-card__image" loading="lazy" onerror="this.src='/src/assets/images/logo.png'" />
+            </div>
+            <div class="product-card__content">
+                <h3 class="product-card__name">${item.title}</h3>
+                <p class="product-card__price">Giá: ${vnd(item.price)}</p>
+                <button class="product-card__button" onclick="detailProduct(${
+                  item.id
+                })">
+                    ĐẶT MÓN
+                </button>
+            </div>
+        </div>
+        `;
+  });
+  grid.innerHTML = html;
+}
+
+// B. Logic tính toán Phân trang (Cắt mảng dữ liệu)
+function loadPageData() {
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
+  // Lấy danh sách món cho trang hiện tại
+  const pageData = currentFilteredList.slice(start, end);
+
+  // 1. Hiển thị món
+  renderProducts(pageData);
+  // 2. Hiển thị nút phân trang
+  renderPaginationButton();
+}
+
+// C. Vẽ các nút số trang [1] [2] [3]...
+function renderPaginationButton() {
+  let paginationContainer = document.getElementById("pagination");
+  if (!paginationContainer) return;
+
+  paginationContainer.innerHTML = "";
+  const pageCount = Math.ceil(currentFilteredList.length / itemsPerPage);
+
+  // Nếu chỉ có 1 trang thì không cần hiện nút
+  if (pageCount <= 1) return;
+
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = document.createElement("button");
+    btn.innerText = i;
+    btn.classList.add("page-btn");
+
+    // Đánh dấu trang đang chọn
+    if (i === currentPage) btn.classList.add("active");
+
+    // Sự kiện khi bấm vào số trang
+    btn.addEventListener("click", function () {
+      currentPage = i;
+      loadPageData(); // Tải lại dữ liệu trang mới
+      // Cuộn nhẹ lên đầu danh sách sản phẩm
+      document
+        .getElementById("product-list")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    paginationContainer.appendChild(btn);
+  }
+}
+
+// D. Logic Lọc theo Danh mục
+function filterCategory(categoryName) {
+  currentPage = 1; // Reset về trang 1
+
+  // 'products' là biến toàn cục lấy từ file data.js
+  if (typeof products === "undefined") {
+    console.error(
+      "Lỗi: Không tìm thấy dữ liệu sản phẩm. Hãy kiểm tra file data.js"
+    );
+    return;
+  }
+
+  if (categoryName === "all") {
+    currentFilteredList = products; // Lấy tất cả
+  } else {
+    currentFilteredList = products.filter((p) => p.category === categoryName); // Lọc theo loại
+  }
+
+  loadPageData(); // Bắt đầu hiển thị
+}
+
+// ==============================================================
+// 3. CHỨC NĂNG POPUP CHI TIẾT & THÊM GIỎ HÀNG
+// ==============================================================
+
+function detailProduct(id) {
+  const modal = document.querySelector(".product-modal");
+
+  // Tìm sản phẩm trong danh sách gốc (từ data.js)
+  const product = products.find((p) => p.id === id);
+
+  if (!product) return;
+
+  // Tạo nội dung Popup
+  const html = `
         <div class="modal-header">
-            <img class="product-image" src="${product.img}" alt="${product.title
-        }">
+            <img class="product-image" src="${product.img}" alt="${
+    product.title
+  }" onerror="this.src='/src/assets/images/logo.png'">
         </div>
         <div class="modal-body">
             <h2 class="product-title">${product.title}</h2>
@@ -30,7 +231,9 @@ function detailProduct(id) {
                     <input class="plus is-form" type="button" value="+" onclick="increasingNumber(this)">
                 </div>
             </div>
-            <p class="product-description">${product.desc}</p>
+            <p class="product-description">${
+              product.desc || "Món ăn đậm đà hương vị truyền thống."
+            }</p>
         </div>
         <div class="notebox">
             <p class="notebox-title">GHI CHÚ</p>
@@ -42,246 +245,143 @@ function detailProduct(id) {
                 <span class="price">${vnd(product.price)}</span>
             </div>
             <div class="modal-footer-control">
-                <button class="button-dathangngay" onclick="addToCartFromModal(${product.id})">Thêm vào giỏ</button>
+                <button class="button-datmonngay">ĐẶT MÓN NGAY</button>
+                <button class="button-dat">THÊM VÀO GIỎ</button>
             </div>
         </div>
     `;
 
-    // Chèn HTML vào modal
-    const contentBox = document.getElementById("product-detail-content");
-    contentBox.innerHTML = html;
+  const contentBox = document.getElementById("product-detail-content");
+  contentBox.innerHTML = html;
+  modal.classList.add("open"); // Hiện Popup
 
-    // Hiển thị Modal
-    modal.classList.add("open");
+  // --- XỬ LÝ SỰ KIỆN NÚT BẤM ---
+  const qtyInput = contentBox.querySelector(".input-qty");
+  const noteInput = contentBox.querySelector("#popup-detail-note");
+  const btnDatMon = contentBox.querySelector(".button-datmonngay");
+  const btnThemGio = contentBox.querySelector(".button-dat");
+  const priceDisplay = contentBox.querySelector(".price");
+  const btns = contentBox.querySelectorAll(".is-form");
 
-    // Gán sự kiện để cập nhật giá tiền khi thay đổi số lượng
-    const qtyInput = contentBox.querySelector(".input-qty");
-    const priceDisplay = contentBox.querySelector(".price-total .price");
+  // Hàm xử lý chung cho việc thêm vào giỏ
+  const handleAddToCart = () => {
+    const qty = parseInt(qtyInput.value);
+    const note = noteInput.value;
 
-    // Hàm cập nhật giá
-    const updatePrice = () => {
-        let qty = parseInt(qtyInput.value);
-        let total = qty * product.price;
-        priceDisplay.innerHTML = vnd(total);
+    // GỌI HÀM CỦA CLASS CART (TỪ FILE data.js)
+    if (typeof cart !== "undefined") {
+      cart.addItem(product.id, qty, note);
+      alert(`Đã thêm ${qty} phần "${product.title}" vào giỏ hàng!`);
+      modal.classList.remove("open"); // Đóng popup sau khi thêm
+    } else {
+      alert("Lỗi hệ thống giỏ hàng!");
+    }
+  };
+
+  // Gán sự kiện cho 2 nút
+  if (btnDatMon) {
+    btnDatMon.onclick = function () {
+      const qty = parseInt(qtyInput.value) || 1;
+      const note = noteInput.value;
+
+      // 1. Thêm vào giỏ hàng (Gọi hàm từ data.js)
+      if (typeof cart !== "undefined") {
+        cart.addItem(product.id, qty, note);
+      }
+
+      // 2. Đóng popup ngay lập tức
+      modal.classList.remove("open");
+
+      window.location.href = "/public/pages/checkout/cart.html";
     };
+  }
+  if (btnThemGio) btnThemGio.onclick = handleAddToCart;
 
-    // Gắn hàm cập nhật giá vào nút cộng trừ
-    const btns = contentBox.querySelectorAll(".is-form");
-    btns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            setTimeout(updatePrice, 0); // Đợi value input cập nhật xong mới tính tiền
-        });
-    });
-}
-
-// Hàm thêm sản phẩm vào giỏ hàng từ modal
-function addToCartFromModal(productId) {
-    const modal = document.querySelector(".modal.product-detail");
-    const qtyInput = modal.querySelector(".input-qty");
-    const noteInput = modal.querySelector("#popup-detail-note");
-    
-    const quantity = parseInt(qtyInput.value) || 1;
-    const note = noteInput ? noteInput.value.trim() : '';
-    
-    // Thêm vào giỏ hàng
-    cart.addItem(productId, quantity, note);
-    
-    // Cập nhật badge giỏ hàng
-    updateCartBadge();
-    
-    // Thông báo
-    alert('Đã thêm vào giỏ hàng!');
-    
-    // Đóng modal
-    modal.classList.remove("open");
-}
-
-// Hàm cập nhật số lượng badge giỏ hàng
-function updateCartBadge() {
-    const cartBadge = document.querySelector('.cart-badge');
-    if (cartBadge) {
-        const itemCount = cart.getItemCount();
-        cartBadge.textContent = itemCount;
-        // Ẩn badge nếu giỏ hàng rỗng
-        if (itemCount === 0) {
-            cartBadge.style.display = 'none';
-        } else {
-            cartBadge.style.display = 'block';
-        }
-    }
-}
-
-// 4. Các hàm xử lý nút tăng giảm số lượng
-function increasingNumber(e) {
-    let qtyInput = e.parentNode.querySelector(".input-qty");
-    let currentVal = parseInt(qtyInput.value);
-    qtyInput.value = currentVal + 1;
-}
-
-function decreasingNumber(e) {
-    let qtyInput = e.parentNode.querySelector(".input-qty");
-    let currentVal = parseInt(qtyInput.value);
-    if (currentVal > 1) {
-        qtyInput.value = currentVal - 1;
-    }
-}
-
-// 5. Xử lý đóng Modal
-const modalContainer = document.querySelectorAll(".modal");
-const closeButtons = document.querySelectorAll(".modal-close");
-
-// Đóng khi bấm nút X
-closeButtons.forEach((btn) => {
+  // Logic tính tiền Realtime khi tăng/giảm số lượng
+  btns.forEach((btn) => {
     btn.addEventListener("click", () => {
-        document.querySelector(".modal.open").classList.remove("open");
+      setTimeout(() => {
+        let qty = parseInt(qtyInput.value);
+        priceDisplay.innerText = vnd(qty * product.price);
+      }, 0);
     });
-});
-
-// Đóng khi bấm ra vùng ngoài popup
-modalContainer.forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("open");
-        }
-    });
-});
-
-function initHeroSlider() {
-    const wrapper = document.getElementById("hero-wrapper");
-    const slides = document.querySelectorAll(".hero-slider__slide");
-    const prevBtn = document.getElementById("hero-prev");
-    const nextBtn = document.getElementById("hero-next");
-    const pagination = document.getElementById("hero-pagination");
-
-    // Nếu không tìm thấy slider thì dừng hàm (tránh lỗi ở các trang khác)
-    if (!wrapper || slides.length === 0) return;
-
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoPlayInterval;
-
-    // 1. Tạo các chấm tròn (Dots) dựa trên số lượng ảnh
-    pagination.innerHTML = ""; // Xóa dots cũ nếu có
-    slides.forEach((_, index) => {
-        const dot = document.createElement("div");
-        dot.classList.add("dot");
-        if (index === 0) dot.classList.add("active");
-
-        // Click vào dot thì chuyển đến slide đó
-        dot.addEventListener("click", () => {
-            currentIndex = index;
-            updateSlider();
-            resetAutoPlay();
-        });
-        pagination.appendChild(dot);
-    });
-
-    const dots = document.querySelectorAll(".slider-pagination .dot");
-
-    // 2. Hàm cập nhật giao diện Slider
-    function updateSlider() {
-        // Di chuyển wrapper sang trái (dùng % để responsive)
-        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-        // Cập nhật trạng thái active cho dot
-        dots.forEach((dot) => dot.classList.remove("active"));
-        if (dots[currentIndex]) {
-            dots[currentIndex].classList.add("active");
-        }
-    }
-
-    // 3. Xử lý nút Next
-    nextBtn.addEventListener("click", () => {
-        currentIndex++;
-        if (currentIndex >= totalSlides) {
-            currentIndex = 0; // Quay về đầu nếu đang ở cuối
-        }
-        updateSlider();
-        resetAutoPlay();
-    });
-
-    // 4. Xử lý nút Prev
-    prevBtn.addEventListener("click", () => {
-        currentIndex--;
-        if (currentIndex < 0) {
-            currentIndex = totalSlides - 1; // Quay về cuối nếu đang ở đầu
-        }
-        updateSlider();
-        resetAutoPlay();
-    });
-
-    // 5. Tự động chạy slide (Auto Play)
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(() => {
-            currentIndex++;
-            if (currentIndex >= totalSlides) currentIndex = 0;
-            updateSlider();
-        }, 5000); // 5000ms = 5 giây đổi ảnh 1 lần
-    }
-
-    function resetAutoPlay() {
-        clearInterval(autoPlayInterval); // Dừng bộ đếm cũ
-        startAutoPlay(); // Bắt đầu bộ đếm mới
-    }
-
-    // Khởi chạy Auto Play
-    startAutoPlay();
+  });
 }
 
-// Gọi hàm khởi tạo khi trang web tải xong
-document.addEventListener("DOMContentLoaded", () => {
-    initHeroSlider();
+// Các hàm hỗ trợ nút tăng/giảm số lượng
+function increasingNumber(e) {
+  let qty = e.parentNode.querySelector(".input-qty");
+  qty.value = parseInt(qty.value) + 1;
+}
+function decreasingNumber(e) {
+  let qty = e.parentNode.querySelector(".input-qty");
+  if (parseInt(qty.value) > 1) qty.value = parseInt(qty.value) - 1;
+}
+
+// ==============================================================
+// XỬ LÝ ĐÓNG MODAL 
+// ==============================================================
+
+// Cách 1: Gán sự kiện trực tiếp cho nút X
+const closeBtn = document.querySelector(".product-modal .modal-close");
+if (closeBtn) {
+  closeBtn.addEventListener("click", function () {
+    const modal = document.querySelector(".product-modal");
+    if (modal) modal.classList.remove("open");
+  });
+}
+
+//Bấm ra vùng đen bên ngoài cũng tắt (Dự phòng)
+document.addEventListener("click", (e) => {
+  // Tìm modal đang mở
+  const modal = document.querySelector(".product-modal.open");
+
+  // Nếu bấm vào vùng đen (chính là thẻ modal cha)
+  if (modal && e.target === modal) {
+    modal.classList.remove("open");
+  }
 });
 
-// Hàm xử lý bấm nút trái/phải cho danh mục
+// ==============================================================
+// 4. KHỞI TẠO KHI TẢI TRANG
+// ==============================================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Mặc định hiển thị tất cả món ăn (để thấy được phân trang)
+  filterCategory("all");
+
+  // Khởi tạo các slider (nếu có)
+  if (typeof initHeroSlider === "function") initHeroSlider();
+  if (typeof initCategoryScroll === "function") initCategoryScroll();
+});
+
 function initCategoryScroll() {
-    const viewport = document.querySelector(".category-slider__viewport");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
+  const viewport = document.querySelector(".category-slider__viewport");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
 
-    // Kiểm tra nếu không tìm thấy phần tử thì dừng
-    if (!viewport || !prevBtn || !nextBtn) return;
+  // Kiểm tra nếu không tìm thấy phần tử thì dừng (tránh lỗi)
+  if (!viewport || !prevBtn || !nextBtn) return;
 
-    // Sự kiện nút Next (Mũi tên phải)
-    nextBtn.addEventListener("click", () => {
-        // Lấy chiều rộng hiện tại của khung nhìn chia 3
-        const scrollAmount = viewport.clientWidth / 3;
+  // Sự kiện nút Next (Mũi tên phải)
+  nextBtn.addEventListener("click", () => {
+    // Lấy chiều rộng hiện tại của khung nhìn chia 2 hoặc 1 số cố định (ví dụ 300px)
+    const scrollAmount = 300;
 
-        // Lệnh trượt sang phải
-        viewport.scrollBy({
-            left: scrollAmount,
-            behavior: "smooth",
-        });
+    // Lệnh trượt sang phải
+    viewport.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth", // Hiệu ứng trượt mượt mà
     });
+  });
+  // Sự kiện nút Prev (Mũi tên trái)
+  prevBtn.addEventListener("click", () => {
+    const scrollAmount = 300;
 
-    // Sự kiện nút Prev (Mũi tên trái)
-    prevBtn.addEventListener("click", () => {
-        // Lấy chiều rộng hiện tại của khung nhìn chia 3
-        const scrollAmount = viewport.clientWidth / 3;
-
-        // Lệnh trượt sang trái (dấu trừ)
-        viewport.scrollBy({
-            left: -scrollAmount,
-            behavior: "smooth",
-        });
+    // Lệnh trượt sang trái (dấu trừ)
+    viewport.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
     });
+  });
 }
 
-// Gọi hàm khi web tải xong
-document.addEventListener("DOMContentLoaded", () => {
-    initCategoryScroll();
-    initCartButton();
-    updateCartBadge(); // Cập nhật badge khi trang load
-});
-
-// Hàm khởi tạo nút giỏ hàng
-function initCartButton() {
-    const cartButton = document.querySelector('.cart-button');
-    if (cartButton) {
-        cartButton.addEventListener('click', () => {
-            window.location.href = '/public/pages/checkout/cart.html';
-        });
-        // Thêm cursor pointer
-        cartButton.style.cursor = 'pointer';
-    }
-}
