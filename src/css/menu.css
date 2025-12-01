@@ -61,7 +61,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 30px auto;
-    padding: 0 40px; /* Chừa chỗ cho nút mũi tên */
+    padding: 0 60px; /* Chừa chỗ cho nút mũi tên */
 }
 
 .category-slider__viewport {
@@ -76,8 +76,9 @@
 .category-slider__wrapper {
     display: flex;
     gap: 20px;
-    padding: 10px 5px;
-    width: max-content;
+    padding: 10px 0;
+    justify-content: center; /* Căn giữa các items */
+    width: 100%;
 }
 
 .category-card {
