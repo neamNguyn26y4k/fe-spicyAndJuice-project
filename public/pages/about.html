@@ -38,7 +38,7 @@
 
                         <!-- Right column (5/12): Text content -->
                         <div class="about-hero__content">
-                            <p class="about-hero__kicker">About us</p>
+                            <p class="about-hero__kicker">Về chúng tôi</p>
                             <h1 class="about-hero__title">Thức ăn là một phần quan trọng của một chế độ ăn cân bằng</h1>
                             <p class="about-hero__text">Chúng tôi tin rằng thức ăn không chỉ là dinh dưỡng mà còn là trải nghiệm. Từ việc chọn nguyên liệu tươi ngon đến cách chế biến tinh tế, mọi món ăn đều được tạo nên với tình yêu và sự cống hiến. Hãy cùng chúng tôi khám phá hành trình ẩm thực đầy cảm hứng.</p>
 
@@ -47,11 +47,11 @@
                                 <span class="about-hero__play-icon">
                                     <span class="about-hero__play-triangle"></span>
                                 </span>
-                                <span class="about-hero__video-text">Watch video</span>
+                                <span class="about-hero__video-text">Xem video</span>
                             </a>
 
                             <!-- Show more button -->
-                            <a href="#" class="btn btn--primary about-hero__btn">Show more</a>
+                            <a href="#" class="btn btn--primary about-hero__btn">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="container why-choose-us__inner">
                     <!-- Part 1: Centered header -->
                     <header class="why-choose-us__header">
-                        <h2 class="why-choose-us__title">Why Choose us</h2>
+                        <h2 class="why-choose-us__title">Tại sao chọn chúng tôi</h2>
                         <p class="why-choose-us__desc">Chúng tôi cam kết mang đến trải nghiệm ẩm thực đỉnh cao với đội ngũ đầu bếp chuyên nghiệp, nguyên liệu tươi sạch mỗi ngày và không gian ăn uống luôn sạch sẽ, an toàn.</p>
                     </header>
 
@@ -119,7 +119,7 @@
                 <div class="container team-members__inner">
                     <!-- Part 1: Centered header (white text) -->
                     <header class="team-members__header">
-                        <h2 class="team-members__title">Team Member</h2>
+                        <h2 class="team-members__title">Đội ngũ đầu bếp</h2>
                         <p class="team-members__desc">Đội ngũ của chúng tôi gồm những người đam mê ẩm thực, tận tâm phục vụ và luôn sáng tạo để mang đến trải nghiệm tuyệt vời nhất cho quý khách.</p>
                     </header>
 
@@ -177,48 +177,12 @@
             <section class="testimonials section">
                 <div class="container testimonials__inner">
                     <header class="testimonials__header">
-                        <p class="testimonials__kicker">Testimonials</p>
-                        <h2 class="testimonials__title">What our client are saying</h2>
+                        <p class="testimonials__kicker">Đánh giá khách hàng</p>
+                        <h2 class="testimonials__title">Khách hàng nói gì về chúng tôi?</h2>
                     </header>
 
-                    <div class="testimonials__slider" aria-roledescription="carousel">
-                        <!-- Single slide -->
-                        <article class="testimonial" aria-roledescription="slide">
-                            <div class="testimonial__avatar-wrap">
-                                <img src="/src/assets/images/testimonial-avatar-copy.jpg" alt="Trần Văn A" class="testimonial__avatar">
-                            </div>
-
-                            <div class="testimonial__body">
-                                <div class="testimonial__quote-icon" aria-hidden="true">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.17 6A5 5 0 002 11v6h6v-6a3 3 0 01-.83-5zM17.17 6A5 5 0 0012 11v6h6v-6a3 3 0 01-.83-5z" fill="currentColor"/>
-                                    </svg>
-                                </div>
-
-                                <blockquote class="testimonial__text">"Hương vị tuyệt vời và dịch vụ xuất sắc. Mỗi lần ghé thăm đều như một buổi tiệc nhỏ đầy ý nghĩa. Rất đáng để thử!"</blockquote>
-
-                                <div class="testimonial__rating" aria-label="5 out of 5 stars">
-                                    <span class="testimonial__rating-star" aria-hidden="true">★</span>
-                                    <span class="testimonial__rating-star" aria-hidden="true">★</span>
-                                    <span class="testimonial__rating-star" aria-hidden="true">★</span>
-                                    <span class="testimonial__rating-star" aria-hidden="true">★</span>
-                                    <span class="testimonial__rating-star" aria-hidden="true">★</span>
-                                </div>
-
-                                <footer class="testimonial__meta">
-                                    <p class="testimonial__name">Trần Văn A</p>
-                                    <p class="testimonial__role">Nhà phê bình ẩm thực</p>
-                                </footer>
-                            </div>
-                        </article>
-                    </div>
-
-                    <!-- Pagination dots for slider navigation -->
-                    <div class="testimonials__dots" role="tablist" aria-label="Testimonials pagination">
-                        <button class="testimonials__dot" aria-label="Show testimonial 1" aria-selected="true"></button>
-                        <button class="testimonials__dot" aria-label="Show testimonial 2" aria-selected="false"></button>
-                        <button class="testimonials__dot" aria-label="Show testimonial 3" aria-selected="false"></button>
-                    </div>
+                    <!-- [Why] Container rỗng để JS render động. [Risk] Xóa nhầm → JS không tìm thấy selector. -->
+                    <div class="testimonials__slider" aria-roledescription="carousel"></div>
                 </div>
             </section>
         </div>
