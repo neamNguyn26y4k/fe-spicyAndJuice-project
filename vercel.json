@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/src/(.*)", "destination": "/src/$1" },
+    { "source": "/(.*)", "destination": "/public/$1" }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
