@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Quản Trị - Spicy & Juicy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img src="/src/assets/images/logo.png" alt="Logo" class="logo-img" />
+          <h2>ADMIN PAGE</h2>
+        </div>
+
+        <div class="sidebar-menu">
+          <div class="sidebar-list-item active" id="tab-products">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Quản lý Món ăn</span>
+          </div>
+
+          <div class="sidebar-list-item" id="tab-orders">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Quản lý Đơn hàng</span>
+          </div>
+
+          <div class="sidebar-list-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Khách hàng</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="admin-header">
+          <div class="header-left">
+            <h3>Dashboard</h3>
+          </div>
+          <div class="header-right">
+            <span>Xin chào, <b id="name-acc">Admin</b></span>
+            <button id="admin-logout" class="btn-logout">
+              <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+          </div>
+        </header>
+
+        <section class="section active" id="section-products">
+          <div class="section-header">
+            <h2>Danh sách Món ăn</h2>
+            <button
+              class="btn-add-new"
+              onclick="alert('Chức năng thêm mới đang cập nhật!')"
+            >
+              <i class="fa-solid fa-plus"></i> Thêm món mới
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Hình ảnh</th>
+                  <th>Tên món</th>
+                  <th>Giá bán</th>
+                  <th>Danh mục</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="product-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="section-orders">
+          <div class="section-header">
+            <h2>Danh sách Đơn đặt bàn/Giao hàng</h2>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Khách hàng</th>
+                  <th>Ngày đặt</th>
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="order-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center">
+                    Chưa có đơn hàng nào
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/src/js/loader.js"></script>
+    <script src="/src/js/data.js"></script>
+    <script src="/src/js/admin.js"></script>
+  </body>
+</html>

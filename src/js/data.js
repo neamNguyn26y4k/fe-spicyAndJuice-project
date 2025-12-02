@@ -872,3 +872,26 @@ const storesData = [
     lng: 105.7821,
   },
 ];
+
+function createAdminAccount() {
+  let accounts = localStorage.getItem("accounts");
+  if (!accounts) {
+    accounts = [];
+    accounts.push({
+      fullname: "Lin",
+      phone: "admin",
+      password: "123456",
+      address: "https://github.com/lin",
+      email: "musicanime2501@gmail.com",
+      status: 1,
+      join: new Date(),
+      cart: [],
+      userType: 1,
+    });
+
+    localStorage.setItem("accounts", JSON.stringify(accounts));
+  }
+}
+
+window.onload = createProduct();
+window.onload = createAdminAccount();
