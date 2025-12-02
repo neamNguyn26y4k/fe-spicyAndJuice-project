@@ -197,6 +197,14 @@ body.no-scroll {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.user-profile:hover {
+  background: var(--background-color);
 }
 
 .user-avatar {
@@ -236,6 +244,7 @@ body.no-scroll {
   padding: 0.4rem;
   min-width: 190px;
   z-index: 10;
+  margin-top: 0.25rem;
 }
 
 .user-menu.is-open {
@@ -1416,10 +1425,7 @@ body.no-scroll {
   .header-container {
     flex-wrap: wrap;
     position: relative;
-  }
-
-  .logo-section {
-    order: 1;
+    justify-content: space-between;
   }
 
   .mobile-menu-toggle {
@@ -1435,8 +1441,7 @@ body.no-scroll {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    order: 3;
-    margin-left: auto;
+    order: 1;
   }
 
   .mobile-menu-toggle:hover {
@@ -1444,10 +1449,17 @@ body.no-scroll {
     color: var(--primary-color);
   }
 
-  .header-actions {
+  .logo-section {
     order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-actions {
+    order: 3;
     margin-left: auto;
-    margin-right: 0.5rem;
+    gap: 0.75rem;
   }
 
   .nav-menu {
@@ -1511,8 +1523,19 @@ body.no-scroll {
     height: 40px;
   }
 
-  .header-actions {
-    gap: 0.75rem;
+  /* Ẩn button Sign Up trên mobile, chỉ giữ Log in */
+  .auth-buttons .btn-signup {
+    display: none;
+  }
+
+  /* Ẩn auth buttons khi đã login trên mobile */
+  body.logged-in .auth-buttons {
+    display: none !important;
+  }
+
+  /* Hiển thị user panel khi đã login */
+  .user-panel.is-visible {
+    display: flex;
   }
 }
 

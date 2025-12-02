@@ -219,7 +219,7 @@ function updateHeaderAuthState() {
     const userPanel = document.querySelector('.user-panel');
     const body = document.body;
     const userMenu = document.querySelector('.user-menu');
-    const moreButton = document.querySelector('.more-button');
+    const userProfile = document.querySelector('.user-profile');
 
     if (!authButtons || !userPanel) {
         return;
@@ -240,29 +240,29 @@ function updateHeaderAuthState() {
         if (userMenu) {
             userMenu.classList.remove('is-open');
         }
-        if (moreButton) {
-            moreButton.setAttribute('aria-expanded', 'false');
+        if (userProfile) {
+            userProfile.setAttribute('aria-expanded', 'false');
         }
     }
 }
 
 // Khởi tạo menu người dùng (toggle mở/đóng + logout)
 function initUserMenu() {
-    const moreButton = document.querySelector('.more-button');
+    const userProfile = document.querySelector('.user-profile');
     const userMenu = document.querySelector('.user-menu');
-    if (!moreButton || !userMenu) {
+    if (!userProfile || !userMenu) {
         return;
     }
 
     const toggleMenu = (force) => {
         const willOpen = force !== undefined ? force : !userMenu.classList.contains('is-open');
         userMenu.classList.toggle('is-open', willOpen);
-        moreButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        userProfile.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     };
 
     const closeMenu = () => toggleMenu(false);
 
-    moreButton.addEventListener('click', (event) => {
+    userProfile.addEventListener('click', (event) => {
         event.stopPropagation();
         toggleMenu();
     });
