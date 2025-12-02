@@ -3,8 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  
-  /* [Why] Distinct Avatars tăng Social Proof/Trust thay vì ảnh lặp lại. [Risk] Hard-coded paths: Đổi tên/xóa file trên server → ảnh 404. */
+  /*  Mảng review để render slider.  */
   const REVIEWS = [
     {
       avatar: '/src/assets/images/blogger-am-thuc-nam.jpg',
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!slider) return;
   
-  /* [Why] Render động số sao theo rating thập phân (4.5 → 4 sao đầy + 1 nửa). [Risk] Rating <0 hoặc >5 → render sai. */
+  /*  Render động số sao theo rating thập phân (4.5 → 4 sao đầy + 1 nửa).  */
   function renderStars(rating) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -77,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
     return starsHTML;
   }
   
-  /* [Why] Xóa HTML tĩnh cũ tránh duplicate content và FOUC (Flash of Unstyled Content). [Risk] Nếu slider chứa element khác cũng bị xóa. */
+  /*  Xóa HTML tĩnh cũ tránh duplicate content và FOUC (Flash of Unstyled Content).  */
   slider.innerHTML = '';
   
-  /* [Why] Tạo DOM từ mảng REVIEWS trước, sau mới clone để tạo infinite loop. [Risk] Nếu không render trước → không có gì để clone. */
-  /* [Why] onerror fallback về placeholder khi ảnh gốc 404/lỗi path. [Risk] Nếu fallback cũng 404 → hiện broken icon. */
+  /*  Tạo DOM từ mảng REVIEWS trước, sau mới clone để tạo infinite loop.  */
+  /*  onerror fallback về placeholder khi ảnh gốc 404/lỗi path.  */
   function renderTestimonials() {
     REVIEWS.forEach(item => {
       const testimonialEl = document.createElement('article');
@@ -122,15 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   renderTestimonials();
   
-  /* [Why] Phải query lại sau renderTestimonials() vì ban đầu slider rỗng. [Risk] Query trước render → NodeList rỗng → vòng clone không chạy. */
+  /*  Phải query lại sau renderTestimonials() vì ban đầu slider rỗng.  */
   const testimonials = slider.querySelectorAll('.testimonial');
   
   if (testimonials.length === 0) return;
   
-  /* [Why] Clone 3 lần (6 cards × 3 = 18 total) để luôn có card tiếp nối khi scroll. [Risk] 18 cards × 350px = 6300px width → tốn memory. */
+  /*  Clone 3 lần (6 cards × 3 = 18 total) để luôn có card tiếp nối khi scroll.  */
   const CLONE_COUNT = 3;
   
-  /* [Why] Clone cards và append vào cuối để khi scroll hết gốc, clone tiếp nối seamless. [Risk] Screen reader đọc trùng 3 lần → dùng aria-hidden="true". */
+  /*  Clone cards và append vào cuối để khi scroll hết gốc, clone tiếp nối seamless. Screen reader đọc trùng 3 lần → dùng aria-hidden="true".  */
   for (let i = 0; i < CLONE_COUNT; i++) {
     testimonials.forEach(testimonial => {
       const clone = testimonial.cloneNode(true);
@@ -141,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  /* [Why] Override CSS để layout flex ngang liên tục (nowrap + max-content). [Risk] Nếu CSS gốc có !important → không override được. */
+  /*  Override CSS để layout flex ngang liên tục (nowrap + max-content).  */
   slider.style.display = 'flex';
   slider.style.flexWrap = 'nowrap';
   slider.style.gap = '2rem';
@@ -151,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
   container.style.overflow = 'hidden';
   container.style.position = 'relative';
   
-  /* [Why] 30px/s (0.5px/frame ở 60fps) để user có thời gian đọc text. [Risk] >80px/s quá nhanh, <20px/s quá chậm nhàm chán. */
+  /*  30px/s (0.5px/frame ở 60fps) để user có thời gian đọc text.  */
   const SCROLL_SPEED = 30; // px/s
   let currentPosition = 0;
   const sliderWidth = slider.scrollWidth;
@@ -162,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let isPaused = false;
   const originalWidth = sliderWidth / (CLONE_COUNT + 1);
   
-  /* [Why] Khi currentPosition ≤ -originalWidth thì reset về 0, clone đã tiếp nối. [Risk] Tính toán sai originalWidth → có khoảng trống khi reset. */
+  /*  Khi currentPosition ≤ -originalWidth thì reset về 0, clone đã tiếp nối.  */
   function animate() {
     if (!isPaused) {
       currentPosition -= pixelsPerFrame;
@@ -179,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   animate();
   
-  /* [Why] Pause marquee khi hover để user đọc text (WCAG 2.2.2). [Risk] Không pause → card chạy liên tục, khó đọc. */
+  /*  Pause marquee khi hover để user đọc text (WCAG 2.2.2).  */
   container.addEventListener('mouseenter', function() {
     isPaused = true;
   });
@@ -188,12 +187,12 @@ document.addEventListener('DOMContentLoaded', function() {
     isPaused = false;
   });
   
-  /* [Why] Pause khi tab hidden (Page Visibility API) tiết kiệm CPU/battery. [Risk] Không pause → chạy ngầm tốn tài nguyên. */
+  /*  Pause khi tab hidden (Page Visibility API) tiết kiệm CPU/battery.  */
   document.addEventListener('visibilitychange', function() {
     isPaused = document.hidden;
   });
   
-  /* [Why] Reset position khi resize. 250ms debounce tránh gọi nhiều lần khi drag resize. [Risk] Không reset → glitch vì containerWidth thay đổi. */
+  /*  Reset position khi resize. 250ms debounce tránh gọi nhiều lần khi drag resize.  */
   let resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
@@ -203,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 250);
   });
   
-  /* [Why] Cancel animation frame khi unload tránh memory leak trong SPA. [Risk] Không cancel → animation frame tiếp tục chạy ngầm. */
+  /*  Cancel animation frame khi unload tránh memory leak trong SPA.  */
   window.addEventListener('beforeunload', function() {
     cancelAnimationFrame(animationId);
   });

@@ -1,4 +1,4 @@
-/* ===== ABOUT PAGE STYLES - Mobile First, 12-Column Grid System ===== */
+/* ===== ABOUT PAGE STYLES ===== */
 
 /* ===== 1. About Hero Section ===== */
 .about-hero {
@@ -10,14 +10,14 @@
   display: block;
 }
 
-/* Mobile: stack vertically */
+/* Mobile */
 .about-hero__grid {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-/* Left column (7/12): Hero image block - rectangular layout */
+/* Hero image block - rectangular layout */
 .hero-image-block {
   width: 100%;
   max-width: 100%;
@@ -26,7 +26,7 @@
   gap: 0.75rem;
 }
 
-/* Top: 1 large image (full width) */
+/* Trên: 1 ảnh lớn (full width) */
 .hero-image-block__main {
   width: 100%;
 }
@@ -34,18 +34,16 @@
 .hero-image-block__img--large {
   width: 100%;
   height: auto;
-  /* min-height 220px hard-coded cho mobile
-     Nếu content image có tỷ lệ khác (portrait/square), sẽ bị méo
-     Workaround: Dùng aspect-ratio: 16/9 thay vì min/max-height cố định */
+  /* min-height 220px hard-coded cho mobile */
   min-height: 220px;
   max-height: 300px;
-  /* object-fit: cover đảm bảo ảnh fill đầy container mà không méo. Tuy nhiên có thể crop mất phần quan trọng của ảnh */
+  /* object-fit: cover đảm bảo ảnh fill đầy container mà không méo*/
   object-fit: cover;
   border-radius: 12px;
   display: block;
 }
 
-/* Bottom: 2 small images side by side (each 50% width) */
+/* Dưới: 2 ảnh nhỏ cạnh nhau (mỗi ảnh chiếm 50% chiều rộng) */
 .hero-image-block__thumbs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -56,7 +54,7 @@
 .hero-image-block__img--small {
   width: 100%;
   /* height 130px cố định
-     Rủi ro: Không responsive theo content, ảnh có thể bị crop hoặc stretch
+     Không responsive theo content,
      Dùng để đảm bảo 2 thumbnails có chiều cao đồng đều */
   height: 130px;
   object-fit: cover;
@@ -64,7 +62,7 @@
   display: block;
 }
 
-/* Right column (5/12): content */
+/* nội dung */
 .about-hero__content {
   width: 100%;
   padding: 0;
@@ -96,7 +94,7 @@
   line-height: 1.65;
 }
 
-/* Watch video link with circular play icon */
+/* Link xem video với biểu tượng play hình tròn */
 .about-hero__video {
   display: inline-flex;
   align-items: center;
@@ -119,7 +117,7 @@
   transform: scale(1.1);
 }
 
-/* Circular play icon container */
+/* Biểu tượng play hình tròn */
 .about-hero__play-icon {
   width: 42px;
   height: 42px;
@@ -137,19 +135,15 @@
 /* Vẽ tam giác play bằng CSS border thay vì dùng SVG/icon
    - width=0, height=0 + border tạo hình tam giác
    - border-left (12px) tạo cạnh huyền màu trắng
-   - border-top/bottom (7px) transparent tạo 2 cạnh góc vuông
-   -> Khó responsive, khó tùy chỉnh kích thước động
-   Có thể dùng clip-path hoặc SVG inline */
+   - border-top/bottom (7px) transparent tạo 2 cạnh góc vuông */
 .about-hero__play-triangle {
   width: 0;
   height: 0;
   border-style: solid;
-  /* 7px và 12px tạo tỷ lệ tam giác cụ thể
-     Nếu thay đổi 1 trong 2 số sẽ làm tam giác lệch hoặc méo */
+  /* 7px và 12px tạo tỷ lệ tam giác cụ thể */
   border-width: 7px 0 7px 12px;
   border-color: transparent transparent transparent #fff;
-  /* margin-left 2px để căn giữa tam giác trong vòng tròn
-     vì border trick tạo tam giác không tự động center */
+  /* margin-left 2px để căn giữa tam giác trong vòng tròn */
   margin-left: 2px;
 }
 
@@ -157,7 +151,7 @@
   line-height: 1;
 }
 
-/* Show more button with perfect centering */
+/* Nút xem thêm */
 .btn--primary {
   background: var(--primary-color);
   color: #fff;
@@ -165,15 +159,11 @@
   padding: 0;
   text-decoration: none;
   font-weight: 600;
-  /* LAYOUT LOGIC: inline-flex thay vì inline-block
-     Lý do: Dễ căn giữa nội dung bên trong (align-items, justify-content)
-     Trade-off: Phải set width: fit-content để không chiếm full width */
+  /* inline-flex thay vì inline-block để dễ căn giữa nội dung bên trong */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* ACCESSIBILITY: height 44px đảm bảo touch target tối thiểu (iOS: 44x44, Android: 48x48)
-     WCAG 2.1 AA: Minimum 44x44px for touch targets
-     Rủi ro: Nếu giảm xuống dưới 40px sẽ khó tap trên mobile */
+  /* height 44px đảm bảo touch target tối thiểu (iOS: 44x44, Android: 48x48) */
   height: 44px;
   padding: 0 1.75rem;
   width: fit-content;
@@ -188,7 +178,7 @@
   box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
 }
 
-/* Tablet: 2 columns */
+/* Tablet */
 @media (min-width: 768px) {
   .about-hero {
     padding: 3rem 0;
@@ -196,9 +186,7 @@
 
   .about-hero__grid {
     display: grid;
-    /* Grid ratio 1.3fr : 0.7fr (tương đương ~65% : 35%)
-       Rủi ro: Tỷ lệ cố định này có thể không phù hợp nếu nội dung text quá dài
-       Lý do chọn: Ưu tiên hiển thị ảnh lớn hơn để thu hút visual*/
+    /* Tỉ lệ grid 1.3fr : 0.7fr (tương đương ~65% : 35%)*/
     grid-template-columns: 1.3fr 0.7fr;
     gap: 2.5rem;
     align-items: center;
@@ -247,15 +235,14 @@
   }
 }
 
-/* Desktop: proper 7/12 + 5/12 ratio */
+/* Desktop */
 @media (min-width: 1024px) {
   .about-hero {
     padding: 4rem 0;
   }
 
   .about-hero__grid {
-    /* Desktop ratio 1.4fr : 0.6fr (~70% : 30%) - rộng hơn tablet
-       Rủi ro: Text column quá hẹp, có thể bị wrap nhiều dòng nếu content dài*/
+    /* Tỉ lệ grid 1.4fr : 0.6fr (~70% : 30%) - rộng hơn tablet */
     grid-template-columns: 1.4fr 0.6fr;
     gap: 3.5rem;
     align-items: center;
@@ -321,7 +308,7 @@
   align-items: center;
 }
 
-/* Part 1: Centered header */
+/* Centered header */
 .why-choose-us__header {
   text-align: center;
   margin-bottom: 2rem;
@@ -344,7 +331,7 @@
   margin: 0 auto;
 }
 
-/* Part 2: Large centered image (10/12 cols) */
+/* Large centered image */
 .why-choose-us__media {
   width: 100%;
   margin: 2rem 0;
@@ -361,7 +348,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Part 3: 3-column grid (each 4/12) */
+/* 3-column grid */
 .why-choose-us__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -432,14 +419,13 @@
     font-size: 1rem;
   }
 
-  /* Image: 10/12 of container with 1/12 margin on each side */
+  /* Large centered image */
   .why-choose-us__media {
     margin: 2.5rem 0;
   }
 
   .why-choose-us__image {
-    /* 83.333% = 10/12 của grid (giả lập Bootstrap-style column)
-       Lý do: Tạo margin tự động 1/12 mỗi bên để image không chạm edge */
+    /* 83.333% = 10/12 của grid 12 cột. Tạo margin tự động 1/12 mỗi bên để image không chạm edge */
     max-width: 83.333%; /* 10/12 = 83.333% */
   }
 
@@ -463,13 +449,13 @@
     font-size: 2.25rem;
   }
 
-  /* Image: 10/12 width with proper centering */
+  /* Large centered image */
   .why-choose-us__media {
     margin: 3rem 0;
   }
 
   .why-choose-us__image {
-    max-width: 1000px; /* or keep 83.333% for true 10/12 */
+    max-width: 1000px; /* hoặc 83.333% để đạt tỉ lệ 10/12 */
     width: 83.333%;
   }
 
@@ -503,11 +489,10 @@
 }
 
 /* Pseudo-element ::before tạo color overlay
-   LAYOUT LOGIC: Z-index stacking context
    - Background image: z-index auto (layer thấp nhất)
    - ::before overlay: z-index 1 (layer giữa)
    - Content (.team-members__inner): z-index 2 (layer cao nhất)
-   Lý do dùng ::before: Không cần thêm div wrapper trong HTML */
+  ::before: Không cần thêm div wrapper trong HTML */
 .team-members::before {
   content: "";
   position: absolute;
@@ -522,7 +507,7 @@
   pointer-events: none;
 }
 
-/* Content container - positioned above overlay */
+/* Content container */
 .team-members__inner {
   position: relative;
   z-index: 2;
@@ -552,7 +537,7 @@
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* Part 2: 5-member staggered grid (2 rows: top 3, bottom 2) */
+/* 5-member grid (2 rows: top 3, bottom 2) */
 .team-members__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -560,7 +545,7 @@
   margin-top: 2rem;
 }
 
-/* Team Card with background image and overlay */
+/* Thẻ card thành viên trên ảnh nền và overlay */
 .team-card {
   position: relative;
   overflow: hidden;
@@ -581,13 +566,13 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Double overlay technique (2 lớp pseudo-element)
-   - .team-members::before: Red overlay cho background section
-   - .team-card::before: White overlay cho từng card
-   LAYOUT LOGIC: Z-index trong card
-   - background-image: z-index auto
-   - ::before white overlay: z-index 1
-   - photo & info: z-index 2 (phải cao hơn overlay) */
+/* Hai lớp pseudo-element:
+   - .team-members::before: lớp overlay đỏ cho toàn bộ section nền.
+   - .team-card::before: overlay trắng riêng cho từng card.
+   Logic z-index trong card:
+   - background-image: z-index mặc định (tầng thấp nhất).
+   - ::before trắng: z-index = 1 (tầng giữa).
+   - Ảnh & thông tin thành viên: z-index = 2 (đè lên overlay). */
 .team-card::before {
   content: "";
   position: absolute;
@@ -595,8 +580,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* opacity 0.92 (92%) cho white overlay
-     Lý do: Cân bằng giữa hiển thị background và readability */
+  /* opacity 0.92 (92%) cho overlay trắng để cân bằng giữa hiển thị background và readability */
   background: rgba(255, 255, 255, 0.92);
   z-index: 1;
   transition: background 0.3s ease;
@@ -611,7 +595,7 @@
   background: rgba(255, 255, 255, 0.96);
 }
 
-/* Member photo - positioned above overlay */
+/* Member photo */
 .team-card__photo {
   position: relative;
   z-index: 2;
@@ -624,7 +608,7 @@
   margin-bottom: 1.25rem;
 }
 
-/* Member info container - positioned above overlay */
+/* Member info container */
 .team-card__info {
   position: relative;
   z-index: 2;
@@ -681,7 +665,7 @@
   }
 }
 
-/* Desktop: 5 columns staggered (top row 3, bottom row 2 centered) */
+/* Desktop */
 @media (min-width: 1024px) {
   .team-members {
     padding: 4.5rem 0;
@@ -700,16 +684,10 @@
     margin-right: auto;
   }
 
-  /* Staggered grid layout (bố cục lệch tầng) cho 5 team members
+  /* (bố cục lệch tầng) cho 5 team members
      Grid 6 cột: [1][2][3][4][5][6]
-     Row 1: [Card1:1-3][Card2:3-5][Card3:5-7] (3 cards)
-     Row 2:    [Card4:2-4][Card5:4-6]        (2 cards centered)
-     
-     nth-child hard-coded cho 5 items
-     Rủi ro nghiêm trọng:
-     - Nếu có 6+ members: Card thứ 6 sẽ bị layout vỡ hoặc hiển thị ở row 3
-     - Nếu có 4 members: Row 2 chỉ có 1 card, layout lệch
-     Có thể dùng CSS Grid auto-flow hoặc dynamic grid với :nth-child logic phức tạp hơn */
+     Row 1: [Card1:1-3][Card2:3-5][Card3:5-7]
+     Row 2:    [Card4:2-4][Card5:4-6] */
   .team-card:nth-child(1) {
     grid-column: 1 / 3; /* Chiếm cột 1-2 */
   }
@@ -778,29 +756,19 @@
   font-weight: 700;
 }
 
-/* Slider container */
-.testimonials__slider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 1.5rem 0 1rem;
-}
-
-/* Single testimonial slide - centered card */
 .testimonial {
   width: 350px;
   max-width: 350px;
-  /* [Why] Fixed height 550px chứa đủ avatar + text + rating + footer. [Risk] Text rất dài vẫn bị cắt. */
+  /* Fixed height 550px chứa đủ avatar + text + rating + footer  */
   height: 500px;
-  /* [Why] flex-shrink: 0 ngăn card co lại trong marquee. [Risk] Mất responsive. */
+  /* flex-shrink: 0 ngăn card co lại trong marquee */
   flex-shrink: 0;
   background: #fff;
-  /* [Why] padding 2.5rem top/bottom để nội dung không dính sát mép. [Risk] Giảm space cho text. */
+  /* padding 2.5rem top/bottom để nội dung không dính sát mép */
   padding: 2.5rem 1.5rem;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(2, 6, 23, 0.1);
-  /* [Why] space-between đẩy footer xuống đáy. [Risk] Cần đủ content giữa. */
+  /* space-between đẩy footer xuống đáy */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -810,18 +778,18 @@
 
 .testimonial__avatar-wrap {
   margin-bottom: 1rem;
-  /* [Why] flex-shrink: 0 ghim avatar ở đầu. [Risk] Card nhỏ → text bị nén. */
+  /* flex-shrink: 0 ghim avatar ở đầu */
   flex-shrink: 0;
 }
 
 .testimonial__avatar {
-  /* [Why] 80px vừa đủ nhận diện, tiết kiệm space cho text. [Risk] Quá nhỏ khó thấy. */
+  /* 80px vừa đủ nhận diện, tiết kiệm space cho text */
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  /* [Why] background #eee hiện khung tròn xám khi ảnh chưa load. [Risk] Ảnh trong suốt sẽ thấy nền xám. */
+  /* background #eee hiện khung tròn xám khi ảnh chưa load */
   background-color: #eee;
-  /* [Why] object-fit cover giữ tỷ lệ ảnh, crop phần thừa. [Risk] Crop mất phần quan trọng của ảnh. */
+  /* object-fit cover giữ tỷ lệ ảnh, crop phần thừa */
   object-fit: cover;
   display: block;
   border: 4px solid #fff;
@@ -830,7 +798,7 @@
 
 .testimonial__body {
   width: 100%;
-  /* [Why] flex column xếp icon → text → rating. [Risk] Không có. */
+  /* flex column xếp icon → text → rating */
   display: flex;
   flex-direction: column;
 }
@@ -848,13 +816,9 @@
   margin-bottom: 1rem;
   line-height: 1.6;
   font-style: italic;
-  /* [Why] max-height 120px cho text 20 từ (3 dòng). [Risk] User zoom → bị cắt. */
+  /* max-height 120px cho text 20 từ (3 dòng) */
   max-height: 120px;
-  /* [Why] overflow hidden ẩn text dài. [Risk] Mất info nếu text vượt 20 từ. */
-  overflow: hidden;
-  /* Lý do: Scroll trong marquee gây confusion (cuộn dọc hay ngang?)
-     ACCESSIBILITY: Ellipsis (...) báo hiệu rõ ràng "text bị cắt"
-     Best practice: Viết ngắn (concise copy 20-25 từ) thay vì dựa vào ellipsis  */
+  /* overflow hidden ẩn text dài */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 8;
@@ -875,7 +839,7 @@
 }
 
 .testimonial__meta {
-  /* [Why] Footer cố định dưới cùng nhờ space-between. [Risk] Không có. */
+  /* Footer cố định dưới cùng nhờ space-between */
   padding-top: 0.5rem;
 }
 
@@ -891,7 +855,7 @@
   font-size: 0.9rem;
 }
 
-/* [Why] Mobile giảm width xuống 90vw, height 380px. [Risk] Card nhỏ → text ngắn hơn. */
+/* Mobile giảm width xuống 90vw, height 380px. Card nhỏ → text ngắn hơn. */
 @media (max-width: 400px) {
   .testimonial {
     width: 90vw;
@@ -921,9 +885,7 @@
     font-size: 2rem;
   }
 
-  /* LAYOUT LOGIC: Giữ nguyên fixed width cho marquee
-     Lý do: Tablet (768px+) đủ rộng để hiển thị 2 cards (380px * 2 + gap)
-     Không override max-width để marquee layout nhất quán */
+  /* Giữ nguyên fixed width cho marquee */
   .testimonial {
     max-width: 700px;
     padding: 2.5rem 2rem;
@@ -949,9 +911,7 @@
     font-size: 2.25rem;
   }
 
-  /* LAYOUT LOGIC: Desktop giữ nguyên 380px width cho marquee
-     Lý do: Desktop (1024px+) hiển thị được 2.5-3 cards cùng lúc
-     Best practice: Fixed width trong marquee tạo rhythm nhất quán */
+  /* LAYOUT LOGIC: Desktop giữ nguyên 380px width cho marquee vì Desktop (1024px+) hiển thị được 2.5-3 cards cùng lúc */
   .testimonial {
     max-width: 860px;
     padding: 3rem 2.5rem;
