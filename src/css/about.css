@@ -789,27 +789,39 @@
 
 /* Single testimonial slide - centered card */
 .testimonial {
-  width: 100%;
-  max-width: 100%;
+  width: 350px;
+  max-width: 350px;
+  /* [Why] Fixed height 550px chứa đủ avatar + text + rating + footer. [Risk] Text rất dài vẫn bị cắt. */
+  height: 500px;
+  /* [Why] flex-shrink: 0 ngăn card co lại trong marquee. [Risk] Mất responsive. */
+  flex-shrink: 0;
   background: #fff;
-  padding: 2rem 1.5rem;
+  /* [Why] padding 2.5rem top/bottom để nội dung không dính sát mép. [Risk] Giảm space cho text. */
+  padding: 2.5rem 1.5rem;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(2, 6, 23, 0.1);
+  /* [Why] space-between đẩy footer xuống đáy. [Risk] Cần đủ content giữa. */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
 }
 
 .testimonial__avatar-wrap {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  /* [Why] flex-shrink: 0 ghim avatar ở đầu. [Risk] Card nhỏ → text bị nén. */
   flex-shrink: 0;
 }
 
 .testimonial__avatar {
-  width: 90px;
-  height: 90px;
+  /* [Why] 80px vừa đủ nhận diện, tiết kiệm space cho text. [Risk] Quá nhỏ khó thấy. */
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  /* [Why] background #eee hiện khung tròn xám khi ảnh chưa load. [Risk] Ảnh trong suốt sẽ thấy nền xám. */
+  background-color: #eee;
+  /* [Why] object-fit cover giữ tỷ lệ ảnh, crop phần thừa. [Risk] Crop mất phần quan trọng của ảnh. */
   object-fit: cover;
   display: block;
   border: 4px solid #fff;
@@ -818,11 +830,14 @@
 
 .testimonial__body {
   width: 100%;
+  /* [Why] flex column xếp icon → text → rating. [Risk] Không có. */
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonial__quote-icon {
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   display: inline-flex;
   justify-content: center;
 }
@@ -830,13 +845,24 @@
 .testimonial__text {
   font-size: 1rem;
   color: var(--text-color);
-  margin-bottom: 1.25rem;
-  line-height: 1.7;
+  margin-bottom: 1rem;
+  line-height: 1.6;
   font-style: italic;
+  /* [Why] max-height 120px cho text 20 từ (3 dòng). [Risk] User zoom → bị cắt. */
+  max-height: 120px;
+  /* [Why] overflow hidden ẩn text dài. [Risk] Mất info nếu text vượt 20 từ. */
+  overflow: hidden;
+  /* Lý do: Scroll trong marquee gây confusion (cuộn dọc hay ngang?)
+     ACCESSIBILITY: Ellipsis (...) báo hiệu rõ ràng "text bị cắt"
+     Best practice: Viết ngắn (concise copy 20-25 từ) thay vì dựa vào ellipsis  */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
 }
 
 .testimonial__rating {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -849,7 +875,8 @@
 }
 
 .testimonial__meta {
-  margin-top: 0.75rem;
+  /* [Why] Footer cố định dưới cùng nhờ space-between. [Risk] Không có. */
+  padding-top: 0.5rem;
 }
 
 .testimonial__name {
@@ -864,40 +891,24 @@
   font-size: 0.9rem;
 }
 
-/* Pagination dots */
-.testimonials__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.7rem;
-  margin-top: 2rem;
-}
-
-.testimonials__dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--border-color);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-}
-
-.testimonials__dot:hover {
-  background: rgba(211, 47, 47, 0.5);
-  transform: scale(1.2);
-}
-
-/* aria-selected thay vì class .active
-   Lý do: Screen reader đọc được state của pagination
-   Best practice: Kết hợp visual indicator (màu, scale) + ARIA attribute
-   
-   transform scale(1.3) tạo visual feedback rõ ràng
-   Không dùng width/height vì sẽ gây layout shift */
-.testimonials__dot[aria-selected="true"] {
-  background: var(--primary-color);
-  transform: scale(1.3);
-  box-shadow: 0 2px 10px rgba(211, 47, 47, 0.4);
+/* [Why] Mobile giảm width xuống 90vw, height 380px. [Risk] Card nhỏ → text ngắn hơn. */
+@media (max-width: 400px) {
+  .testimonial {
+    width: 90vw;
+    max-width: 90vw;
+    height: 380px;
+  }
+  
+  .testimonial__text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-height: 110px;
+  }
+  
+  .testimonial__avatar {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 /* Tablet */
@@ -910,6 +921,9 @@
     font-size: 2rem;
   }
 
+  /* LAYOUT LOGIC: Giữ nguyên fixed width cho marquee
+     Lý do: Tablet (768px+) đủ rộng để hiển thị 2 cards (380px * 2 + gap)
+     Không override max-width để marquee layout nhất quán */
   .testimonial {
     max-width: 700px;
     padding: 2.5rem 2rem;
@@ -935,6 +949,9 @@
     font-size: 2.25rem;
   }
 
+  /* LAYOUT LOGIC: Desktop giữ nguyên 380px width cho marquee
+     Lý do: Desktop (1024px+) hiển thị được 2.5-3 cards cùng lúc
+     Best practice: Fixed width trong marquee tạo rhythm nhất quán */
   .testimonial {
     max-width: 860px;
     padding: 3rem 2.5rem;
@@ -950,14 +967,5 @@
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .testimonials__dots {
-    gap: 0.8rem;
-  }
-
-  .testimonials__dot {
-    width: 14px;
-    height: 14px;
   }
 }
