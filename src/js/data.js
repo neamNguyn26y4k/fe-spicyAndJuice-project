@@ -650,7 +650,7 @@ const products = [
   },
 ];
 
-// === GIỎ HÀNG - Shopping Cart Class ===
+// GIỎ HÀNG - Shopping Cart Class
 
 /**
  * Class quản lý giỏ hàng
@@ -668,7 +668,7 @@ class ShoppingCart {
 
   /**
    * Load giỏ hàng từ localStorage
-   * @returns {Array} Mảng các sản phẩm trong giỏ hàng
+   @returns {Array}
    */
   loadCart() {
     const cartData = localStorage.getItem("shoppingCart");
@@ -701,10 +701,10 @@ class ShoppingCart {
    * Thêm sản phẩm vào giỏ hàng
    * Nếu sản phẩm đã tồn tại (cùng ID và note), tăng số lượng
    * Nếu chưa tồn tại, thêm mới vào giỏ
-   * @param {number} productId - ID của sản phẩm
-   * @param {number} quantity - Số lượng cần thêm (mặc định: 1)
-   * @param {string} note - Ghi chú cho sản phẩm (mặc định: '')
-   * @returns {Array} Mảng sản phẩm sau khi thêm
+   @param {number} productId 
+   @param {number} quantity 
+   @param {string} note 
+   @returns {Array} 
    */
   addItem(productId, quantity = 1, note = "") {
     const product = products.find((p) => p.id === productId);
@@ -735,10 +735,10 @@ class ShoppingCart {
   /**
    * Cập nhật số lượng của một sản phẩm trong giỏ hàng
    * Nếu quantity <= 0, sản phẩm sẽ bị xóa khỏi giỏ
-   * @param {number} productId - ID của sản phẩm
-   * @param {number} quantity - Số lượng mới
-   * @param {string} note - Ghi chú để phân biệt các item cùng productId
-   * @returns {Array} Mảng sản phẩm sau khi cập nhật
+   @param {number} productId 
+   @param {number} quantity 
+   @param {string} note 
+   @returns {Array} 
    */
   updateQuantity(productId, quantity, note = "") {
     const itemIndex = this.items.findIndex(
@@ -758,9 +758,9 @@ class ShoppingCart {
 
   /**
    * Xóa một sản phẩm khỏi giỏ hàng
-   * @param {number} productId - ID của sản phẩm cần xóa
-   * @param {string} note - Ghi chú để xác định chính xác item cần xóa
-   * @returns {Array} Mảng sản phẩm sau khi xóa
+   @param {number} productId
+   @param {string} note
+   @returns {Array} 
    */
   removeItem(productId, note = "") {
     this.items = this.items.filter(
@@ -772,7 +772,7 @@ class ShoppingCart {
 
   /**
    * Xóa toàn bộ giỏ hàng
-   * @returns {Array} Mảng rỗng
+   @returns {Array}
    */
   clearCart() {
     this.items = [];
@@ -782,7 +782,7 @@ class ShoppingCart {
 
   /**
    * Lấy danh sách tất cả sản phẩm trong giỏ hàng
-   * @returns {Array} Mảng các sản phẩm
+   @returns {Array}
    */
   getItems() {
     return this.items;
@@ -790,7 +790,7 @@ class ShoppingCart {
 
   /**
    * Lấy tổng số lượng sản phẩm trong giỏ hàng
-   * @returns {number} Tổng số lượng
+   @returns {number}
    */
   getItemCount() {
     return this.items.reduce((total, item) => total + item.quantity, 0);
@@ -798,7 +798,7 @@ class ShoppingCart {
 
   /**
    * Tính tổng giá trị đơn hàng
-   * @returns {number} Tổng tiền
+   @returns {number} 
    */
   getTotal() {
     return this.items.reduce(
@@ -813,14 +813,14 @@ const cart = new ShoppingCart();
 
 /**
  * Hàm định dạng tiền tệ theo chuẩn Việt Nam
- * @param {number} price - Số tiền cần định dạng
- * @returns {string} Chuỗi tiền tệ đã định dạng (VD: 200.000 ₫)
+ @param {number} price 
+ @returns {string} 
  */
 function vnd(price) {
   return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
 }
 
-// === NGUỒN DỮ LIỆU VỀ CÁC CỬA HÀNG ===
+// NGUỒN DỮ LIỆU VỀ CÁC CỬA HÀNG
 
 const storesData = [
   {

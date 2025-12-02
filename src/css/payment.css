@@ -1,6 +1,4 @@
-/* ===================================
-   STYLES CHO TRANG THANH TOÁN
-   =================================== */
+/* STYLES CHO TRANG THANH TOÁN */
 
 /* Container chính của trang */
 .page {
@@ -9,9 +7,7 @@
     padding: 30px 40px;
 }
 
-/* ===================================
-   THANH TIẾN TRÌNH (BƯỚC 3)
-   =================================== */
+/* THANH TIẾN TRÌNH (BƯỚC 3) */
 /* Hiển thị tiến trình đang ở bước Thanh toán */
 .progress {
     display: flex;
@@ -77,9 +73,7 @@
     border-radius: 2px;
 }
 
-/* ===================================
-   NỘI DUNG CHÍNH
-   =================================== */
+/* NỘI DUNG CHÍNH */
 /* Layout 2 cột: Giỏ hàng (trái) và Phương thức thanh toán (phải) */
 .payment {
     display: grid;
@@ -87,9 +81,7 @@
     gap: 30px;
 }
 
-/* ===================================
-   PANEL GIỎ HÀNG (CỘT TRÁI)
-   =================================== */
+/* PANEL GIỎ HÀNG (CỘT TRÁI) */
 /* Hiển thị tóm tắt đơn hàng và tổng tiền */
 .cart {
     background: white;
@@ -244,9 +236,7 @@
     transform: translateY(0);
 }
 
-/* ===================================
-   PANEL PHƯƠNG THỨC THANH TOÁN (CỘT PHẢI)
-   =================================== */
+/* PANEL PHƯƠNG THỨC THANH TOÁN (CỘT PHẢI) */
 /* Chứa các tùy chọn thanh toán */
 .payment__methods {
     display: flex;
@@ -254,9 +244,7 @@
     gap: 20px;
 }
 
-/* ===================================
-   PHẦN TÌM VÀ NHẬP MÃ GIẢM GIÁ
-   =================================== */
+/* PHẦN TÌM VÀ NHẬP MÃ GIẢM GIÁ */
 /* Section để nhập mã giảm giá cho đơn hàng */
 .payment__search {
     background: white;
@@ -315,9 +303,7 @@
     background: white;
 }
 
-/* ===================================
-   TAB CHỌN PHƯƠNG THỨC THANH TOÁN
-   =================================== */
+/* TAB CHỌN PHƯƠNG THỨC THANH TOÁN */
 /* 3 tabs: Tiền mặt, Thẻ tín dụng, Ví điện tử */
 .payment__tabs {
     background: white;
@@ -369,9 +355,7 @@
     color: currentColor;
 }
 
-/* ===================================
-   NỘI DUNG CHI TIẾT TỪNG PHƯƠNG THỨC
-   =================================== */
+/* NỘI DUNG CHI TIẾT TỪNG PHƯƠNG THỨC */
 /* Container chứa thông tin chi tiết của phương thức được chọn */
 .payment__content {
     background: white;
@@ -388,9 +372,7 @@
     display: block;
 }
 
-/* ===================================
-   THANH TOÁN TIỀN MẶT
-   =================================== */
+/* THANH TOÁN TIỀN MẶT */
 /* Thông tin và hướng dẫn thanh toán bằng tiền mặt */
 .payment__info {
     display: flex;
@@ -429,9 +411,7 @@
     color: #ef4444;
 }
 
-/* ===================================
-   THANH TOÁN QUA THẺ & VÍ ĐIỆN TỬ
-   =================================== */
+/* THANH TOÁN QUA THẺ & VÍ ĐIỆN TỬ */
 /* Cổng thanh toán và lựa chọn ngân hàng/ví */
 .payment__gateway {
     width: 100%;
@@ -499,10 +479,7 @@
     line-height: 1.6;
 }
 
-/* ===================================
-   TÙY CHỈNH THANH SCROLLBAR
-   =================================== */
-/* Custom scrollbar cho danh sách món ăn */
+/* TÙY CHỈNH THANH SCROLLBAR */
 .cart__items::-webkit-scrollbar {
     width: 6px;
 }
@@ -521,9 +498,7 @@
     background: #94a3b8;
 }
 
-/* ===================================
-   RESPONSIVE DESIGN - MOBILE/TABLET
-   =================================== */
+/* RESPONSIVE DESIGN - MOBILE/TABLET */
 /* Tablet: Chuyển layout thành 1 cột */
 @media (max-width: 1200px) {
     .payment {

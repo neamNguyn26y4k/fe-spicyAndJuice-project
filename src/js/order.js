@@ -1,20 +1,30 @@
-// ===================================
-// XỬ LÝ CHỨC NĂNG TRANG ĐẶT HÀNG
-// ===================================
+// Xử lý trang đặt hàng
 
-// Lấy dữ liệu giỏ hàng từ localStorage
 const cartData = cart.getItems();
-
-// Mảng lưu trữ các địa chỉ giao hàng của người dùng
 let addresses = [];
-
-// ID của địa chỉ đang được chọn
 let selectedAddressId = null;
 
-/**
- * Render danh sách sản phẩm trong giỏ hàng
- * Hiển thị tên, giá, số lượng và cho phép điều chỉnh số lượng
- */
+// Lưu địa chỉ vào localStorage
+function saveAddressesToStorage() {
+    localStorage.setItem('orderAddresses', JSON.stringify(addresses));
+    localStorage.setItem('selectedAddressId', selectedAddressId);
+}
+
+// Load địa chỉ từ localStorage
+function loadAddressesFromStorage() {
+    const savedAddresses = localStorage.getItem('orderAddresses');
+    const savedSelectedId = localStorage.getItem('selectedAddressId');
+    
+    if (savedAddresses) {
+        addresses = JSON.parse(savedAddresses);
+    }
+    
+    if (savedSelectedId) {
+        selectedAddressId = parseInt(savedSelectedId);
+    }
+}
+
+// Hiển thị danh sách món ăn
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cartItems');
     cartItemsContainer.innerHTML = '';
@@ -48,13 +58,7 @@ function renderCartItems() {
     updateCartSummary();
 }
 
-/**
- * Render danh sách các địa chỉ giao hàng đã lưu
- * Mỗi địa chỉ hiển thị dưới dạng card với:
- * - Địa chỉ, tên người nhận, số điện thoại
- * - Nút xóa và chỉnh sửa
- * - Highlight địa chỉ đang được chọn
- */
+// Hiển thị danh sách địa chỉ giao hàng
 function renderAddressCards() {
     const addressCardsContainer = document.getElementById('addressCards');
     const mapSection = document.getElementById('mapSection');
@@ -102,21 +106,15 @@ function renderAddressCards() {
     }
 }
 
-/**
- * Chọn địa chỉ giao hàng
- * Cập nhật UI và hiển thị thông tin địa chỉ đã chọn
- * @param {number} id - ID của địa chỉ được chọn
- */
+// Chọn địa chỉ giao hàng
 function selectAddress(id) {
     selectedAddressId = id;
+    saveAddressesToStorage();
     renderAddressCards();
     updateDeliveryInfo();
 }
 
-/**
- * Cập nhật thông tin giao hàng lên phần map section
- * Hiển thị địa chỉ, SĐT, tên người nhận, thời gian giao
- */
+// Cập nhật thông tin giao hàng
 function updateDeliveryInfo() {
     const selectedAddress = addresses.find(addr => addr.id === selectedAddressId);
     if (selectedAddress) {
@@ -127,37 +125,31 @@ function updateDeliveryInfo() {
     }
 }
 
-/**
- * Tăng số lượng sản phẩm trong giỏ
- * @param {number} productId - ID sản phẩm
- * @param {string} note - Ghi chú sản phẩm
- */
+// Tăng số lượng
 function increaseQuantity(productId, note = '') {
     cart.updateQuantity(productId, cart.getItems().find(i => i.productId === productId && i.note === note).quantity + 1, note);
-    // Reload lại trang để cập nhật UI
     location.reload();
 }
 
-/**
- * Giảm số lượng sản phẩm trong giỏ
- * Không cho phép giảm xuống dưới 1
- * @param {number} productId - ID sản phẩm
- * @param {string} note - Ghi chú sản phẩm
- */
+// Giảm số lượng hoặc xóa món
 function decreaseQuantity(productId, note = '') {
     const item = cart.getItems().find(i => i.productId === productId && i.note === note);
-    if (item && item.quantity > 1) {
-        cart.updateQuantity(productId, item.quantity - 1, note);
+    if (item) {
+        if (item.quantity > 1) {
+            cart.updateQuantity(productId, item.quantity - 1, note);
+        } else {
+            // Xóa món khi số lượng = 1
+            if (confirm('Bạn có chắc chắn muốn xóa món này?')) {
+                cart.removeItem(productId, note);
+            } else {
+                return; // Không reload nếu người dùng hủy
+            }
+        }
         location.reload();
     }
 }
 
-/**
- * Xóa một địa chỉ khỏi danh sách
- * Yêu cầu confirm trước khi xóa
- * Không cho phép xóa nếu chỉ còn 1 địa chỉ
- * @param {number} id - ID địa chỉ cần xóa
- */
+// Xóa địa chỉ
 function deleteAddress(id) {
     if (addresses.length > 1) {
         if (confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) {
@@ -166,6 +158,7 @@ function deleteAddress(id) {
                 selectedAddressId = addresses[0].id;
                 updateDeliveryInfo();
             }
+            saveAddressesToStorage();
             renderAddressCards();
         }
     } else {
@@ -173,11 +166,7 @@ function deleteAddress(id) {
     }
 }
 
-/**
- * Chỉnh sửa thông tin địa chỉ
- * Mở modal và điền sẵn thông tin địa chỉ hiện tại
- * @param {number} id - ID địa chỉ cần chỉnh sửa
- */
+// Chỉnh sửa địa chỉ
 let editingAddressId = null;
 
 function editAddress(id) {
@@ -185,7 +174,6 @@ function editAddress(id) {
     const address = addresses.find(addr => addr.id === id);
     
     if (address) {
-        // Cập nhật tiêu đề modal thành "Chỉnh sửa"
         document.getElementById('modalTitle').textContent = 'Chỉnh sửa thông tin';
         document.getElementById('confirmBtnText').textContent = 'Cập nhật';
 
@@ -199,17 +187,12 @@ function editAddress(id) {
     }
 }
 
-/**
- * Cập nhật tổng tiền đơn hàng
- */
+// Tính tổng tiền
 function updateCartSummary() {
     const subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const discount = 58000;
-    
-    // Kiểm tra xem có chọn lấy tại chỗ không
     const pickupSelected = document.querySelector('.delivery__option[data-delivery="pickup"]').classList.contains('delivery__option--active');
     const shipping = pickupSelected ? 0 : 25000;
-    
     const total = subtotal - discount + shipping;
 
     document.getElementById('discountAmount').textContent = formatPrice(discount);
@@ -217,24 +200,16 @@ function updateCartSummary() {
     document.getElementById('totalAmount').textContent = formatPrice(total);
 }
 
-// Format giá tiền
 function formatPrice(price) {
     return price.toLocaleString('vi-VN') + ' VNĐ';
 }
 
-/**
- * XỬ LÝ MODAL THÊM/SỬA ĐỊA CHỈ
- */
-
+// Xử lý modal thêm/sửa địa chỉ
 const modal = document.getElementById('addressModal');
 const addAddressBtn = document.getElementById('addAddressBtn');
 const closeModal = document.getElementById('closeModal');
 const confirmBtn = document.getElementById('confirmBtn');
 
-/**
- * Reset modal về chế độ thêm mới
- * Xóa toàn bộ dữ liệu trong form
- */
 function resetModal() {
     editingAddressId = null;
     document.getElementById('modalTitle').textContent = 'Đăng kí địa chỉ';
@@ -263,14 +238,7 @@ window.onclick = (event) => {
     }
 };
 
-/**
- * Xử lý nút Xác nhận trong modal
- * Chức năng:
- * - Thêm địa chỉ mới nếu đang ở chế độ Add
- * - Cập nhật địa chỉ nếu đang ở chế độ Edit
- * - Validate dữ liệu trước khi lưu
- * - Xử lý logic địa chỉ mặc định
- */
+// Xác nhận thêm/sửa địa chỉ
 confirmBtn.onclick = () => {
     const name = document.getElementById('addressName').value.trim();
     const personName = document.getElementById('addressPersonName').value.trim();
@@ -327,33 +295,51 @@ confirmBtn.onclick = () => {
             isDefault: isDefault
         });
         
-        // Nếu là địa chỉ đầu tiên hoặc được đặt làm mặc định, chọn nó
+        // Nếu là địa chỉ đầu tiên hoặc được đặt làm mặc định, chọn làm địa chỉ giao hàng
         if (addresses.length === 1 || isDefault) {
             selectedAddressId = newId;
             updateDeliveryInfo();
         }
     }
 
+    saveAddressesToStorage();
     renderAddressCards();
     modal.classList.remove('active');
     resetModal();
 };
 
-/**
- * XỬ LÝ THÔNG TIN LẤY HÀNG TẠI CHỖ (PICKUP)
- */
-
-// Object lưu thông tin người nhận khi chọn lấy tại chỗ
+// Xử lý thông tin lấy tại chỗ
 let pickupInfo = {
     name: '',
     phone: '',
     time: ''
 };
 
-/**
- * Lưu thông tin pickup
- * Validate dữ liệu và chuyển sang chế độ hiển thị
- */
+// Lưu pickup info vào localStorage
+function savePickupInfoToStorage() {
+    localStorage.setItem('pickupInfo', JSON.stringify(pickupInfo));
+}
+
+// Load pickup info từ localStorage
+function loadPickupInfoFromStorage() {
+    const savedPickupInfo = localStorage.getItem('pickupInfo');
+    if (savedPickupInfo) {
+        pickupInfo = JSON.parse(savedPickupInfo);
+        if (pickupInfo.name && pickupInfo.phone && pickupInfo.time) {
+            document.getElementById('pickupName').value = pickupInfo.name;
+            document.getElementById('pickupPhone').value = pickupInfo.phone;
+            document.getElementById('pickupTime').value = pickupInfo.time;
+            
+            document.getElementById('displayPickupPhone').textContent = pickupInfo.phone;
+            document.getElementById('displayPickupName').textContent = pickupInfo.name;
+            document.getElementById('displayPickupTime').textContent = pickupInfo.time;
+            
+            document.getElementById('pickupForm').classList.add('pickup__form--hidden');
+            document.getElementById('pickupInfoDisplay').classList.remove('pickup__display--hidden');
+        }
+    }
+}
+
 document.getElementById('savePickupBtn').onclick = () => {
     const name = document.getElementById('pickupName').value.trim();
     const phone = document.getElementById('pickupPhone').value.trim();
@@ -364,40 +350,23 @@ document.getElementById('savePickupBtn').onclick = () => {
         return;
     }
     
-    pickupInfo = {
-        name: name,
-        phone: phone,
-        time: time
-    };
+    pickupInfo = { name, phone, time };
+    savePickupInfoToStorage();
     
-    // Update display
     document.getElementById('displayPickupPhone').textContent = phone;
     document.getElementById('displayPickupName').textContent = name;
     document.getElementById('displayPickupTime').textContent = time;
     
-    // Hide form, show display
     document.getElementById('pickupForm').classList.add('pickup__form--hidden');
     document.getElementById('pickupInfoDisplay').classList.remove('pickup__display--hidden');
 };
 
-/**
- * Nút chỉnh sửa thông tin pickup
- * Chuyển từ chế độ hiển thị sang chế độ chỉnh sửa
- */
 document.getElementById('editPickupBtn').onclick = () => {
-    // Hiển thị form, ẩn phần hiển thị
     document.getElementById('pickupForm').classList.remove('pickup__form--hidden');
     document.getElementById('pickupInfoDisplay').classList.add('pickup__display--hidden');
 };
 
-/**
- * Xử lý nút Đặt món ăn
- * Validate:
- * - Giỏ hàng không trống
- * - Đã chọn địa chỉ giao hàng (nếu chọn giao hàng)
- * - Đã điền thông tin (nếu chọn lấy tại chỗ)
- * Sau đó chuyển sang trang thanh toán
- */
+// Xử lý nút đặt món
 document.getElementById('orderBtn').onclick = () => {
     if (cartData.length === 0) {
         alert('Giỏ hàng trống! Vui lòng thêm món ăn.');
@@ -417,46 +386,54 @@ document.getElementById('orderBtn').onclick = () => {
         return;
     }
     
+    // Lưu thông tin trước khi chuyển trang
+    saveAddressesToStorage();
+    savePickupInfoToStorage();
+    
     // Chuyển sang trang thanh toán
     window.location.href = '/public/pages/checkout/payment.html';
 };
 
-/**
- * Xử lý chuyển đổi giữa 2 phương thức:
- * - Giao hàng tận nơi: Hiển thị form nhập địa chỉ
- * - Lấy tại chỗ: Hiển thị form nhập thông tin người nhận
- * Tự động cập nhật phí vận chuyển khi thay đổi
- */
+// Lưu và load delivery type
+function saveDeliveryType(type) {
+    localStorage.setItem('deliveryType', type);
+}
+
+function loadDeliveryType() {
+    const savedType = localStorage.getItem('deliveryType');
+    if (savedType) {
+        const option = document.querySelector(`.delivery__option[data-delivery="${savedType}"]`);
+        if (option) {
+            option.click();
+        }
+    }
+}
+
+// Xử lý chuyển đổi phương thức giao hàng
 document.querySelectorAll('.delivery__option').forEach(option => {
     option.addEventListener('click', function() {
-        // Remove active from all options
         document.querySelectorAll('.delivery__option').forEach(opt => {
             opt.classList.remove('delivery__option--active');
         });
-        
-        // Add active to clicked option
+
         this.classList.add('delivery__option--active');
         this.querySelector('input[type="radio"]').checked = true;
-        
-        // Get delivery type
+
         const deliveryType = this.getAttribute('data-delivery');
-        
-        // Get sections
+        saveDeliveryType(deliveryType);
+
         const addressSection = document.getElementById('addressSection');
         const mapSection = document.getElementById('mapSection');
         const pickupInfoSection = document.getElementById('pickupInfoSection');
         
         if (deliveryType === 'pickup') {
-            // Hide address and map sections, show pickup info
             addressSection.classList.add('address--hidden');
             mapSection.classList.add('map--hidden');
             pickupInfoSection.classList.remove('pickup--hidden');
         } else {
-            // Show address and map sections, hide pickup info
             addressSection.classList.remove('address--hidden');
             pickupInfoSection.classList.add('pickup--hidden');
             
-            // Only show map section if there are addresses
             if (addresses.length > 0) {
                 mapSection.classList.remove('map--hidden');
             } else {
@@ -464,14 +441,15 @@ document.querySelectorAll('.delivery__option').forEach(option => {
             }
         }
         
-        // Update cart summary to recalculate shipping fee
         updateCartSummary();
     });
 });
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    loadAddressesFromStorage();
     renderCartItems();
     renderAddressCards();
     updateDeliveryInfo();
+    loadDeliveryType();
+    loadPickupInfoFromStorage();
 });
