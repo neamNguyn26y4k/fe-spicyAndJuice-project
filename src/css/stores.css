@@ -104,3 +104,27 @@
     background-color: #fffbeb;
     border-left: 4px solid #E6B34B;
 }
+
+/* === RESPONSIVE CHO TABLET & MOBILE === */
+@media (max-width: 768px) {
+    /* Chuyển bố cục chính thành dạng cột stack lên nhau*/
+    .stores-page-wrapper {
+        flex-direction: column;
+        height: auto; /* Bỏ chiều cao cố định để content kéo dài */
+    }
+
+    /* Vì không còn layout 2 cột nên set lại chiều cao cho bản đồ */
+    .map-container {
+        flex: none; /* Bỏ thuộc tính co dãn */
+        height: 400px; /* Đặt chiều cao cố định cho bản đồ trên mobile */
+    }
+
+    /* Giảm kích thước chữ và khoảng cách để giao diện gọn hơn */
+    .store-list__title {
+        font-size: 1.5rem;
+    }
+
+    .store-card {
+        padding: 15px;
+    }
+}

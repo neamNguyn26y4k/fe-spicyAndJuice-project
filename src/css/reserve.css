@@ -133,3 +133,22 @@
     background-color: #E6B34B;
     color: #333;
 }
+
+/* === RESPONSIVE CHO MÀN HÌNH NHỎ (TABLET & MOBILE) === */
+@media (max-width: 768px) {
+    /* Chuyển bố cục chính thành dạng cột, xếp chồng lên nhau */
+    .booking-wrapper {
+        flex-direction: column;
+        margin: 20px auto; /* Giảm khoảng cách trên dưới */
+        gap: 30px;
+    }
+
+    /* Giảm kích thước chữ và khoảng cách */
+    .booking-form-container__title {
+        font-size: 2rem;
+    }
+
+    .booking-info__card {
+        padding: 20px;
+    }
+}

@@ -73,3 +73,23 @@
   color: #333;
   border-color: #e6b34b;
 }
+
+/* === RESPONSIVE CHO MÀN HÌNH NHỎ (TABLET & MOBILE) === */
+@media (max-width: 768px) {
+  /* Giảm padding và margin để box vừa vặn hơn */
+  .confirmation-container {
+    padding: 20px;
+    margin: 20px 15px; /* Thêm khoảng cách hai bên */
+  }
+
+  /* Giảm kích thước chữ */
+  .confirmation-container__title {
+    font-size: 1.8rem;
+  }
+
+  /* Cho các nút bấm xếp chồng lên nhau thay vì nằm ngang */
+  .confirmation-actions {
+    flex-direction: column;
+    width: 100%; /* Đảm bảo các nút chiếm hết chiều rộng */
+  }
+}

@@ -993,12 +993,6 @@ body.no-scroll {
   }
 }
 
-@media (max-width: 768px) {
-  .booking-form .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /*! MODAL STYLES */
 
 .modal {
@@ -1388,7 +1382,6 @@ body.no-scroll {
 
 /*! RESPONSIVE STYLES */
 
-/*? Header Responsive */
 @media (max-width: 1024px) {
   .header-container {
     padding: 0.875rem 1.5rem;
@@ -1400,6 +1393,7 @@ body.no-scroll {
 }
 
 @media (max-width: 968px) {
+  /* Header */
   .header-container {
     padding: 0.875rem 1rem;
   }
@@ -1418,6 +1412,54 @@ body.no-scroll {
 
   .logo {
     height: 40px;
+  }
+
+  /* Modal */
+  .modal-container {
+    width: 750px;
+    min-height: 500px;
+  }
+
+  .modal form,
+  .overlay-panel {
+    padding: 0 40px;
+  }
+
+  .modal h1,
+  .overlay-panel h1 {
+    font-size: 28px;
+  }
+
+  .overlay-panel p {
+    font-size: 14px;
+    max-width: 280px;
+  }
+
+  /* Footer */
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-left,
+  .footer-mural {
+    width: 100%;
+    height: 280px;
+  }
+
+  .footer-right {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+  }
+
+  .contact-section {
+    max-width: 100%;
+  }
+
+  .footer-section {
+    min-width: 140px;
   }
 }
 
@@ -1539,48 +1581,223 @@ body.no-scroll {
   }
 }
 
-@media (max-width: 640px) {
-  .header-container {
-    padding: 0.75rem 1rem;
+@media (max-width: 768px) {
+  /* Booking Form */
+  .booking-form .form-grid {
+    grid-template-columns: 1fr;
   }
 
-  .spicy-text {
-    height: 28px;
+  /* Homepage */
+  .homepage .content {
+    left: 5%;
+    max-width: 90%;
   }
 
-  .logo {
-    height: 36px;
+  .homepage .content .page-title {
+    font-size: 2.5rem;
   }
 
-  .auth-buttons {
-    gap: 8px;
-  }
-
-  .btn {
-    height: 34px;
-    padding: 0 12px;
-    font-size: 0.85rem;
-  }
-
-  .icon-button {
-    width: 38px;
-    height: 38px;
+  .homepage .content p {
     font-size: 1rem;
   }
 
-  .cart-badge {
-    font-size: 0.6rem;
-    padding: 1px 4px;
-    min-width: 16px;
+  .indicators {
+    bottom: 30px;
+    right: 30px;
+    gap: 10px;
   }
 
-  .user-menu {
-    right: -1rem;
-    min-width: 160px;
+  .indicator {
+    width: 55px;
+    height: 55px;
+  }
+
+  /* Gallery */
+  .gallery-section .image-caption {
+    bottom: 30px;
+    right: 30px;
+    left: 30px;
+    max-width: none;
+    padding: 24px;
+  }
+
+  .gallery-section .image-caption p {
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .footer-left {
+    height: 240px;
+  }
+
+  .footer-mural {
+    height: 240px;
+  }
+
+  .footer-right {
+    padding: 2rem 1.5rem 1.25rem;
+  }
+
+  .footer-content {
+    gap: 1.75rem;
+  }
+
+  .phone-number {
+    font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+  }
+
+  .hours p {
+    font-size: 0.875rem;
+  }
+
+  /* Modal */
+  .modal-container {
+    width: 100%;
+    max-width: 500px;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .overlay-modal {
+    display: none;
+  }
+
+  .form-modal {
+    position: relative;
+    width: 100% !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .sign-in-modal {
+    position: relative;
+    z-index: 2;
+  }
+
+  .sign-up-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .modal.right-panel-active .sign-up-modal {
+    opacity: 1;
+    z-index: 2;
+    pointer-events: all;
+    transform: none;
+  }
+
+  .modal.right-panel-active .sign-in-modal {
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transform: none;
+  }
+
+  .modal form {
+    padding: 130px 30px 40px;
+    min-height: 500px;
+  }
+
+  .modal h1 {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .modal p {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .modal-container::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 60px);
+    height: 45px;
+    background: #f8f9fa;
+    border-radius: 25px;
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  .modal-container::after {
+    content: "Đăng Nhập";
+    position: absolute;
+    top: 60px;
+    left: 30px;
+    width: calc(50% - 35px);
+    height: 45px;
+    background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+    color: white;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    z-index: 11;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  .modal.right-panel-active .modal-container::after {
+    content: "Đăng Ký";
+    left: calc(50% + 5px);
+  }
+
+  .close-btn {
+    top: 15px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .modal button {
+    padding: 12px 40px;
+    width: 100%;
+  }
+
+  .modal button.ghost {
+    padding: 10px 30px;
+  }
+
+  .modal .social-buttons {
+    gap: 10px;
+  }
+
+  .modal .icn-social {
+    max-width: 90px;
+    height: 44px;
+    padding: 10px 15px;
+  }
+
+  .modal .icn-social img {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 480px) {
+  /* Header */
   .header-container {
     padding: 0.625rem 0.75rem;
   }
@@ -1621,184 +1838,84 @@ body.no-scroll {
     width: 36px;
     height: 36px;
   }
-}
 
-/*? Modal Responsive */
-@media (max-width: 968px) {
-  .modal-container {
-    width: 750px;
-    min-height: 500px;
+  /* Gallery */
+  .gallery-section .image-caption {
+    padding: 20px;
   }
 
-  .modal form {
-    padding: 0 40px;
+  .gallery-section .caption-accent {
+    width: 50px;
   }
 
-  .overlay-panel {
-    padding: 0 40px;
+  /* Footer */
+  .footer-left,
+  .footer-mural {
+    height: 200px;
   }
 
-  .modal h1 {
-    font-size: 28px;
+  .footer-right {
+    padding: 1.75rem 1.25rem 1rem;
   }
 
-  .overlay-panel h1 {
-    font-size: 28px;
+  .footer-content {
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  .overlay-panel p {
-    font-size: 14px;
-    max-width: 280px;
+  .phone-number {
+    font-size: 1.5rem;
+    margin-bottom: 0.85rem;
   }
-}
 
-@media (max-width: 768px) {
-  .modal-container {
-    width: 100%;
-    max-width: 500px;
-    min-height: auto;
+  .section-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hours p {
+    font-size: 0.85rem;
+  }
+
+  .hours {
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-links a {
+    font-size: 0.875rem;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    padding-top: 1.25rem;
+    gap: 1rem;
+  }
+
+  .footer-legal {
     flex-direction: column;
+    gap: 0.75rem;
   }
 
-  /* Ẩn overlay panel trên mobile */
-  .overlay-modal {
-    display: none;
+  .footer-legal a,
+  .copyright {
+    font-size: 0.8rem;
   }
 
-  /* Form chiếm toàn bộ chiều rộng */
-  .form-modal {
-    position: relative;
-    width: 100% !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-
-  .sign-in-modal {
-    position: relative;
-    z-index: 2;
-  }
-
-  .sign-up-modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .modal.right-panel-active .sign-up-modal {
-    opacity: 1;
-    z-index: 2;
-    pointer-events: all;
-    transform: none;
-  }
-
-  .modal.right-panel-active .sign-in-modal {
-    opacity: 0;
-    z-index: 1;
-    pointer-events: none;
-    transform: none;
-  }
-
-  .modal form {
-    padding: 40px 30px;
-    min-height: 500px;
-  }
-
-  .modal h1 {
-    font-size: 26px;
-    margin-bottom: 12px;
-  }
-
-  .modal p {
-    font-size: 13px;
-    margin-bottom: 20px;
-  }
-
-  /* Thêm toggle buttons cho mobile */
-  .modal-container::before {
-    content: "";
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 60px);
-    height: 45px;
-    background: #f8f9fa;
-
-    border-radius: 25px;
-    z-index: 10;
-    cursor: pointer;
-  }
-
-  .modal-container::after {
-    content: "Đăng Nhập";
-    position: absolute;
-    top: 60px;
-    left: 30px;
-    width: calc(50% - 35px);
-    height: 45px;
-    background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
-    color: white;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 14px;
-    z-index: 11;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
-    cursor: pointer;
-    pointer-events: none;
-  }
-
-  .modal.right-panel-active .modal-container::after {
-    content: "Đăng Ký";
-    left: calc(50% + 5px);
-  }
-
-  .modal form {
-    padding-top: 130px;
-  }
-
-  .close-btn {
-    top: 15px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    font-size: 20px;
-  }
-
-  .modal button {
-    padding: 12px 40px;
-    width: 100%;
-  }
-
-  .modal button.ghost {
-    padding: 10px 30px;
-  }
-
-  .modal .social-buttons {
-    gap: 10px;
-  }
-
-  .modal .icn-social {
-    max-width: 90px;
-    height: 44px;
-    padding: 10px 15px;
-  }
-
-  .modal .icn-social img {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
+  /* Modal */
   .modal-container {
     max-width: 95%;
     border-radius: 12px;
@@ -1877,90 +1994,121 @@ body.no-scroll {
   }
 }
 
-/*? Footer Responsive */
-@media (max-width: 968px) {
-  .footer-container {
-    flex-direction: column;
-  }
-
-  .footer-left {
-    flex: 0 0 auto;
-    height: 300px;
-  }
-
-  .footer-right {
-    padding: 2rem 1.5rem 1.5rem;
-  }
-
-  .footer-content {
-    gap: 2rem;
-  }
-
-  .contact-section {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .homepage .content {
-    left: 5%;
-    max-width: 90%;
-  }
-
-  .homepage .content .page-title {
-    font-size: 2.5rem;
-  }
-
-  .homepage .content p {
-    font-size: 1rem;
-  }
-
-  .indicators {
-    bottom: 30px;
-    right: 30px;
-    gap: 10px;
-  }
-
-  .indicator {
-    width: 55px;
-    height: 55px;
-  }
-
-  .gallery-section .image-caption {
-    bottom: 30px;
-    right: 30px;
-    left: 30px;
-    max-width: none;
-    padding: 24px;
-  }
-
-  .gallery-section .image-caption p {
-    font-size: 1rem;
-  }
-}
-
 @media (max-width: 640px) {
+  /* Header */
+  .header-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .spicy-text {
+    height: 28px;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .auth-buttons {
+    gap: 8px;
+  }
+
+  .btn {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+  }
+
+  .icon-button {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .cart-badge {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+    min-width: 16px;
+  }
+
+  .user-menu {
+    right: -1rem;
+    min-width: 160px;
+  }
+
+  /* Footer */
   .footer-content {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.75rem;
+  }
+
+  .footer-section {
+    min-width: 100%;
   }
 
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .footer-legal {
+    gap: 1rem;
+    order: 2;
+  }
+
+  .copyright {
+    order: 1;
   }
 
   .phone-number {
-    font-size: 1.5rem;
+    font-size: 1.65rem;
+  }
+
+  .social-icons {
+    gap: 0.65rem;
+  }
+
+  .social-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 480px) {
-  .gallery-section .image-caption {
-    padding: 20px;
+@media (max-width: 380px) {
+  .footer-left,
+  .footer-mural {
+    height: 160px;
   }
 
-  .gallery-section .caption-accent {
-    width: 50px;
+  .footer-right {
+    padding: 1.5rem 1rem 0.875rem;
+  }
+
+  .phone-number {
+    font-size: 1.35rem;
+  }
+
+  .section-title {
+    font-size: 0.9rem;
+  }
+
+  .footer-links a {
+    font-size: 0.825rem;
+  }
+
+  .hours p {
+    font-size: 0.8rem;
+  }
+
+  .social-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
+  }
+
+  .footer-legal a,
+  .copyright {
+    font-size: 0.75rem;
   }
 }
