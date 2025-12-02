@@ -1,30 +1,20 @@
-// ===================================
-// XỬ LÝ CHỨC NĂNG TRANG GIỎ HÀNG
-// ===================================
-// Sử dụng dữ liệu từ localStorage thông qua class ShoppingCart
+// Xử lý trang giỏ hàng
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Lấy các elements từ DOM
     const checkoutBtn = document.getElementById('checkoutBtn');
     const clearCartBtn = document.getElementById('clearCartBtn');
     const applyPromoBtn = document.getElementById('applyPromoBtn');
     const cartItemsList = document.getElementById('cartItemsList');
     const emptyCart = document.querySelector('.empty-cart');
     
-    /**
-     * Load và hiển thị danh sách sản phẩm trong giỏ hàng
-     * Render từng item với HTML động, bao gồm:
-     * - Hình ảnh, tên, mô tả sản phẩm
-     * - Nút tăng/giảm số lượng
-     * - Nút xóa sản phẩm
-     */
+    // Load và hiển thị danh sách món ăn
     function loadCartItems() {
         const cartItems = cart.getItems();
         cartItemsList.innerHTML = '';
         
         if (cartItems.length === 0) {
             checkEmptyCart();
-            updateCartTotals(); // Cập nhật totals về 0
+            updateCartTotals();
             return;
         }
         
@@ -60,24 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
         checkEmptyCart();
     }
     
-    /**
-     * Thay đổi số lượng sản phẩm trong giỏ hàng
-     * Được gọi khi người dùng click nút +/-
-     * @param {number} productId - ID sản phẩm
-     * @param {number} newQuantity - Số lượng mới
-     * @param {string} note - Ghi chú sản phẩm
-     */
+    // Thay đổi số lượng món ăn
     window.changeQuantity = function(productId, newQuantity, note = '') {
         cart.updateQuantity(productId, newQuantity, note);
         loadCartItems();
     };
     
-    /**
-     * Xóa sản phẩm khỏi giỏ hàng
-     * Hiển thị confirm dialog trước khi xóa
-     * @param {number} productId - ID sản phẩm cần xóa
-     * @param {string} note - Ghi chú sản phẩm
-     */
+    // Xóa món ăn khỏi giỏ
     window.removeCartItem = function(productId, note = '') {
         if (confirm('Bạn có chắc chắn muốn xóa món này?')) {
             cart.removeItem(productId, note);
@@ -85,10 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    /**
-     * Xóa toàn bộ giỏ hàng
-     * Hiển thị confirm dialog trước khi xóa tất cả
-     */
+    // Xóa tất cả món ăn
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', function() {
             if (confirm('Bạn có chắc chắn muốn xóa tất cả sản phẩm?')) {
@@ -98,48 +74,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    /**
-     * Áp dụng mã giảm giá
-     * TODO: Cần tích hợp với API backend để validate mã giảm giá
-     * Hiện tại chỉ mô phỏng việc áp dụng mã
-     */
+    // Áp dụng mã giảm giá
     if (applyPromoBtn) {
         applyPromoBtn.addEventListener('click', function() {
             const promoInput = document.getElementById('promoInput');
             const promoCode = promoInput.value.trim();
             
             if (promoCode) {
-                // Mô phỏng áp dụng mã giảm giá
                 alert('Mã giảm giá "' + promoCode + '" đã được áp dụng!');
                 updateCartTotals();
             }
         });
     }
     
-    /**
-     * Xử lý nút tiến hành đặt hàng
-     * Kiểm tra giỏ hàng có sản phẩm trước khi chuyển trang
-     */
+    // Chuyển sang trang đặt hàng
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
             if (cart.getItems().length === 0) {
                 alert('Giỏ hàng trống! Vui lòng thêm món ăn trước khi đặt hàng.');
                 return;
             }
-            // Navigate to order page
             window.location.href = '/public/pages/checkout/order.html';
         });
     }
     
-    /**
-     * Cập nhật tổng tiền trong phần summary
-     * Tính toán:
-     * - Tạm tính (subtotal): Tổng giá trị sản phẩm
-     * - Giảm giá (discount): 50.000 VNĐ (cố định)
-     * - Phí vận chuyển (shipping): 25.000 VNĐ
-     * - Tổng cộng (total): subtotal - discount + shipping
-     * Chỉ áp dụng giảm giá và phí ship khi giỏ hàng có sản phẩm
-     */
+    // Tính toán và cập nhật tổng tiền
     function updateCartTotals() {
         const items = cart.getItems();
         let subtotal = 0;
@@ -150,12 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
             itemCount += item.quantity;
         });
         
-        // Chỉ áp dụng giảm giá và phí ship khi có sản phẩm
         const discount = itemCount > 0 ? 50000 : 0;
         const shipping = itemCount > 0 ? 25000 : 0;
         const total = subtotal - discount + shipping;
         
-        // Update display
         document.getElementById('subtotal').textContent = formatCurrency(subtotal);
         document.getElementById('discount').textContent = '-' + formatCurrency(discount);
         document.getElementById('shipping').textContent = formatCurrency(shipping);
@@ -163,11 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('itemsCount').textContent = itemCount + ' món';
     }
     
-    /**
-     * Kiểm tra và hiển thị trạng thái giỏ hàng trống
-     * Nếu giỏ trống: hiển thị thông báo "Giỏ hàng trống"
-     * Nếu có sản phẩm: hiển thị danh sách sản phẩm
-     */
+    // Kiểm tra giỏ hàng có trống không
     function checkEmptyCart() {
         const items = cart.getItems();
         if (items.length === 0) {
@@ -179,15 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    /**
-     * Định dạng số tiền theo chuẩn Việt Nam
-     * @param {number} amount - Số tiền cần định dạng
-     * @returns {string} Chuỗi tiền tệ (VD: 200.000 VNĐ)
-     */
+    // Format giá tiền
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN') + ' VNĐ';
     }
     
-    // Initial load
     loadCartItems();
 });

@@ -1,6 +1,4 @@
-/* ===================================
-   STYLES CHO TRANG GIỎ HÀNG
-   =================================== */
+/* STYLES CHO TRANG GIỎ HÀNG */
 
 /* Container chính của trang giỏ hàng */
 .cart-page {
@@ -33,9 +31,7 @@
     align-items: start;
 }
 
-/* ===================================
-   PHẦN DANH SÁCH MÓN ĂN
-   =================================== */
+/* PHẦN DANH SÁCH MÓN ĂN*/
 /* Container chứa danh sách các món ăn */
 .cart-items-section {
     background: #fff;
@@ -87,9 +83,7 @@
     gap: 20px;
 }
 
-/* ===================================
-   ITEM MÓN ĂN TRONG GIỎ HÀNG
-   =================================== */
+/* ITEM MÓN ĂN TRONG GIỎ HÀNG */
 /* Card hiển thị thông tin từng món ăn */
 .cart-item {
     display: flex;
@@ -204,9 +198,7 @@
     transform: scale(1.05);
 }
 
-/* ===================================
-   TRẠNG THÁI GIỎ HÀNG TRỐNG
-   =================================== */
+/* TRẠNG THÁI GIỎ HÀNG TRỐNG */
 /* Hiển thị khi không có món ăn nào trong giỏ */
 .empty-cart {
     text-align: center;
@@ -232,9 +224,7 @@
     margin-bottom: 30px;
 }
 
-/* ===================================
-   PHẦN TỔNG KẾT ĐỞN HÀNG
-   =================================== */
+/* PHẦN TỔNG KẾT ĐỞN HÀNG */
 /* Panel hiển thị tổng tiền, giảm giá, phí vận chuyển */
 .cart-summary {
     background: #fff;
@@ -292,9 +282,7 @@
     color: var(--primary-color);
 }
 
-/* ===================================
-   PHẦN NHẬP MÃ GIẢM GIÁ
-   =================================== */
+/* PHẦN NHẬP MÃ GIẢM GIÁ */
 /* Form nhập và áp dụng mã giảm giá */
 .promo-code {
     display: flex;
@@ -333,9 +321,7 @@
     transform: translateY(-1px);
 }
 
-/* ===================================
-   NÚT TIẾN HÀNH ĐẶT HÀNG
-   =================================== */
+/* NÚT TIẾN HÀNH ĐẶT HÀNG */
 /* Nút chính để chuyển sang trang đặt hàng */
 .checkout-btn {
     width: 100%;
@@ -384,9 +370,7 @@
     color: var(--primary-color);
 }
 
-/* ===================================
-   RESPONSIVE DESIGN - MOBILE/TABLET
-   =================================== */
+/* RESPONSIVE DESIGN - MOBILE/TABLET */
 /* Tablet: Chuyển layout thành 1 cột */
 @media (max-width: 1024px) {
     .cart-layout {
