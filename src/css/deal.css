@@ -1,6 +1,6 @@
 /* ===== PROMOTION PAGE STYLES ===== */
 
-/* ===== Promotion Section - 2 columns grid layout ===== */
+/* ===== Promotion Section ===== */
 .promotion-section {
   padding: 3rem 0;
   background-color: #fafafa;
@@ -18,7 +18,7 @@
   gap: 2rem;
 }
 
-/* ===== Pagination Dots (reusable for slider effect) ===== */
+/* ===== Pagination Dots ===== */
 .promotion-pagination {
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@
   background-color: var(--primary-color);
 }
 
-/* ===== Left Column ===== */
+/* ===== Cột trái ===== */
 .promo-left-column {
   display: flex;
   flex-direction: column;
@@ -67,10 +67,7 @@
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  /* height 220px cố định cho voucher image container
-     - Nếu voucher image có tỷ lệ khác sẽ bị crop hoặc có white space
-     - Không flexible khi thay đổi nội dung
-     Lý do dùng: Đồng bộ chiều cao với voucher-card để layout đồng đều*/
+  /* height 220px cố định cho voucher image container để đồng bộ chiều cao với voucher-card để layout đồng đều*/
   height: 220px;
   background-color: #ffffff;
   display: flex;
@@ -82,9 +79,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  /* object-fit: contain thay vì cover
-     Lý do: Voucher/promo images thường có text quan trọng, không được crop
-     Trade-off: Có thể có white space (letterbox) nếu tỷ lể image khác container*/
+  /* object-fit: contain thay vì cover tránh trường hợp text bị crop*/
   object-fit: contain;
   transition: transform 0.3s ease;
 }
@@ -94,24 +89,21 @@
   transform: scale(1.05);
 }
 
-/* ===== Right Column ===== */
+/* ===== Cột phải ===== */
 .promo-right-column {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* ===== Voucher Card ===== */
+/* ===== Voucher ===== */
 .voucher-card {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* height 220px match với promo-image height
-     - Nếu voucher info dài hơn (nhiều fields), text sẽ overflow hoặc bị truncate
-     - Nếu thay đổi promo-image height, phải đồng bộ thay đổi ở 3 breakpoints
-     Lý do: Giữ symmetry giữa 2 cột (left: images, right: cards)*/
+  /* height 220px match với promo-image height để layout đồng đều */
   height: 220px;
   display: flex;
   flex-direction: column;
